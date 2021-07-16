@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
-
+import {useState,useEffect, useRef} from "react";
+import axios from "axios";
+import "./App.css";
 function App() {
+  const [loginInfo,setLoginInfo] = useState({
+    userId : "",
+    userPassword:"",
+  });
+  
+  const userId = useRef();
+  const userPwd = useRef();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="main">
+      <div className="Login">
+        <input type="text" placeholder="아이디를 입력하세요" ref={userId}/>
+        <input type="password" placeholder="비밀번호를 입력하세요" ref={userPwd}/>
+      </div>
+      <button>로그인</button>
     </div>
   );
 }
