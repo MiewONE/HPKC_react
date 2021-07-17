@@ -1,6 +1,7 @@
+
 const LOGIN = "user/LOGIN";
 const LOGOUT = "user/LOGOUT";
-
+const CHECKLOGIN = "user/CHECKLOGIN";
 export function login(user) {
     return {
         type : LOGIN,
@@ -9,7 +10,13 @@ export function login(user) {
 }
 export function logout() {
     return {
-
+        type:LOGOUT,
+    }
+}
+export function checklogin()
+{
+    return {
+        type:CHECKLOGIN
     }
 }
 
@@ -36,8 +43,20 @@ export default function user ( state = initialInfo,action)
                 user : action.payload.data,
             }
         case LOGOUT :
+            
             return {
-                user : {},
+                user : {
+                    name : "",
+                    provider : "",
+                    email : "",
+                    accessToken : "",
+                    refreshToken : "",
+                    connectTime : "",
+                },
+            }
+        case CHECKLOGIN :
+            return{
+
             }
         default :
             return state;
