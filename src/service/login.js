@@ -3,16 +3,24 @@ import { useSelector,useDispatch } from "react-redux";
 import { login,logout } from "../store/modules/user";
 import axios from "axios";
 import "../styles/login.scss";
-import {Route,Redirect} from "react-router-dom";
 
 function Login() 
 {
+
+    useEffect( () => {
+        if(!state_login.user.name){
+            console.log("로그인 정보 가져오기");
+            axios.get("/oauth/usr").then( (res) => {
+                dispatch(login(res))
+            }).catch( (err) => {
+                console.log(err);
+            })
+        }
+    },[])
+    
     const userEmail = useRef();
     const userPwd = useRef();
-    const [loginInfo,setLoginInfo] = useState({
-        userEmail : "",
-        password:"",
-      });
+    
     const [_whoami,setWhoami] = useState()
 
     const state_login = useSelector(state => state.user);
@@ -27,11 +35,12 @@ function Login()
             })
         }
     const event_login = () => {
-        setLoginInfo({
+        
+        axios.post("/oauth/logins",{
             userEmail : userEmail.current.value,
             password : userPwd.current.value
-        });
-        axios.post("/oauth/logins",loginInfo).then( (res) => {
+        }).then( (res) => {
+            dispatch(login(res))
         }).catch((err) => {
             console.log(err);
             if(err)
@@ -44,16 +53,7 @@ function Login()
         axios.get("/oauth/logout")
         dispatch(logout());
     }
-    useEffect( () => {
-        if(!state_login.user.name){
-            console.log("로그인 정보 가져오기");
-            axios.get("/oauth/usr").then( (res) => {
-                dispatch(login(res))
-            }).catch( (err) => {
-                console.log(err);
-            })
-        }
-    })
+
 
     return (
         <>
