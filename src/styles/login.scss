@@ -1,11 +1,17 @@
 .login {
     display: flex;
     flex-direction: column;
+    margin-bottom: 31px;
     input {
         height: 100%;
     }
 }
 
+loginmain {
+    &::before{
+        content: "";
+    }
+}
 .loginBody{
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -24,9 +30,13 @@ a.kakao {
     display: block;
     width: 100%;
     height: 52px;
-    border-radius: .1em;
+    border-radius: .75em;
     line-height: 50px;
     font-size: 17px;
     font-weight: 500;
     text-align: center;
+    &:hover{
+        background-color: #e5c600;
+        transition-duration: .1s;
+    }
 }

@@ -1,12 +1,15 @@
 import Login from "./service/Login"
 import "./styles/app.scss"
 import Vote from "./service/Vote";
-function App() {
+import { useSelector,useDispatch } from "react-redux";
+import { login,logout } from "./store/modules/user";
 
+function App() {
+  const state_login = useSelector(state => state.user);
   return (
     <div className="main">
-      <Login/>
-      <Vote/>
+      {!state_login.user.name && <Login/>}
+      {/* <Vote/> */}
     </div>
   );
 }

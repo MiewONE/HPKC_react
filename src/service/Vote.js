@@ -15,6 +15,9 @@ function Vote()
             console.log("투표 시작");
             dispatch(voting());
         })
+        socket.on('votedDone',(done) => {
+            console.log(done);
+        })
     })
     const state_login = useSelector(state => state.user);
     const state_vote = useSelector(state => state.vote)
@@ -45,11 +48,15 @@ function Vote()
             text : "test"
         });
     }
+    const doneSend =() => {
+        socket.emit("innerSocket",{text : "test"});
+    }
     return (
         <>
             <input type="text" ref={intputRef}/>
             <button onClick={con}>connection</button>
             <button onClick={send}>send</button>
+            <button onClick={doneSend}>doneSend</button>
             {
                 state_vote.stateVote === true && <div>투표 시작</div>
             }
