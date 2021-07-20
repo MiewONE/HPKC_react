@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 import { useSelector,useDispatch } from "react-redux";
 import {useEffect, useRef} from "react";
-import { voting,voted } from '../store/modules/vote';
+import { voting } from '../store/modules/vote';
 
 
 const socket = io.connect("http://localhost:3046");

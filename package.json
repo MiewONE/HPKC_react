@@ -30,7 +30,7 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "airbnb"
     ]
   },
   "browserslist": {
@@ -47,6 +47,8 @@
   },
   "devDependencies": {
     "eslint": "^7.31.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2"
   },
