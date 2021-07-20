@@ -15,13 +15,18 @@ function App() {
     };
     return (
         <>
-            <Link to="/">홈페이지</Link>
-            {state_login.user.name === '' && <Link to="/login">로그인</Link>}
-            {state_login.user.name !== '' && (
-                <button onClick={event_logout}>로그아웃</button>
-            )}
-            <Link to="/team">팀 페이지</Link>
-
+            <div>
+                <Link to="/">홈페이지</Link>
+                {state_login.user.name === '' && (
+                    <Link to="/login">로그인</Link>
+                )}
+                {state_login.user.name !== '' && (
+                    <button onClick={event_logout}>로그아웃</button>
+                )}
+                {state_login.user.name !== '' && (
+                    <Link to="/team">팀 페이지</Link>
+                )}
+            </div>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/team" component={Team} />

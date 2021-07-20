@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import PresentorDetail from './PresentorDetail';
-
+import { Presentation } from '../styles/PresentationList';
 function PresentationList({ match }) {
     const { teamname: teamName } = match.params;
     console.log(teamName);
@@ -40,38 +40,25 @@ function PresentationList({ match }) {
     };
     return (
         <>
-            <ul>
-                <span>pt 리스트</span>
-                {attendents &&
-                    attendents.map((ele) => {
-                        return (
-                            <li key={ele._id}>
-                                <ul key={ele._id + 'ul'}>
-                                    <li>
-                                        {ele.ptName}
-                                        <Link>
-                                            <button onClick={detailPt(ele)}>
-                                                발표 자세히 보기
-                                            </button>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        {ele.attendents.map((sub_ele) => {
-                                            return (
-                                                <ul key={sub_ele._id}>
-                                                    <li>{sub_ele.name}</li>
-                                                    <li>{sub_ele.subject}</li>
-                                                    <li>{sub_ele.order}</li>
-                                                </ul>
-                                            );
-                                        })}
-                                    </li>
-                                    <li>{ele.joined_people}</li>
-                                </ul>
-                            </li>
-                        );
-                    })}
-            </ul>
+            {attendents &&
+                attendents.map((ele) => {
+                    return (
+                        <Presentation key={ele._id + 'div'}>
+                            <span>{ele.ptName}</span>
+                            <div style={{ display: 'flex' }}>
+                                <span>멤버 이름 :</span>
+                                {ele.attendents.map((sub_ele) => {
+                                    return (
+                                        <div key={sub_ele._id}>
+                                            {sub_ele.name}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                            <div>{ele.joined_people}</div>
+                        </Presentation>
+                    );
+                })}
             <Route
                 path="/detailpresentation"
                 render={() => <PresentorDetail presentor={presentor} />}

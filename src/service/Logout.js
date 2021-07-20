@@ -6,7 +6,9 @@ import axios from "axios";
 function Logout() 
 {
     const event_logout = () => {
-        axios.get("/oauth/logout")
+        axios.get("/oauth/logout").then(data => {
+            console.log(data.data);
+        })
         dispatch(logout());
     }
     const state_login = useSelector(state => state.user);
