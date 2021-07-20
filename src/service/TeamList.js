@@ -15,6 +15,7 @@ function TeamList()
         }).catch((err) => {
             console.log(err);
         })
+
     },[])
     return(
         <>
@@ -22,16 +23,14 @@ function TeamList()
                 {
                     teamList && teamList.map((ele) => {
                         return (
-                            <div>
-                                <li>
+                                <li key={ele}>
                                     <Link to={"/ptlist/"+ele}>{ele}</Link>
                                 </li>
-                                
-                            </div>
                         )
                 })}
             </ul>
-            <Route path="/ptlist/:teamname" component={PresentationList} exact/>
+
+            <Route path="/ptlist/:teamname" component={PresentationList}/>
             
         </>
     )
