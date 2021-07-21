@@ -3,9 +3,18 @@ import { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import PresentorDetail from './PresentorDetail';
 import { Presentation } from '../styles/PresentationList';
+import Modal from '../components/Modal';
 function PresentationList({ match }) {
     const { teamname: teamName } = match.params;
     console.log(teamName);
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const openModal = () => {
+        setModalOpen(true);
+    };
+    const closeModal = () => {
+        setModalOpen(false);
+    };
     const [attendents, setAttendents] = useState([]);
     const [presentor, setPresentor] = useState({
         _id: '',
@@ -32,19 +41,29 @@ function PresentationList({ match }) {
         return () => {};
     }, [teamName]);
     const detailPt = (pt) => {
-        // console.log(pt);
         return () => {
-            console.log(pt);
-            setPresentor(pt);
+            console.log(pt, '이 클릭되었습니다.');
         };
     };
+
     return (
         <>
             {attendents &&
                 attendents.map((ele) => {
                     return (
                         <Presentation key={ele._id + 'div'}>
-                            <span>{ele.ptName}</span>
+                            <Modal
+                                open={modalOpen}
+                                close={closeModal}
+                                header="Modal heading"
+                            >
+                                <main> test </main>에 내용이 입력된다. 리액트
+                                함수형 모달 팝업창입니다. 쉽게 만들 수 있어요.
+                                같이 만들어봐요!
+                            </Modal>
+                            <button onClick={detailPt(ele.ptName)}>
+                                <span>{ele.ptName}</span>
+                            </button>
                             <div style={{ display: 'flex' }}>
                                 <span>멤버 이름 :</span>
                                 {ele.attendents.map((sub_ele) => {
@@ -59,10 +78,10 @@ function PresentationList({ match }) {
                         </Presentation>
                     );
                 })}
-            <Route
+            {/* <Route
                 path="/detailpresentation"
                 render={() => <PresentorDetail presentor={presentor} />}
-            />
+            /> */}
         </>
     );
 }
