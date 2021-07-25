@@ -3,18 +3,18 @@ import { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import PresentorDetail from './PresentorDetail';
 import { Presentation } from '../styles/PresentationList';
-import Modal from '../components/Modal';
+import Modal from 'react-awesome-modal';
 function PresentationList({ match }) {
     const { teamname: teamName } = match.params;
     console.log(teamName);
-    const [modalOpen, setModalOpen] = useState(false);
-
+    const [modalVisible, setModalVisible] = useState(false);
     const openModal = () => {
-        setModalOpen(true);
+        setModalVisible(true);
     };
     const closeModal = () => {
-        setModalOpen(false);
+        setModalVisible(false);
     };
+
     const [attendents, setAttendents] = useState([]);
     const [presentor, setPresentor] = useState({
         _id: '',
@@ -31,8 +31,6 @@ function PresentationList({ match }) {
         axios
             .post('/pt/ptlist', { teamname: teamName })
             .then((data) => {
-                console.log('ptlist call');
-                console.log(data.data);
                 setAttendents(data.data);
             })
             .catch((err) => {
@@ -45,23 +43,16 @@ function PresentationList({ match }) {
             console.log(pt, '이 클릭되었습니다.');
         };
     };
-
+    if (attendents < 1) {
+        return <h1>발표 내역이 없습니다. 추가 하기겠습니까?</h1>;
+    }
     return (
         <>
             {attendents &&
                 attendents.map((ele) => {
                     return (
                         <Presentation key={ele._id + 'div'}>
-                            <Modal
-                                open={modalOpen}
-                                close={closeModal}
-                                header="Modal heading"
-                            >
-                                <main> test </main>에 내용이 입력된다. 리액트
-                                함수형 모달 팝업창입니다. 쉽게 만들 수 있어요.
-                                같이 만들어봐요!
-                            </Modal>
-                            <button onClick={detailPt(ele.ptName)}>
+                            <button onClick={openModal}>
                                 <span>{ele.ptName}</span>
                             </button>
                             <div style={{ display: 'flex' }}>
@@ -78,6 +69,18 @@ function PresentationList({ match }) {
                         </Presentation>
                     );
                 })}
+            <Modal
+                visible={modalVisible}
+                width="400"
+                height="300"
+                effect="fadeInUp"
+                onClickAway={closeModal}
+            >
+                <div>
+                    <h1>test</h1>
+                    <button onClick={closeModal}>모달 닫기</button>
+                </div>
+            </Modal>
             {/* <Route
                 path="/detailpresentation"
                 render={() => <PresentorDetail presentor={presentor} />}

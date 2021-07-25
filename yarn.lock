@@ -10176,6 +10176,11 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
+"react-awesome-modal@^2.0.5":
+  "integrity" "sha512-H+0xKBhcGJCoDtMww5K+XUzQtK+oRNpXr1VZoN1tbBgu+fzrLrF+ZkdRC1XiPLJ5gpVd9uR90yg8nyPTtYj/OQ=="
+  "resolved" "https://registry.npmjs.org/react-awesome-modal/-/react-awesome-modal-2.0.5.tgz"
+  "version" "2.0.5"
+
 "react-dev-utils@^11.0.3":
   "integrity" "sha512-dx0LvIGHcOPtKbeiSUM4jqpBl3TcY7CDjZdfOIcKeznE7BWr9dg0iPG90G5yfVQ+p/rGNMXdbfStvzQZEVEi4A=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-11.0.4.tgz"

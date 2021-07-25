@@ -3,12 +3,11 @@ import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
 import PresentationList from '../service/PresentationList';
-import TestPage from './TestPage';
-import { logout } from '../store/modules/user';
 import { TeamDivList } from '../styles/teamStyle';
 function TeamList() {
     const [teamList, setTeamList] = useState();
     const [state_teamName, setTeamName] = useState('');
+
     const dispatch = useDispatch();
     useEffect(() => {
         console.log('teamList request');
@@ -22,12 +21,7 @@ function TeamList() {
                 alert('서버에서 오류가 발생하였습니다.');
             });
     }, []);
-    const ptClick = (teamName) => {
-        return () => {
-            console.log(teamName, '클릭');
-            setTeamName(teamName);
-        };
-    };
+
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ width: '50%' }}>
@@ -41,6 +35,7 @@ function TeamList() {
                                 <Link to={'/team/list/' + ele.teamName}>
                                     {ele.teamName}
                                 </Link>
+                                <span>발표 : {ele.ptCnt}개</span>
                                 <span>멤버수:{ele.members}명</span>
                             </TeamDivList>
                         );
