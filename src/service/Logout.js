@@ -9,7 +9,7 @@ function Logout() {
         });
         dispatch(logout());
     };
-    const state_login = useSelector((state) => state.user;
+    const state_login = useSelector((state) => state.user);
     const dispatch = useDispatch();
     return (
         <>
@@ -27,3 +27,5 @@ function Logout() {
         </>
     );
 }
+
+export default Logout;

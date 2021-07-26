@@ -6,6 +6,8 @@ import { Link, Route } from 'react-router-dom';
 import Home from './service/Home';
 import axios from 'axios';
 import { logout } from './store/modules/user';
+
+import { useState } from 'react';
 function App() {
     const state_login = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -13,6 +15,7 @@ function App() {
         axios.get('/oauth/logout');
         dispatch(logout());
     };
+
     return (
         <>
             <div>

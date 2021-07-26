@@ -1,33 +1,24 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
-import PresentorDetail from './PresentorDetail';
+import PresenterDetail from './PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 function PresentationList({ match }) {
     const { teamname: teamName } = match.params;
     console.log(teamName);
     const [modalVisible, setModalVisible] = useState(false);
-    const openModal = () => {
-        setModalVisible(true);
-    };
-    const closeModal = () => {
-        setModalVisible(false);
-    };
 
     const [attendents, setAttendents] = useState([]);
-    const [presentor, setPresentor] = useState({
+    const [presenter, setpresenter] = useState({
         _id: '',
         ptName: '',
         attendents: [],
         createdAt: '',
         joined_people: 0,
         resultVote: '',
-        Team_id: '',
     });
     useEffect(() => {
-        // setAttendents();
-        console.log('teamname output', teamName);
         axios
             .post('/pt/ptlist', { teamname: teamName })
             .then((data) => {
@@ -38,10 +29,22 @@ function PresentationList({ match }) {
             });
         return () => {};
     }, [teamName]);
-    const detailPt = (pt) => {
+    const openModal = (pt) => {
         return () => {
-            console.log(pt, '이 클릭되었습니다.');
+            setpresenter(pt);
+            setModalVisible(true);
         };
+    };
+    const closeModal = () => {
+        setpresenter({
+            _id: '',
+            ptName: '',
+            attendents: [],
+            createdAt: '',
+            joined_people: 0,
+            resultVote: '',
+        });
+        setModalVisible(false);
     };
     if (attendents < 1) {
         return <h1>발표 내역이 없습니다. 추가 하기겠습니까?</h1>;
@@ -52,7 +55,7 @@ function PresentationList({ match }) {
                 attendents.map((ele) => {
                     return (
                         <Presentation key={ele._id + 'div'}>
-                            <button onClick={openModal}>
+                            <button onClick={openModal(ele)}>
                                 <span>{ele.ptName}</span>
                             </button>
                             <div style={{ display: 'flex' }}>
@@ -69,21 +72,26 @@ function PresentationList({ match }) {
                         </Presentation>
                     );
                 })}
-            <Modal
-                visible={modalVisible}
-                width="400"
-                height="300"
-                effect="fadeInUp"
-                onClickAway={closeModal}
-            >
-                <div>
-                    <h1>test</h1>
-                    <button onClick={closeModal}>모달 닫기</button>
-                </div>
-            </Modal>
+            {presenter._id !== '' && (
+                <Modal
+                    visible={modalVisible}
+                    width="1000"
+                    height="600"
+                    effect="fadeInUp"
+                    onClickAway={closeModal}
+                >
+                    <div>
+                        <PresenterDetail
+                            teamname={teamName}
+                            presenter={presenter}
+                        />
+                        <button onClick={closeModal}>모달 닫기</button>
+                    </div>
+                </Modal>
+            )}
             {/* <Route
                 path="/detailpresentation"
-                render={() => <PresentorDetail presentor={presentor} />}
+                render={() => <presenterDetail presenter={presenter} />}
             /> */}
         </>
     );
