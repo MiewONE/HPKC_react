@@ -63,7 +63,6 @@ function PresenterDetail({ teamname, presenter }) {
         });
         console.log('order 감소>>>', presenterInfo);
     };
-
     return (
         <>
             {presenterInfo && (
@@ -80,6 +79,14 @@ function PresenterDetail({ teamname, presenter }) {
                             <br />
                             <span>요약</span>
                             <br />
+                            <form
+                                action="/upload/uploadFile"
+                                encType="multipart/form-data"
+                                method="post"
+                            >
+                                <input type="file" name="attachment" />
+                                <button type="submit">Upload</button>
+                            </form>
                             <EditorComponent
                                 value={presenterInfo.summary}
                                 onChange={onEditorChange}

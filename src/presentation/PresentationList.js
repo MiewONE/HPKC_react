@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
-import PresenterDetail from './PresenterDetail';
+import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 function PresentationList({ match }) {

@@ -38,7 +38,7 @@ function EditorComponent({ value, onChange }) {
     return (
         <div style={{ height: '400px' }}>
             <ReactQuill
-                style={{ width: '300px', height: '300px' }}
+                style={{ width: '99%', height: '300px' }}
                 theme="snow"
                 modules={modules}
                 formats={formats}
