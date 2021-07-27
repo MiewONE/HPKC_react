@@ -3,7 +3,7 @@ import EditorComponent from '../components/EditorComponent';
 import axios from 'axios';
 const Presenter = ({
     teamId,
-    teamname,
+    teamName,
     ptName,
     presenterInfo: presenter,
     updatePresenter,
@@ -44,7 +44,7 @@ const Presenter = ({
             axios
                 .post('/pt/presenter/detailsave', {
                     teamId,
-                    teamname,
+                    teamName,
                     ptName,
                     presenter: sendUser,
                 })

@@ -49,7 +49,7 @@ useEffect는 deps에 특정 값을 넣게 된다면, 컴포넌트가 처음 아�
 발표의 자세한 정보를 보기위해 path의 경로를 변경 하였더니 경로를 이동하면서 현재 페이지가 다시 그려진것이었음.
 >경로 수정 전: /team --> /team/list --> /ptlist/detail
 
->경로 수정 후: /team --> /team/list --> /tea/list/:teamname
+>경로 수정 후: /team --> /team/list --> /tea/list/:teamName
 
 이 경로를 변경하면 제대로 나오는것을 확인.
 

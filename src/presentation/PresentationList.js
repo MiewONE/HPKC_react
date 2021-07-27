@@ -4,7 +4,7 @@ import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 function PresentationList({ match }) {
-    const { teamname: teamName } = match.params;
+    const { teamName: teamName } = match.params;
     const [modalVisible, setModalVisible] = useState(false);
 
     const [attendents, setAttendents] = useState([]);
@@ -19,7 +19,7 @@ function PresentationList({ match }) {
 
     useEffect(() => {
         axios
-            .post('/pt/ptlist', { teamname: teamName })
+            .post('/pt/ptlist', { teamName: teamName })
             .then((data) => {
                 setAttendents(data.data);
                 setpresenter({
@@ -60,7 +60,7 @@ function PresentationList({ match }) {
     const closeModal = () => {
         console.log(teamName);
         axios
-            .post('/pt/ptlist', { teamname: teamName })
+            .post('/pt/ptlist', { teamName: teamName })
             .then((data) => {
                 setAttendents(data.data);
                 setpresenter({
@@ -90,7 +90,7 @@ function PresentationList({ match }) {
                                 <span>{ele.ptName}</span>
                             </button>
                             <div style={{ display: 'flex' }}>
-                                <span>멤버 이름 :</span>
+                                <span>발표 순서 :</span>
                                 {ele.attendents.map((sub_ele) => {
                                     return (
                                         <div key={sub_ele._id}>
@@ -114,7 +114,7 @@ function PresentationList({ match }) {
                     <div>
                         {console.log('모달 열때 presenter', presenter)}
                         <PresenterDetail
-                            teamname={teamName}
+                            teamName={teamName}
                             presenter={presenter}
                             updatePresenter={updatePresenter}
                         />

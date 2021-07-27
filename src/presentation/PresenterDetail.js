@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Presenter from './Presenter';
 
-function PresenterDetail({ teamname, presenter: presenters, updatePresenter }) {
+function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
     const [num, setNum] = useState(0);
 
     const [attendent, setAttendent] = useState([...presenters.attendents]);
@@ -31,7 +31,7 @@ function PresenterDetail({ teamname, presenter: presenters, updatePresenter }) {
     };
 
     if (!presenters) {
-        console.log(presenters, '>> 팀이름', teamname);
+        console.log(presenters, '>> 팀이름', teamName);
         return <div>뭐징</div>;
     }
 
@@ -41,7 +41,7 @@ function PresenterDetail({ teamname, presenter: presenters, updatePresenter }) {
                 <div>
                     {console.log(presenters)}
                     <Presenter
-                        teamname={teamname}
+                        teamName={teamName}
                         teamId={presenters.teamId}
                         ptName={presenters.ptName}
                         presenterInfo={attendent[num]}

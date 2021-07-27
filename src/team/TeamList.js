@@ -6,7 +6,7 @@ import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
 function TeamList() {
     const [teamList, setTeamList] = useState();
-    const [state_teamName, setTeamName] = useState('');
+    const [state_teamName, setteamName] = useState('');
 
     const dispatch = useDispatch();
     useEffect(() => {
@@ -43,7 +43,7 @@ function TeamList() {
             </div>
             <div style={{ width: '50%' }}>
                 <Route
-                    path="/team/list/:teamname"
+                    path="/team/list/:teamName"
                     component={PresentationList}
                 />
             </div>
