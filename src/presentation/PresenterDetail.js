@@ -1,24 +1,10 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
-import EditorComponent from '../components/EditorComponent';
-function PresenterDetail({ teamname, presenter }) {
-    const [num, setNum] = useState(0);
-    const [presenterInfo, setPresenterInfo] = useState({
-        name: '',
-        subject: '',
-        order: 0,
-        summary: '',
-    });
-    const [desc, setDesc] = useState('');
-    useEffect(() => {
-        console.log('detail page mount');
-        setPresenterInfo(presenter.attendents[num]);
-    }, [num, presenter, presenterInfo]);
+import Presenter from './Presenter';
 
-    const onEditorChange = (value) => {
-        setDesc(value);
-        console.log(value);
-    };
+function PresenterDetail({ teamname, presenter: presenters, updatePresenter }) {
+    const [num, setNum] = useState(0);
+
+    const [attendent, setAttendent] = useState([...presenters.attendents]);
     const previous = () => {
         if (num > 0) {
             setNum((n) => n - 1);
@@ -27,74 +13,43 @@ function PresenterDetail({ teamname, presenter }) {
         }
     };
     const next = () => {
-        if (num < presenter.attendents.length - 1) {
+        if (num < presenters.attendents.length - 1) {
             setNum((n) => n + 1);
         } else {
             alert('마지막 인원입니다.');
         }
     };
-    const save = () => {
-        console.log(presenterInfo);
-        setPresenterInfo((presenterInfo) => {
-            presenterInfo.summary = desc;
-        });
-        axios
-            .post('/pt/presenter/detailsave', {
-                teamname,
-                ptName: presenter.ptName,
-                presenter: presenterInfo,
+    const updateAttendent = (_attendent) => {
+        console.log('변경 전 발표자들입니다', attendent);
+        setAttendent(
+            attendent.map((ele) => {
+                if (ele.name === _attendent.name) return _attendent;
+                else return ele;
             })
-            .then((res) => {
-                console.log(JSON.stringify(res));
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        );
+        console.log('변경 후 발표자들입니다', attendent);
     };
-    const increase = () => {
-        setPresenterInfo((presenterInfo) => {
-            presenterInfo.order = presenterInfo.order + 1;
-        });
-        console.log('order 증가>>>', presenterInfo);
-    };
-    const oncrease = () => {
-        setPresenterInfo((presenterInfo) => {
-            presenterInfo.order = presenterInfo.order - 1;
-        });
-        console.log('order 감소>>>', presenterInfo);
-    };
+
+    if (!presenters) {
+        console.log(presenters, '>> 팀이름', teamname);
+        return <div>뭐징</div>;
+    }
+
     return (
         <>
-            {presenterInfo && (
+            {attendent && (
                 <div>
-                    {
-                        <div>
-                            <span>{presenter.ptName}</span>
-                            <br />
-                            {presenterInfo.name}
-                            <br />
-                            <button onClick={oncrease}>-</button>
-                            <span>{presenterInfo.order}</span>
-                            <button onClick={increase}>+</button>
-                            <br />
-                            <span>요약</span>
-                            <br />
-                            <form
-                                action="/upload/uploadFile"
-                                encType="multipart/form-data"
-                                method="post"
-                            >
-                                <input type="file" name="attachment" />
-                                <button type="submit">Upload</button>
-                            </form>
-                            <EditorComponent
-                                value={presenterInfo.summary}
-                                onChange={onEditorChange}
-                            />
-                        </div>
-                    }
+                    {console.log(presenters)}
+                    <Presenter
+                        teamname={teamname}
+                        teamId={presenters.teamId}
+                        ptName={presenters.ptName}
+                        presenterInfo={attendent[num]}
+                        updatePresenter={updatePresenter}
+                        updateAttendent={updateAttendent}
+                    />
                     <button onClick={previous}>이전</button>
-                    <button onClick={save}>저장</button>
+
                     <button onClick={next}>다음</button>
                 </div>
             )}
