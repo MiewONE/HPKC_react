@@ -10,12 +10,6 @@ import { TeamDiv } from '../styles/teamStyle';
 
 function Team({ history }) {
     const state_login = useSelector((state) => state.user);
-    useEffect(() => {
-        if (state_login.user.name === '') {
-            alert('권한이 없는 접근입니다.');
-            history.push('/');
-        }
-    }, []);
     return (
         <>
             {state_login.user.name !== '' && (

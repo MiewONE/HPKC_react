@@ -1,29 +1,18 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, logout } from '../store/modules/user';
+import { login } from '../store/modules/user';
 import axios from 'axios';
 import '../styles/login.scss';
-import styled from 'styled-components';
 import { LoginMain, ButtonLogin, Input, MainImg } from '../styles/loginStyle';
+import storage from '../lib/storage';
+
 function Login() {
     const dispatch = useDispatch();
-    useEffect(() => {
-        console.log('로그인 정보 가져오기');
-        axios
-            .get('/oauth/usr')
-            .then((res) => {
-                dispatch(login(res));
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
 
     const userEmail = useRef();
     const userPwd = useRef();
 
     const state_login = useSelector((state) => state.user);
-    const state_token = useSelector((state) => state.token);
 
     const event_login = () => {
         axios
@@ -32,7 +21,9 @@ function Login() {
                 password: userPwd.current.value,
             })
             .then((res) => {
-                dispatch(login(res));
+                console.log(res);
+                dispatch(login(res.data));
+                storage.set('loggedInfo', res.data);
             })
             .catch((err) => {
                 console.log(err);
@@ -44,7 +35,7 @@ function Login() {
 
     return (
         <>
-            {state_login.user.name === '' && (
+            {state_login && (
                 <LoginMain>
                     <MainImg src="/img/minions.jpg" alt="logo" />
                     <div className="login">

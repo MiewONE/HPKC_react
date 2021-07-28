@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
+import PresentationHeader from './PresentationHeader';
 function PresentationList({ match }) {
-    const { teamName: teamName } = match.params;
+    const { teamName } = match.params;
     const [modalVisible, setModalVisible] = useState(false);
 
     const [attendents, setAttendents] = useState([]);
@@ -19,7 +20,7 @@ function PresentationList({ match }) {
 
     useEffect(() => {
         axios
-            .post('/pt/ptlist', { teamName: teamName })
+            .post('/pt/ptlist', { teamName })
             .then((data) => {
                 setAttendents(data.data);
                 setpresenter({
@@ -41,6 +42,24 @@ function PresentationList({ match }) {
             else return ele;
         });
         setpresenter({ ...presenter, attendents: attendenta });
+    };
+    const updatePtList = () => {
+        axios
+            .post('/pt/ptlist', { teamName: teamName })
+            .then((data) => {
+                setAttendents(data.data);
+                setpresenter({
+                    _id: '',
+                    ptName: '',
+                    attendents: [],
+                    createdAt: '',
+                    joined_people: 0,
+                    resultVote: '',
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
     const openModal = (pt) => {
         return () => {
@@ -82,24 +101,37 @@ function PresentationList({ match }) {
     }
     return (
         <>
+            <div className="ptHeader">
+                <PresentationHeader
+                    teamName={teamName}
+                    updatePtList={updatePtList}
+                />
+            </div>
+            <ptlistHeader
+                style={{ display: 'flex', justifyContent: 'space-around' }}
+            >
+                <div>발표명</div>
+                <div>참석자 수</div>
+                <div>첫번째 발표자</div>
+                <div>만든 날짜</div>
+            </ptlistHeader>
             {attendents &&
                 attendents.map((ele) => {
                     return (
                         <Presentation key={ele._id + 'div'}>
-                            <button onClick={openModal(ele)}>
-                                <span>{ele.ptName}</span>
-                            </button>
-                            <div style={{ display: 'flex' }}>
-                                <span>발표 순서 :</span>
-                                {ele.attendents.map((sub_ele) => {
-                                    return (
-                                        <div key={sub_ele._id}>
-                                            {sub_ele.name}
-                                        </div>
-                                    );
-                                })}
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'space-around',
+                                }}
+                            >
+                                <button onClick={openModal(ele)}>
+                                    <span>{ele.ptName}</span>
+                                </button>
                             </div>
                             <div>{ele.joined_people}</div>
+                            <div>{ele.attendents[0].name}</div>
+                            <div>{ele.createdAt}</div>
                         </Presentation>
                     );
                 })}
@@ -112,7 +144,6 @@ function PresentationList({ match }) {
                     onClickAway={closeModal}
                 >
                     <div>
-                        {console.log('모달 열때 presenter', presenter)}
                         <PresenterDetail
                             teamName={teamName}
                             presenter={presenter}

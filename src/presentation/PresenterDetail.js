@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Presenter from './Presenter';
 
 function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
@@ -20,14 +20,12 @@ function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
         }
     };
     const updateAttendent = (_attendent) => {
-        console.log('변경 전 발표자들입니다', attendent);
         setAttendent(
             attendent.map((ele) => {
                 if (ele.name === _attendent.name) return _attendent;
                 else return ele;
             })
         );
-        console.log('변경 후 발표자들입니다', attendent);
     };
 
     if (!presenters) {

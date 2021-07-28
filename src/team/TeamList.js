@@ -1,14 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
 import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
 function TeamList() {
     const [teamList, setTeamList] = useState();
-    const [state_teamName, setteamName] = useState('');
 
-    const dispatch = useDispatch();
     useEffect(() => {
         console.log('teamList request');
         axios
