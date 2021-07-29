@@ -44,6 +44,7 @@ function PresentationList({ match }) {
         setpresenter({ ...presenter, attendents: attendenta });
     };
     const updatePtList = () => {
+        console.log('리스트 업데이트');
         axios
             .post('/pt/ptlist', { teamName: teamName })
             .then((data) => {
@@ -119,9 +120,9 @@ function PresentationList({ match }) {
                 </div>
             )}
             {attendents &&
-                attendents.map((ele) => {
+                attendents.map((ele, idx) => {
                     return (
-                        <Presentation key={ele._id + 'div'}>
+                        <Presentation key={idx}>
                             <div
                                 style={{
                                     display: 'flex',

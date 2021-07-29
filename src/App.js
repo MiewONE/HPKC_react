@@ -1,4 +1,4 @@
-import Login from './service/Login';
+import Login from './service/login';
 import { useEffect, useState } from 'react';
 import './styles/app.scss';
 import { useDispatch } from 'react-redux';

@@ -1,5 +1,3 @@
-import { pender } from 'redux-pender';
-
 const LOGIN = 'user/LOGIN';
 const LOGOUT = 'user/LOGOUT';
 const CHECKLOGIN = 'user/CHECKLOGIN';

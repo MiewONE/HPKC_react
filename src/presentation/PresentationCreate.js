@@ -53,7 +53,11 @@ const PresentationCreate = ({ teamName, updatePtList }) => {
                 teamName,
             })
             .then((res) => {
-                alert(res.data.ptName + '이 생성되었습니다.');
+                if (!res.data.success) {
+                    alert('생성에 실패하였습니다.');
+                    return;
+                }
+                alert(res.data.msg + '이 생성되었습니다.');
             });
         updatePtList();
     };

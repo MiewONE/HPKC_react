@@ -27,6 +27,7 @@ function Login() {
                 }
                 dispatch(login(res.data.msg));
                 storage.set('loggedInfo', res.data.msg);
+                window.location.href = '/';
             })
             .catch((err) => {
                 console.log(err);
