@@ -96,9 +96,7 @@ function PresentationList({ match }) {
             });
         setModalVisible(false);
     };
-    if (attendents < 1) {
-        return <h1>발표 내역이 없습니다. 추가 하기겠습니까?</h1>;
-    }
+
     return (
         <>
             <div className="ptHeader">
@@ -107,14 +105,19 @@ function PresentationList({ match }) {
                     updatePtList={updatePtList}
                 />
             </div>
-            <ptlistHeader
-                style={{ display: 'flex', justifyContent: 'space-around' }}
-            >
-                <div>발표명</div>
-                <div>참석자 수</div>
-                <div>첫번째 발표자</div>
-                <div>만든 날짜</div>
-            </ptlistHeader>
+            {attendents < 1 && (
+                <h1>발표 내역이 없습니다. 추가 하시겠습니까?</h1>
+            )}
+            {attendents.length > 1 && (
+                <div
+                    style={{ display: 'flex', justifyContent: 'space-around' }}
+                >
+                    <div>발표명</div>
+                    <div>참석자 수</div>
+                    <div>첫번째 발표자</div>
+                    <div>만든 날짜</div>
+                </div>
+            )}
             {attendents &&
                 attendents.map((ele) => {
                     return (

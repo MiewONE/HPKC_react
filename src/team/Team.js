@@ -9,7 +9,8 @@ import TeamMemberDel from './TeamMemberDel';
 import { TeamDiv } from '../styles/teamStyle';
 
 function Team({ history }) {
-    const state_login = useSelector((state) => state.user);
+    const state_login = useSelector((state) => state);
+    console.log(state_login);
     return (
         <>
             {state_login.user.name !== '' && (

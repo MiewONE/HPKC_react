@@ -21,9 +21,12 @@ function Login() {
                 password: userPwd.current.value,
             })
             .then((res) => {
-                console.log(res);
-                dispatch(login(res.data));
-                storage.set('loggedInfo', res.data);
+                if (!res.data.success) {
+                    alert(res.data.msg);
+                    return;
+                }
+                dispatch(login(res.data.msg));
+                storage.set('loggedInfo', res.data.msg);
             })
             .catch((err) => {
                 console.log(err);

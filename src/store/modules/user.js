@@ -60,7 +60,12 @@ export default function user(state = initialInfo, action) {
                 },
             };
         case LOGOUT:
-            return {};
+            return {
+                ...state,
+                loggedInfo: {
+                    user: null,
+                },
+            };
         case CHECKLOGIN:
             return {};
         case SET_LOGGED_INFO:

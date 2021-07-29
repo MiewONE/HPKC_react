@@ -1,8 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { login, logout } from './store/modules/user';
 import axios from 'axios';
-
+import storage from '../lib/storage';
 function Logout() {
+    storage.remove('loggedInfo');
     const event_logout = () => {
         axios.get('/oauth/logout').then((data) => {
             console.log(data.data);
