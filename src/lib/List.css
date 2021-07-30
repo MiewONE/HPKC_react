@@ -1,0 +1,25 @@
+.memberList {
+  display: flex;
+  flex-direction: column;
+  border : 1px solid black;
+  width: 80%;
+}
+.member {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+ul.list {
+  padding: 1em;
+  border: 1px solid blue;
+  width: 900px;
+}
+ul.list.horizontal {
+  display: flex;
+}
+ul.list li {
+  padding: 0.3em;
+  margin: 0.2em;
+  border: 1px solid black;
+  list-style-type: none;
+}

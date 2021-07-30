@@ -1,6 +1,6 @@
-import Login from './service/login';
+import Login from './service/NewLogin';
 import { useEffect, useState } from 'react';
-import './styles/app.scss';
+import './styles/app.css';
 import { useDispatch } from 'react-redux';
 import Team from './team/Team';
 import { Link, Route } from 'react-router-dom';
@@ -8,10 +8,11 @@ import Home from './service/Home';
 import axios from 'axios';
 import { logout, setLoggedInfo } from './store/modules/user';
 import storage from './lib/storage';
-
+import Modal from 'react-awesome-modal';
 function App() {
     const dispatch = useDispatch();
     const [logined, setLogined] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     useEffect(() => {
         const loggedInfo = storage.get('loggedInfo');
         console.log(loggedInfo);
@@ -45,18 +46,37 @@ function App() {
         storage.remove('loggedInfo');
         window.location.href = '/';
     };
+    const openModal = () => {
+        setModalVisible(true);
+    };
+    const closeModal = () => {
+        setModalVisible(false);
+    };
     return (
-        <>
-            <div>
-                <Link to="/">홈페이지</Link>
-                {!logined && <Link to="/login">로그인</Link>}
-                {logined && <button onClick={event_logout}>로그아웃</button>}
-                {logined && <Link to="/team">팀 페이지</Link>}
+        <div className="appContiner">
+            <div className="body">
+                <div>
+                    <Link to="/">홈페이지</Link>
+                    {!logined && <button onClick={openModal}>로그인</button>}
+                    {logined && (
+                        <button onClick={event_logout}>로그아웃</button>
+                    )}
+                    {logined && <Link to="/team">팀 페이지</Link>}
+                </div>
+                <Route exact path="/" component={Home} />
+                <Route path="/team" component={Team} />
             </div>
-            <Route exact path="/" component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/team" component={Team} />
-        </>
+
+            <Modal
+                visible={modalVisible}
+                width="420"
+                height="558"
+                effect="fadeInUp"
+                onClickAway={closeModal}
+            >
+                <Login closeModal={closeModal} />
+            </Modal>
+        </div>
     );
 }
 

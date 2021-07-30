@@ -1,0 +1,55 @@
+.loginBody{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      height: 95%;
+      padding: 10px;
+      &::before{
+            content:"";
+      }
+}
+.close{
+      position: absolute;
+      right: 18px;
+}
+.logo{
+      height: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      margin-bottom: 4%;
+      & span {
+            position: absolute;
+            left: 41%;
+      }
+}
+
+.input {
+      height: 12%;
+  }
+
+.btnClick{
+      height: 12%;
+}
+.oauthExplain{
+      height: 9%;
+      font-size: 0.84em;
+}
+.oauthClick{
+      display:flex;
+      width: 55%;
+      justify-content: space-around;
+}
+// .kakao{
+//       background: #FFD11A;
+// }
+// .input{
+      
+// }
+img{
+      width: 21%;
+      position: absolute;
+      left: 15%;
+      top: 4%;
+}

@@ -29,7 +29,7 @@ const PresentationHeader = ({ teamName, updatePtList }) => {
         setCrudState(999);
         setModalVisible(false);
     };
-    useEffect(() => {}, [crudState]);
+
     return (
         <div>
             <button onClick={createModal}>발표 생성</button>

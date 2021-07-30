@@ -25,24 +25,32 @@ export const LoginMain = styled.div`
 `;
 
 export const ButtonLogin = styled.a`
+    margin: 8% 0 5% 0;
     display: block;
-    background: tomato;
-    width: 100%;
-    height: 52px;
-    border-radius: 0.75em;
+    background: #78b27a;
+    width: 80%;
+    height: 8%;
+    border-radius: 3.75em;
     line-height: 50px;
-    font-size: 17px;
+    font-size: 14px;
     font-weight: 500;
     text-align: center;
     &:hover {
-        background-color: #ff7259;
+        background-color: #557e57;
         transition-duration: 0.1s;
     }
+`;
+export const SosialLogin = styled.div`
+    background: #ffd11a;
+    width: 15%;
+    border-radius: 83px;
+    height: 33px;
+    font-size: 12px;
 `;
 
 export const Input = styled.input`
     height: 2em;
-    width: 94%;
+    width: 80%;
     border-radius: 5px;
     margin: 4px;
     padding: 6px;

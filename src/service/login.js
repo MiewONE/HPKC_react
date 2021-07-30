@@ -41,7 +41,6 @@ function Login() {
         <>
             {state_login && (
                 <LoginMain>
-                    <MainImg src="/img/minions.jpg" alt="logo" />
                     <div className="login">
                         <span>이메일</span>
                         <Input
