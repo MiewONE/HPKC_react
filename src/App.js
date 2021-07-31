@@ -1,30 +1,57 @@
 import Login from './service/NewLogin';
 import { useEffect, useState } from 'react';
-import './styles/app.css';
+import './styles/app.scss';
 import { useDispatch } from 'react-redux';
 import Team from './team/Team';
 import { Link, Route } from 'react-router-dom';
 import Home from './service/Home';
 import axios from 'axios';
-import { logout, setLoggedInfo } from './store/modules/user';
+import { login, logout, setLoggedInfo, checklogin } from './store/modules/user';
 import storage from './lib/storage';
 import Modal from 'react-awesome-modal';
+const _loggedInfo = 'loggedInfo';
 function App() {
     const dispatch = useDispatch();
     const [logined, setLogined] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+
     useEffect(() => {
-        const loggedInfo = storage.get('loggedInfo');
-        console.log(loggedInfo);
-        dispatch(setLoggedInfo(loggedInfo));
+        const kakaoLogin = storage.get('kakao');
+        console.log(kakaoLogin);
+        if (kakaoLogin) {
+            axios
+                .get('/oauth/usr')
+                .then((res) => {
+                    console.log(res);
+                    if (!res.data.success) {
+                        return;
+                    }
+                    dispatch(login(res.data.msg));
+                    storage.remove('kakao');
+                    storage.set(_loggedInfo, res.data.msg);
+                    setLogined(true);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    if (err) {
+                        alert('로그인에 실패 하였습니다.');
+                    }
+                });
+        }
+        const loggedInfo = storage.get(_loggedInfo)
+            ? storage.get(_loggedInfo)
+            : storage.remainGet(_loggedInfo);
         if (!loggedInfo) return;
+
+        dispatch(setLoggedInfo(loggedInfo));
 
         try {
             axios
                 .post('/oauth/check', loggedInfo)
                 .then((res) => {
+                    console.log(res);
                     if (!res.data.success) {
-                        storage.remove('loggedInfo');
+                        storage.remove(_loggedInfo);
                         dispatch(logout());
                         window.location.href = '/';
                         alert('다시 로그인해주시 바랍니다.');
@@ -35,7 +62,8 @@ function App() {
                     console.log(err);
                 });
         } catch {
-            storage.remove('loggedInfo');
+            storage.remove(_loggedInfo);
+            storage.removeRemain(_loggedInfo);
             window.location.href = '/login?expired';
         }
     }, []);
@@ -43,7 +71,8 @@ function App() {
         axios.get('/oauth/logout');
         dispatch(logout());
         setLogined(false);
-        storage.remove('loggedInfo');
+        storage.remove(_loggedInfo);
+        storage.removeRemain(_loggedInfo);
         window.location.href = '/';
     };
     const openModal = () => {
@@ -54,19 +83,23 @@ function App() {
     };
     return (
         <div className="appContiner">
-            <div className="body">
+            <div className="madinHeader">
                 <div>
-                    <Link to="/">홈페이지</Link>
+                    <Link to="/" className="titleLogo">
+                        123
+                    </Link>
+                    {logined && <Link to="/team">팀 페이지</Link>}
+                </div>
+                <div>
                     {!logined && <button onClick={openModal}>로그인</button>}
+                    {!logined && <button onClick={openModal}>회원가입</button>}
                     {logined && (
                         <button onClick={event_logout}>로그아웃</button>
                     )}
-                    {logined && <Link to="/team">팀 페이지</Link>}
                 </div>
-                <Route exact path="/" component={Home} />
-                <Route path="/team" component={Team} />
             </div>
-
+            <Route exact path="/" component={Home} />
+            <Route path="/team" component={Team} />
             <Modal
                 visible={modalVisible}
                 width="420"

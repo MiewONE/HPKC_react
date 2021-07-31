@@ -32,20 +32,21 @@ export const ButtonLogin = styled.a`
     height: 8%;
     border-radius: 3.75em;
     line-height: 50px;
-    font-size: 14px;
-    font-weight: 500;
+    font-size: 17px;
+    /* font-weight: 500; */
+    color: white;
     text-align: center;
+    cursor: pointer;
     &:hover {
         background-color: #557e57;
         transition-duration: 0.1s;
     }
 `;
 export const SosialLogin = styled.div`
-    background: #ffd11a;
-    width: 15%;
+    width: 18%;
     border-radius: 83px;
-    height: 33px;
-    font-size: 12px;
+    height: 38px;
+    cursor: pointer;
 `;
 
 export const Input = styled.input`
@@ -56,7 +57,7 @@ export const Input = styled.input`
     padding: 6px;
     &:focus {
         outline: none;
-        box-shadow: 0 0 0 2px #388bfd;
+        box-shadow: 0 0 0 2px #557e57;
     }
 `;
 

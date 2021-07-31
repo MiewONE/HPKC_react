@@ -34,9 +34,10 @@ export function logout() {
         type: LOGOUT,
     };
 }
-export function checklogin() {
+export function checklogin(data) {
     return {
         type: CHECKLOGIN,
+        payload: data,
     };
 }
 
@@ -44,6 +45,7 @@ const initialInfo = {
     loggedInfo: {
         user: null,
     },
+    trylogin: false,
     logged: false,
     validated: false,
 };

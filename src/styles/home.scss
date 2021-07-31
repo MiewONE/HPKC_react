@@ -1,6 +1,111 @@
 .body {
       display: flex;
 }
-.login {
-      
+.homelogo{
+      display:flex;
+      height: 700px;
+      margin: 0 0 4% 0;
+      justify-content: space-evenly;
+      & img {
+            user-select: none;
+      }
+      & span {
+            font-size: 6em;
+
+            font-family: vitroCoreTTF;
+      }
+}
+.explain{
+      height: 800px;    
+      display:flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+}
+.grayblock{
+      background-color: #F2F2F8;
+}
+.header{
+      font-size: 3em;
+      height: 10%;
+      font-weight: bold;
+
+}
+.explanation{
+      height: 700px;
+      width: 100%;
+      display:flex;
+
+      & > div:nth-child(2){
+            font-size: 2em;
+            display: flex;
+            justify-content: space-evenly;
+      }
+
+}
+.topheader{
+      position: relative;
+    left: -47%;
+    font-weight: bold;  
+    font-size: 1.2em;
+    top: 4%;
+}
+#about{
+      & > div:nth-child(1) {
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            width: 40%;
+            & > div:nth-child(1) {
+                  height: 61%;
+                  width: 55%;
+                  display: flex;
+                  justify-content: inherit;
+            }
+            & > div:nth-child(2) {
+                  height: 43%;
+                  width: 55%;
+                  display:flex;
+                  justify-content: flex-end;
+                  &  div {
+                        margin : 3%;
+                        font-weight: bold;
+                  }
+                  & > div:nth-child(1)
+                  {
+                        display: flex;
+                        flex-direction: column;
+                        width: 23%;
+                        justify-content: space-evenly;;
+                        align-items: center;    
+                  }
+                  & > div:nth-child(2)
+                  {
+                        width: 50%;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-evenly;
+                  }
+            }
+      }
+      & > div:nth-child(2) {
+            width: 60%;
+      }
+      & img {
+
+            width: 322.016px;
+            border-radius: 10em;
+            border : 1px solid black;
+      }
+}
+.explanation2{
+      height: 700px;
+      width: 100%;
+      display:flex;
+      justify-content: space-evenly;
+      margin-top: 4%;
+}
+li{
+      margin : 5px;
 }

@@ -25,31 +25,56 @@
       }
 }
 
-.input {
-      height: 12%;
-  }
 
 .btnClick{
       height: 12%;
 }
 .oauthExplain{
-      height: 9%;
+      height: 7%;
       font-size: 0.84em;
 }
 .oauthClick{
       display:flex;
       width: 55%;
       justify-content: space-around;
+      height: 12%;
 }
-// .kakao{
-//       background: #FFD11A;
-// }
-// .input{
-      
-// }
-img{
+
+.logoimg{
       width: 21%;
       position: absolute;
       left: 15%;
       top: 4%;
+}
+.xbutton{
+      width: 4%;
+      position: absolute;
+      right: 5%;
+      top: 2%;
+      background: url("./img/x-button.png") no-repeat center center;
+      background-size: 95%;
+      cursor : pointer;
+}
+
+.kakao{
+      background: url("./logo/logo-kakao.png") no-repeat center center;
+      background-color: #FFD11A;
+}
+.google{
+      background: url("./logo/logo_google.png") no-repeat center center;
+      border : 1px solid rgb(88, 86, 86)
+}
+.facebook{
+      background: url("./logo/logo-zuckerberg.png") no-repeat center center;
+      background-color: #15A4FB;
+}
+.naver{
+      background: url("./logo/logo-naver.png") no-repeat center center;
+      background-color: #04CF61;
+}
+.checkLoginRemain{
+      height: 7%;
+}
+.forgotPw{
+      height: 7%;
 }
