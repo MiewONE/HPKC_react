@@ -5,6 +5,7 @@ import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
 function PresentationList({ match }) {
+    console.log('출력>>>>>', match);
     const { teamName } = match.params;
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -21,16 +22,21 @@ function PresentationList({ match }) {
     useEffect(() => {
         axios
             .post('/pt/ptlist', { teamName })
-            .then((data) => {
-                setAttendents(data.data);
-                setpresenter({
-                    _id: '',
-                    ptName: '',
-                    attendents: [],
-                    createdAt: '',
-                    joined_people: 0,
-                    resultVote: '',
-                });
+            .then((res) => {
+                if (res.data.success) {
+                    setAttendents(res.data.msg);
+                    setpresenter({
+                        _id: '',
+                        ptName: '',
+                        attendents: [],
+                        createdAt: '',
+                        joined_people: 0,
+                        resultVote: '',
+                    });
+                } else {
+                    alert(res.data.msg);
+                    window.location.href = '/';
+                }
             })
             .catch((err) => {
                 console.log(err);

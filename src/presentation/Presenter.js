@@ -56,6 +56,14 @@ const Presenter = ({
                     console.log(err);
                 });
         },
+        ddabong: () => {
+            console.log(teamName, ptName, presenter);
+            // axios.post("따봉할 url",{
+            //     teamName,
+            //     ptName,
+            //     presenter: presenter.email
+            // })
+        },
     };
     if (!presenter) {
         console.log(presenter);
@@ -84,6 +92,7 @@ const Presenter = ({
                 <button type="submit">Upload</button>
             </form>
             <EditorComponent value={desc} onChange={events.onEditorChange} />
+            <button onClick={events.ddabong}>추천</button>
         </div>
     );
 };

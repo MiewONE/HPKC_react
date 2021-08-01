@@ -52,10 +52,13 @@ const NewLogin = ({ closeModal }) => {
             <div className="xbutton" onClick={closeModal}>
                 <SosialLogin></SosialLogin>
             </div>
-            <img src="/img/pptogether.png" alt="logo" className="logoimg" />
 
             <div className="back logo">
-                <span>안녕하세요</span>
+                <img
+                    src="/img/logopptogether.png"
+                    alt="logo"
+                    className="logoimg"
+                />
             </div>
             <Input
                 className="input"

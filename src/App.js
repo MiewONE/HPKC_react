@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import './styles/app.scss';
 import { useDispatch } from 'react-redux';
 import Team from './team/Team';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import Home from './service/Home';
 import axios from 'axios';
 import { login, logout, setLoggedInfo, checklogin } from './store/modules/user';
 import storage from './lib/storage';
 import Modal from 'react-awesome-modal';
+import Notfount from './components/Notfount';
 const _loggedInfo = 'loggedInfo';
 function App() {
     const dispatch = useDispatch();
@@ -98,8 +99,12 @@ function App() {
                     )}
                 </div>
             </div>
-            <Route exact path="/" component={Home} />
-            <Route path="/team" component={Team} />
+            <Switch>
+                <Route exact path="/" component={Home} />
+                <Route path="/team" component={Team} />
+                <Route component={Notfount} />
+            </Switch>
+
             <Modal
                 visible={modalVisible}
                 width="420"

@@ -10,12 +10,21 @@ function TeamList() {
         console.log('teamList request');
         axios
             .get('/team/teamlist')
-            .then((data) => {
-                console.log(data.data);
-                setTeamList(data.data);
+            .then((res) => {
+                console.log(res);
+                if (res.data.success) {
+                    setTeamList(res.data.msg);
+                } else {
+                    alert('서버에서 오류가 발생하였습니다.');
+                    window.location.href = '/';
+                    return;
+                }
             })
             .catch((err) => {
+                console.log(err);
                 alert('서버에서 오류가 발생하였습니다.');
+                window.location.href = '/';
+                return;
             });
     }, []);
 
