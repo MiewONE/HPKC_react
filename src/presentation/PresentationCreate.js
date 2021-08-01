@@ -18,26 +18,24 @@ const PresentationCreate = ({ teamName, updatePtList }) => {
     }, []);
 
     const save = () => {
-        console.log(member);
-        console.log(selectedMember);
         if (!ptName.current.value) {
             alert('발표명을 지정해주세요');
             return;
         }
-        // axios
-        //     .post('/pt/create-presentation', {
-        //         ptName: ptName.current.value,
-        //         members: selectedMember,
-        //         teamName,
-        //     })
-        //     .then((res) => {
-        //         if (!res.data.success) {
-        //             alert('생성에 실패하였습니다.');
-        //             return;
-        //         }
-        //         alert(res.data.msg + '이 생성되었습니다.');
-        //     });
-        // updatePtList();
+        axios
+            .post('/pt/create-presentation', {
+                ptName: ptName.current.value,
+                members: selectedMember,
+                teamName,
+            })
+            .then((res) => {
+                if (!res.data.success) {
+                    alert('생성에 실패하였습니다.');
+                    return;
+                }
+                alert(res.data.msg + '이 생성되었습니다.');
+            });
+        updatePtList();
     };
     return (
         <div className="ptCreateModal">

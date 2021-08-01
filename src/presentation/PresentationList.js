@@ -53,16 +53,21 @@ function PresentationList({ match }) {
         console.log('리스트 업데이트');
         axios
             .post('/pt/ptlist', { teamName: teamName })
-            .then((data) => {
-                setAttendents(data.data);
-                setpresenter({
-                    _id: '',
-                    ptName: '',
-                    attendents: [],
-                    createdAt: '',
-                    joined_people: 0,
-                    resultVote: '',
-                });
+            .then((res) => {
+                if (res.data.success) {
+                    setAttendents(res.data.msg);
+                    setpresenter({
+                        _id: '',
+                        ptName: '',
+                        attendents: [],
+                        createdAt: '',
+                        joined_people: 0,
+                        resultVote: '',
+                    });
+                } else {
+                    alert(res.data.msg);
+                    window.location.href = '/';
+                }
             })
             .catch((err) => {
                 console.log(err);
