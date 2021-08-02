@@ -58,11 +58,18 @@ const Presenter = ({
         },
         ddabong: () => {
             console.log(teamName, ptName, presenter);
-            // axios.post("따봉할 url",{
-            //     teamName,
-            //     ptName,
-            //     presenter: presenter.email
-            // })
+            axios
+                .put('/pt/recommendation', {
+                    teamName,
+                    ptName,
+                    presenter,
+                })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
         },
     };
     if (!presenter) {

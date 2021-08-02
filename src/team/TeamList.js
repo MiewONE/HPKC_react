@@ -3,31 +3,7 @@ import axios from 'axios';
 import { Route, Link } from 'react-router-dom';
 import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
-function TeamList() {
-    const [teamList, setTeamList] = useState();
-
-    useEffect(() => {
-        console.log('teamList request');
-        axios
-            .get('/team/teamlist')
-            .then((res) => {
-                console.log(res);
-                if (res.data.success) {
-                    setTeamList(res.data.msg);
-                } else {
-                    alert('서버에서 오류가 발생하였습니다.');
-                    window.location.href = '/';
-                    return;
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-                alert('서버에서 오류가 발생하였습니다.');
-                window.location.href = '/';
-                return;
-            });
-    }, []);
-
+function TeamList({ teamList }) {
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ width: '50%' }}>

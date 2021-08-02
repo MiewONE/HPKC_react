@@ -35,7 +35,7 @@ function PresentationList({ match }) {
                     });
                 } else {
                     alert(res.data.msg);
-                    window.location.href = '/';
+                    window.location.href = '/team';
                 }
             })
             .catch((err) => {
@@ -92,8 +92,12 @@ function PresentationList({ match }) {
         console.log(teamName);
         axios
             .post('/pt/ptlist', { teamName: teamName })
-            .then((data) => {
-                setAttendents(data.data);
+            .then((res) => {
+                if (!res.data.success) {
+                    alert('서버로부터 응답을 받지 못했습니다');
+                    window.location.href = '/';
+                }
+                setAttendents(res.data.msg);
                 setpresenter({
                     _id: '',
                     ptName: '',
@@ -130,7 +134,7 @@ function PresentationList({ match }) {
                     <div>만든 날짜</div>
                 </div>
             )}
-            {attendents &&
+            {attendents.length > 0 &&
                 attendents.map((ele, idx) => {
                     return (
                         <Presentation key={idx}>
