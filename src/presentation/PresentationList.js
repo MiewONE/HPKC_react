@@ -4,9 +4,7 @@ import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
-function PresentationList({ match }) {
-    console.log('출력>>>>>', match);
-    const { teamName } = match.params;
+function PresentationList({ teamName, teamList, updateTeam, match }) {
     const [modalVisible, setModalVisible] = useState(false);
 
     const [attendents, setAttendents] = useState([]);
@@ -18,21 +16,23 @@ function PresentationList({ match }) {
         joined_people: 0,
         resultVote: '',
     });
-
     useEffect(() => {
         axios
             .post('/pt/ptlist', { teamName })
             .then((res) => {
                 if (res.data.success) {
-                    setAttendents(res.data.msg);
-                    setpresenter({
-                        _id: '',
-                        ptName: '',
-                        attendents: [],
-                        createdAt: '',
-                        joined_people: 0,
-                        resultVote: '',
-                    });
+                    setAttendents((state) => (state = res.data.msg));
+                    setpresenter(
+                        (state) =>
+                            (state = {
+                                _id: '',
+                                ptName: '',
+                                attendents: [],
+                                createdAt: '',
+                                joined_people: 0,
+                                resultVote: '',
+                            })
+                    );
                 } else {
                     alert(res.data.msg);
                     window.location.href = '/team';
@@ -41,29 +41,34 @@ function PresentationList({ match }) {
             .catch((err) => {
                 console.log(err);
             });
-    }, [teamName]);
+    }, [teamName, match]);
     const updatePresenter = (update) => {
         const attendenta = presenter.attendents.map((ele) => {
             if (ele.name === update.name) return update;
             else return ele;
         });
-        setpresenter({ ...presenter, attendents: attendenta });
+        setpresenter(
+            (data) => (data = { ...presenter, attendents: attendenta })
+        );
     };
     const updatePtList = () => {
-        console.log('리스트 업데이트');
         axios
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
                 if (res.data.success) {
-                    setAttendents(res.data.msg);
-                    setpresenter({
-                        _id: '',
-                        ptName: '',
-                        attendents: [],
-                        createdAt: '',
-                        joined_people: 0,
-                        resultVote: '',
-                    });
+                    console.log(res.data.msg);
+                    setAttendents((state) => (state = res.data.msg));
+                    setpresenter(
+                        (state) =>
+                            (state = {
+                                _id: '',
+                                ptName: '',
+                                attendents: [],
+                                createdAt: '',
+                                joined_people: 0,
+                                resultVote: '',
+                            })
+                    );
                 } else {
                     alert(res.data.msg);
                     window.location.href = '/';
@@ -72,20 +77,36 @@ function PresentationList({ match }) {
             .catch((err) => {
                 console.log(err);
             });
+
+        updateTeam(
+            teamList.map((ele) => {
+                if (ele.teamName === teamName) {
+                    return {
+                        ...ele,
+                        ptCnt: ele.ptCnt + 1,
+                    };
+                } else {
+                    return ele;
+                }
+            })
+        );
     };
     const openModal = (pt) => {
         return () => {
             if (pt.ptName !== presenter.ptName) {
-                setpresenter({
-                    _id: pt._id,
-                    ptName: pt.ptName,
-                    attendents: pt.attendents,
-                    createdAt: pt.createdAt,
-                    joined_people: pt.joined_people,
-                    resultVote: pt.resultVote,
-                });
+                setpresenter(
+                    (state) =>
+                        (state = {
+                            _id: pt._id,
+                            ptName: pt.ptName,
+                            attendents: pt.attendents,
+                            createdAt: pt.createdAt,
+                            joined_people: pt.joined_people,
+                            resultVote: pt.resultVote,
+                        })
+                );
             }
-            setModalVisible(true);
+            setModalVisible((state) => (state = true));
         };
     };
     const closeModal = () => {
@@ -97,20 +118,23 @@ function PresentationList({ match }) {
                     alert('서버로부터 응답을 받지 못했습니다');
                     window.location.href = '/';
                 }
-                setAttendents(res.data.msg);
-                setpresenter({
-                    _id: '',
-                    ptName: '',
-                    attendents: [],
-                    createdAt: '',
-                    joined_people: 0,
-                    resultVote: '',
-                });
+                setAttendents((state) => (state = res.data.msg));
+                setpresenter(
+                    (state) =>
+                        (state = {
+                            _id: '',
+                            ptName: '',
+                            attendents: [],
+                            createdAt: '',
+                            joined_people: 0,
+                            resultVote: '',
+                        })
+                );
             })
             .catch((err) => {
                 console.log(err);
             });
-        setModalVisible(false);
+        setModalVisible((state) => (state = false));
     };
 
     return (

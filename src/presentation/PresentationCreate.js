@@ -10,12 +10,12 @@ const PresentationCreate = ({ teamName, updatePtList }) => {
         axios
             .post('/team/userlist', { teamName })
             .then((res) => {
-                setMember(res.data.member);
+                setMember((state) => (state = res.data.msg));
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [teamName]);
 
     const save = () => {
         if (!ptName.current.value) {
@@ -35,6 +35,7 @@ const PresentationCreate = ({ teamName, updatePtList }) => {
                 }
                 alert(res.data.msg + '이 생성되었습니다.');
             });
+        console.log('업데이트 시작');
         updatePtList();
     };
     return (

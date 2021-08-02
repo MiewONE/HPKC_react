@@ -11,13 +11,14 @@ import { login } from './store/modules/user';
 import storage from './lib/storage';
 import Modal from 'react-awesome-modal';
 import Notfount from './components/Notfount';
+import Register from './service/Register';
 
 function App() {
     const _loggedInfo = 'loggedInfo';
     const dispatch = useDispatch();
     const [logined, setLogined] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
-
+    const [modalState, setModalState] = useState(false);
     useEffect(() => {
         const kakaoLogin = storage.get('kakao');
         console.log(kakaoLogin);
@@ -32,7 +33,7 @@ function App() {
                     dispatch(login(res.data.msg));
                     storage.remove('kakao');
                     storage.set(_loggedInfo, res.data.msg);
-                    setLogined(true);
+                    setLogined((data) => (data = true));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -80,11 +81,16 @@ function App() {
         storage.removeRemain(_loggedInfo);
         window.location.href = '/';
     };
-    const openModal = () => {
+    const openRegister = () => {
+        setModalState((state) => (state = false));
         setModalVisible(true);
     };
+    const openModal = () => {
+        setModalState((state) => (state = true));
+        setModalVisible((state) => (state = true));
+    };
     const closeModal = () => {
-        setModalVisible(false);
+        setModalVisible((state) => (state = false));
     };
     return (
         <div className="appContiner">
@@ -97,7 +103,9 @@ function App() {
                 </div>
                 <div>
                     {!logined && <button onClick={openModal}>로그인</button>}
-                    {!logined && <button onClick={openModal}>회원가입</button>}
+                    {!logined && (
+                        <button onClick={openRegister}>회원가입</button>
+                    )}
                     {logined && (
                         <button onClick={event_logout}>로그아웃</button>
                     )}
@@ -116,7 +124,8 @@ function App() {
                 effect="fadeInUp"
                 onClickAway={closeModal}
             >
-                <Login closeModal={closeModal} />
+                {modalState && <Login closeModal={closeModal} />}
+                {!modalState && <Register closeModal={closeModal} />}
             </Modal>
         </div>
     );

@@ -1,25 +1,16 @@
-import React, { useState, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import '../styles/newlogin.scss';
-import { login } from '../store/modules/user';
+import React, { useRef } from 'react';
 import axios from 'axios';
+import '../styles/newlogin.scss';
 import storage from '../lib/storage';
-import {
-    SosialLogin,
-    LoginMain,
-    ButtonLogin,
-    Input,
-    MainImg,
-} from '../styles/loginStyle';
-
-const NewLogin = ({ closeModal }) => {
-    const dispatch = useDispatch();
-    const [saveme, setSaveme] = useState(false);
+import { SosialLogin, ButtonLogin, Input } from '../styles/loginStyle';
+const Register = ({ closeModal }) => {
+    const userName = useRef();
     const userEmail = useRef();
     const userPwd = useRef();
     const event_login = () => {
         axios
-            .post('/oauth/logins', {
+            .post('/oauth/register', {
+                userName: userName.current.value,
                 userEmail: userEmail.current.value,
                 password: userPwd.current.value,
             })
@@ -28,9 +19,7 @@ const NewLogin = ({ closeModal }) => {
                     alert(res.data.msg);
                     return;
                 }
-                dispatch(login(res.data.msg));
-                if (saveme) storage.remain('loggedInfo', res.data.msg);
-                else storage.set('loggedInfo', res.data.msg);
+                alert('회원가입이 완료되었습니다.');
                 window.location.href = '/';
             })
             .catch((err) => {
@@ -39,9 +28,6 @@ const NewLogin = ({ closeModal }) => {
                     alert('로그인에 실패 하였습니다.');
                 }
             });
-    };
-    const save = () => {
-        setSaveme((state) => (state = !saveme));
     };
     const kakaoLogin = () => {
         storage.set('kakao', true);
@@ -63,6 +49,13 @@ const NewLogin = ({ closeModal }) => {
             <Input
                 className="input"
                 type="text"
+                name="name"
+                placeholder="이름"
+                ref={userName}
+            ></Input>
+            <Input
+                className="input"
+                type="text"
                 name="email"
                 placeholder="이메일"
                 ref={userEmail}
@@ -75,9 +68,9 @@ const NewLogin = ({ closeModal }) => {
                 ref={userPwd}
             ></Input>
             <ButtonLogin className="sosial kakao" onClick={event_login}>
-                로그인
+                회원 가입
             </ButtonLogin>
-            <div className="back oauthExplain">소셜 계정으로 로그인</div>
+            <div className="back oauthExplain">소셜 계정으로 가입</div>
             <div className="back oauthClick">
                 <SosialLogin
                     className="kakao"
@@ -87,18 +80,9 @@ const NewLogin = ({ closeModal }) => {
                 <SosialLogin className="facebook"></SosialLogin>
                 <SosialLogin className="naver"></SosialLogin> */}
             </div>
-            <div className="back checkLoginRemain">
-                <label>
-                    <input type="checkbox" name="saveme" onClick={save} />
-                    로그인 상태 유지하기
-                </label>
-            </div>
             <div className="back forgotPw">비밀번호 찾기</div>
-            <div className="back register">
-                회원이 아니시라면? <a href="#">회원가입</a>
-            </div>
         </div>
     );
 };
 
-export default NewLogin;
+export default Register;

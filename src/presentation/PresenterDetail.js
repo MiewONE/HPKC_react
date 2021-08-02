@@ -21,10 +21,11 @@ function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
     };
     const updateAttendent = (_attendent) => {
         setAttendent(
-            attendent.map((ele) => {
-                if (ele.name === _attendent.name) return _attendent;
-                else return ele;
-            })
+            (state) =>
+                (state = attendent.map((ele) => {
+                    if (ele.name === _attendent.name) return _attendent;
+                    else return ele;
+                }))
         );
     };
 
