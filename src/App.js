@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react';
 import './styles/app.scss';
 import { useDispatch } from 'react-redux';
 import Team from './team/Team';
+import { logout, setLoggedInfo } from './store/modules/user';
 import { Link, Route, Switch } from 'react-router-dom';
 import Home from './service/Home';
 import axios from 'axios';
-import { login, logout, setLoggedInfo, checklogin } from './store/modules/user';
+import { login } from './store/modules/user';
 import storage from './lib/storage';
 import Modal from 'react-awesome-modal';
 import Notfount from './components/Notfount';
-const _loggedInfo = 'loggedInfo';
+
 function App() {
+    const _loggedInfo = 'loggedInfo';
     const dispatch = useDispatch();
     const [logined, setLogined] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -52,6 +54,7 @@ function App() {
                 .then((res) => {
                     console.log(res);
                     if (!res.data.success) {
+                        storage.remove('loggedInfo');
                         storage.remove(_loggedInfo);
                         dispatch(logout());
                         window.location.href = '/';
@@ -63,6 +66,7 @@ function App() {
                     console.log(err);
                 });
         } catch {
+            storage.remove('loggedInfo');
             storage.remove(_loggedInfo);
             storage.removeRemain(_loggedInfo);
             window.location.href = '/login?expired';

@@ -1,15 +1,41 @@
 import { Link, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import TeamCreate from './TeamCreate';
 import TeamDelete from './TeamDelete';
 import TeamList from './TeamList';
 import TeamMemberAdd from './TeamMemberAdd';
 import TeamMemberDel from './TeamMemberDel';
 import { TeamDiv } from '../styles/teamStyle';
+import axios from 'axios';
 
 function Team({ history }) {
     const state_login = useSelector((state) => state);
+    const [teamList, setTeamList] = useState();
+    const updateTeam = (data) => {
+        setTeamList(data);
+    };
+    useEffect(() => {
+        console.log('teamList request');
+        axios
+            .get('/team/teamlist')
+            .then((res) => {
+                console.log(res);
+                if (res.data.success) {
+                    setTeamList(res.data.msg);
+                } else {
+                    alert('서버에서 오류가 발생하였습니다.');
+                    window.location.href = '/';
+                    return;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                alert('서버에서 오류가 발생하였습니다.');
+                window.location.href = '/';
+                return;
+            });
+    }, []);
     console.log(state_login);
     return (
         <>
@@ -22,14 +48,25 @@ function Team({ history }) {
                         <Link to="/team/member-delete">팀 멤버 제거</Link>
                     </TeamDiv>
                     {/* <Route path="/team/list" component={TeamList} /> */}
-                    <Route path="/team/create" component={TeamCreate} />
-                    <Route path="/team/delete" component={TeamDelete} />
+                    <Route
+                        path="/team/create"
+                        render={() => <TeamCreate updateTeam={updateTeam} />}
+                    />
+                    <Route
+                        path="/team/delete"
+                        render={() => (
+                            <TeamDelete
+                                updateTeam={updateTeam}
+                                teamList={teamList}
+                            />
+                        )}
+                    />
                     <Route path="/team/member-add" component={TeamMemberAdd} />
                     <Route
                         path="/team/member-delete"
                         component={TeamMemberDel}
                     />
-                    <TeamList />
+                    <TeamList teamList={teamList} updateTeam={updateTeam} />
                 </div>
             )}
         </>
