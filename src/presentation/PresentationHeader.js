@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-awesome-modal';
 import PresentationBody from './PresentationBody';
 
 const CREATE = 0;
-const UPDATE = 1;
 const DELETE = 2;
 
 const PresentationHeader = ({ teamName, updatePtList }) => {

@@ -4,9 +4,9 @@ import '../styles/ptcreate.scss';
 import { setPresentationList } from '../store/modules/presentation';
 import { useSelector, useDispatch } from 'react-redux';
 import { List } from '../lib/List';
-const PresentationCreate = ({ teamName, updatePtList }) => {
+const PresentationCreate = ({ teamName }) => {
     const { presentation } = useSelector((stat) => stat);
-    const { ptList, presenter } = presentation;
+    const { ptList } = presentation;
     const dispatch = useDispatch();
     const [member, setMember] = useState([]);
     const [selectedMember, setSelectedMember] = useState([]);

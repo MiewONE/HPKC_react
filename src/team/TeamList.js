@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Route, Link } from 'react-router-dom';
 import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
+
 function TeamList({ teamList, updateTeam }) {
     const [teamName, setTeamName] = useState('');
-
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ width: '50%' }}>

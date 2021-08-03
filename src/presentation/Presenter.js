@@ -15,15 +15,9 @@ const Presenter = ({
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
     const { attendents, order: num, recommend } = presentation;
-    console.log(presentation);
-    console.log(num);
-    console.log(attendents);
-    console.log(attendents[num].ddabong.length);
     const loginInfo = storage.get('loggedInfo')
         ? storage.get('loggedInfo')
         : storage.remainGet('loggedInfo');
-
-    const [alreadyDdabong, setAlreadyDdabong] = useState(false);
 
     const [desc, setDesc] = useState(attendents[num].summary);
     const [file, setFile] = useState('');
@@ -33,7 +27,7 @@ const Presenter = ({
         dispatch(setRecommed(attendents[num].ddabong.length));
         setOrder((n) => (n = attendents[num].order));
         setDesc((state) => (state = attendents[num].summary));
-        console.log(attendents[num].ddabong.length);
+
         const checkRecommend = attendents[num].ddabong.filter(
             (ele) => ele === loginInfo.email
         );
@@ -94,10 +88,7 @@ const Presenter = ({
                     presenter: attendents[num],
                 })
                 .then((res) => {
-                    console.log(res.data);
                     if (res.data.success) {
-                        console.log(attendents);
-
                         dispatch(
                             setAttendent(
                                 attendents.map((ele) => {
@@ -106,7 +97,7 @@ const Presenter = ({
                                             ...ele,
                                             ddabong: [
                                                 ...attendents[num].ddabong,
-                                                'up',
+                                                loginInfo.email,
                                             ],
                                         };
                                     } else {
@@ -115,7 +106,7 @@ const Presenter = ({
                                 })
                             )
                         );
-                        console.log(attendents);
+
                         alert('추천 되었습니다.');
                     } else {
                         alert(res.data.msg);

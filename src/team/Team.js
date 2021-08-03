@@ -35,7 +35,7 @@ function Team({ history }) {
                 // window.location.href = '/';
                 return;
             });
-    }, []);
+    }, [team]);
     return (
         <>
             {user.name !== '' && (

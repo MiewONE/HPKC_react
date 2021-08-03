@@ -44,7 +44,7 @@ function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
         console.log(presenters, '>> 팀이름', teamName);
         return <div>뭐징</div>;
     }
-    console.log(attendents);
+
     return (
         <>
             {attendents.length > 0 && (

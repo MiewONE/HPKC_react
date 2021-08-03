@@ -2,7 +2,6 @@ import React from 'react';
 import PresentationCreate from './PresentationCreate';
 import PresentationDelete from './PresentationDelete';
 const CREATE = 0;
-const UPDATE = 1;
 const DELETE = 2;
 
 const PresentationBody = ({ curdState, teamName, updatePtList }) => {

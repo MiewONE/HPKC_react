@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     setPresentationList,
     setPresenter,
-    setAttendent,
     setOrder,
 } from '../store/modules/presentation';
 import PresenterDetail from '../presentation/PresenterDetail';
@@ -12,22 +11,17 @@ import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
 
-function PresentationList({ teamName, teamList, updateTeam, match }) {
+function PresentationList({ teamName, teamList, updateTeam }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const { presentation } = useSelector((state) => state);
-    const { ptList, presenter, attendents, order } = presentation;
-    console.log(presentation);
+    const { ptList, presenter } = presentation;
 
     useEffect(() => {
-        // getPtList();
-        console.log(ptList);
         axios
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
-                console.log(res);
                 if (res.data.success) {
-                    // dispatch(setPresentationList(res.data.msg));
                     updateState(res.data.msg);
                 } else {
                     alert(res.data.msg);
@@ -46,7 +40,6 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
         dispatch(setPresenter({ ...presenter, attendents: attendenta }));
     };
     const updateState = (data) => {
-        console.log(data);
         dispatch(setPresentationList(data));
         dispatch(
             setPresenter({
@@ -60,12 +53,9 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
         );
     };
     const getPtList = () => {
-        console.log('ptlist가 업데이트 되었습니다.');
-        console.log(ptList);
         axios
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
-                console.log('ptlist업데이트', res.data);
                 if (res.data.success) {
                     updateState(res.data.msg);
                 } else {
@@ -95,8 +85,6 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
     const openModal = (pt) => {
         return () => {
             if (pt.ptName !== presenter.ptName) {
-                console.log(presenter);
-                console.log(pt);
                 dispatch(setOrder(0));
                 dispatch(
                     setPresenter({
@@ -113,7 +101,6 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
         };
     };
     const closeModal = () => {
-        console.log(teamName);
         getPtList();
         setModalVisible((state) => (state = false));
     };
