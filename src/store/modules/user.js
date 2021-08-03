@@ -40,7 +40,6 @@ export function checklogin(data) {
         payload: data,
     };
 }
-
 const initialInfo = {
     loggedInfo: {
         user: null,
