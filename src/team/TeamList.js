@@ -1,13 +1,28 @@
-import { useState, useEffect } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { useState } from 'react';
 import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
-
+import '../styles/teamlist.css';
 function TeamList({ teamList, updateTeam }) {
     const [teamName, setTeamName] = useState('');
     return (
-        <div style={{ display: 'flex' }}>
-            <div style={{ width: '50%' }}>
+        <div
+            style={
+                teamName
+                    ? {
+                          display: 'flex',
+                          justifyContent: 'space-evenly',
+                          transition: 'all 0.1s',
+                      }
+                    : {
+                          display: 'flex',
+                          justifyContent: 'center',
+                      }
+            }
+        >
+            <div
+                className={teamName ? 'test' : 'none'}
+                style={teamName ? { width: '20%' } : { width: '40%' }}
+            >
                 {teamList && teamList.length < 1 && (
                     <h1>팀이 존재하지 않습니다. 팀을 만들어 보세요!</h1>
                 )}
@@ -15,8 +30,7 @@ function TeamList({ teamList, updateTeam }) {
                     teamList.map((ele) => {
                         return (
                             <TeamDivList className="list" key={ele.teamName}>
-                                <Link
-                                    to={'/team/list/' + ele.teamName}
+                                <button
                                     onClick={() => {
                                         setTeamName(
                                             (state) => (state = ele.teamName)
@@ -24,24 +38,27 @@ function TeamList({ teamList, updateTeam }) {
                                     }}
                                 >
                                     {ele.teamName}
-                                </Link>
+                                </button>
                                 <span>발표 : {ele.ptCnt}개</span>
                                 <span>멤버수:{ele.members}명</span>
                             </TeamDivList>
                         );
                     })}
             </div>
-            <div style={{ width: '50%' }}>
-                <Route
-                    path="/team/list/:teamName"
-                    render={() => (
-                        <PresentationList
-                            teamName={teamName}
-                            teamList={teamList}
-                            updateTeam={updateTeam}
-                        />
-                    )}
-                />
+            <div
+                style={
+                    teamName
+                        ? { width: '70%', height: '100%' }
+                        : { width: '0px' }
+                }
+            >
+                {teamName && (
+                    <PresentationList
+                        teamName={teamName}
+                        teamList={teamList}
+                        updateTeam={updateTeam}
+                    />
+                )}
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import TeamList from './TeamList';
 import axios from 'axios';
 import TeamHeader from './TeamHeader';
 
-function Team({ history }) {
+function Team() {
     const dispatch = useDispatch();
     const { user, team } = useSelector((state) => state);
     const teamList = team.teamList;
@@ -20,8 +20,6 @@ function Team({ history }) {
             .then((res) => {
                 console.log(res.data);
                 if (res.data.success) {
-                    // setTeamList((state) => (state = res.data.msg));
-                    // dispatch(_setTeamList(res.data.msg));
                     updateTeam(res.data.msg);
                 } else {
                     alert('서버에서 오류가 발생하였습니다.');
@@ -35,7 +33,7 @@ function Team({ history }) {
                 // window.location.href = '/';
                 return;
             });
-    }, [team]);
+    }, []);
     return (
         <>
             {user.name !== '' && (

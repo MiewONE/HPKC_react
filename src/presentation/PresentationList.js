@@ -10,7 +10,7 @@ import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
-
+import '../styles/presentationList.css';
 function PresentationList({ teamName, teamList, updateTeam }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
@@ -106,7 +106,7 @@ function PresentationList({ teamName, teamList, updateTeam }) {
     };
 
     return (
-        <>
+        <div>
             <div className="ptHeader">
                 <PresentationHeader
                     teamName={teamName}
@@ -164,7 +164,7 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                     </div>
                 </Modal>
             )}
-        </>
+        </div>
     );
 }
 
