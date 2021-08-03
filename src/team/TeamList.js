@@ -5,8 +5,6 @@ import { TeamDivList } from '../styles/teamStyle';
 function TeamList({ teamList, updateTeam }) {
     const [teamName, setTeamName] = useState('');
 
-    useEffect(() => {}, [teamList]);
-    if (!teamList) return <h1></h1>;
     return (
         <div style={{ display: 'flex' }}>
             <div style={{ width: '50%' }}>

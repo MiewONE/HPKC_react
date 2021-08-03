@@ -2,36 +2,49 @@ import React, { useState, useEffect } from 'react';
 import EditorComponent from '../components/EditorComponent';
 import axios from 'axios';
 import storage from '../lib/storage';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRecommed, setAttendent } from '../store/modules/presentation';
+
 const Presenter = ({
     teamId,
     teamName,
     ptName,
-    presenterInfo: presenter,
     updatePresenter,
     updateAttendent,
 }) => {
+    const dispatch = useDispatch();
+    const { presentation } = useSelector((state) => state);
+    const { attendents, order: num, recommend } = presentation;
+    console.log(presentation);
+    console.log(num);
+    console.log(attendents);
+    console.log(attendents[num].ddabong.length);
     const loginInfo = storage.get('loggedInfo')
         ? storage.get('loggedInfo')
         : storage.remainGet('loggedInfo');
+
     const [alreadyDdabong, setAlreadyDdabong] = useState(false);
-    const [desc, setDesc] = useState(presenter.summary);
+
+    const [desc, setDesc] = useState(attendents[num].summary);
     const [file, setFile] = useState('');
-    const [order, setOrder] = useState(presenter.order);
-    const [recommended, setRecommended] = useState(presenter.ddabong.length);
+    const [order, setOrder] = useState(attendents[num].order);
 
     useEffect(() => {
-        setOrder((n) => (n = presenter.order));
-        setDesc((state) => (state = presenter.summary));
-        console.log(presenter);
-        const checkRecommend = presenter.ddabong.filter(
+        dispatch(setRecommed(attendents[num].ddabong.length));
+        setOrder((n) => (n = attendents[num].order));
+        setDesc((state) => (state = attendents[num].summary));
+        console.log(attendents[num].ddabong.length);
+        const checkRecommend = attendents[num].ddabong.filter(
             (ele) => ele === loginInfo.email
         );
 
         if (checkRecommend.length > 0) {
             console.log('추천한 발표입니다.');
         }
-        setRecommended((cnt) => (cnt = presenter.ddabong.length));
-    }, [presenter, recommended]);
+        return () => {
+            dispatch(setRecommed(0));
+        };
+    }, [num]);
     const events = {
         onEditorChange: (value) => {
             setDesc((state) => (state = value));
@@ -49,7 +62,7 @@ const Presenter = ({
         },
         save: () => {
             const sendUser = {
-                ...presenter,
+                ...attendents[num],
                 order: order,
                 summary: desc,
                 filename: file,
@@ -73,17 +86,36 @@ const Presenter = ({
                     console.log(err);
                 });
         },
-        ddabong: () => {
+        ddabong: async () => {
             axios
                 .put('/pt/recommendation', {
                     teamName,
                     ptName,
-                    presenter,
+                    presenter: attendents[num],
                 })
                 .then((res) => {
                     console.log(res.data);
                     if (res.data.success) {
-                        setRecommended(res.data.msg);
+                        console.log(attendents);
+
+                        dispatch(
+                            setAttendent(
+                                attendents.map((ele) => {
+                                    if (ele.email === attendents[num].email) {
+                                        return {
+                                            ...ele,
+                                            ddabong: [
+                                                ...attendents[num].ddabong,
+                                                'up',
+                                            ],
+                                        };
+                                    } else {
+                                        return ele;
+                                    }
+                                })
+                            )
+                        );
+                        console.log(attendents);
                         alert('추천 되었습니다.');
                     } else {
                         alert(res.data.msg);
@@ -99,7 +131,7 @@ const Presenter = ({
             <button onClick={events.save}>저장</button>
             <span>{ptName}</span>
             <br />
-            {presenter.name}
+            {attendents[num].name}
             <br />
             <button onClick={events.oncrease}>-</button>
             <span>{order}</span>
@@ -117,7 +149,7 @@ const Presenter = ({
                 <button type="submit">Upload</button>
             </form>
             <EditorComponent value={desc} onChange={events.onEditorChange} />
-            <span>{recommended}</span>
+            <span>{recommend}</span>
             <button onClick={events.ddabong}>추천</button>
         </div>
     );

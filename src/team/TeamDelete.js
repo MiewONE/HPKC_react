@@ -30,7 +30,7 @@ function TeamDelete({ teamList, updateTeam }) {
                                 )
                             );
                         } else {
-                            alert('삭제에 실패하였습니다.');
+                            alert(res.data.msg);
                             // window.location.href = '/';
                         }
                     });

@@ -1,74 +1,34 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+    setPresentationList,
+    setPresenter,
+    setAttendent,
+    setOrder,
+} from '../store/modules/presentation';
 import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
-function PresentationList({ teamName, teamList, updateTeam, match }) {
-    const [modalVisible, setModalVisible] = useState(false);
 
-    const [attendents, setAttendents] = useState([]);
-    const [presenter, setpresenter] = useState({
-        _id: '',
-        ptName: '',
-        attendents: [],
-        createdAt: '',
-        joined_people: 0,
-        resultVote: '',
-    });
+function PresentationList({ teamName, teamList, updateTeam, match }) {
+    const dispatch = useDispatch();
+    const [modalVisible, setModalVisible] = useState(false);
+    const { presentation } = useSelector((state) => state);
+    const { ptList, presenter, attendents, order } = presentation;
+    console.log(presentation);
+
     useEffect(() => {
-        axios
-            .post('/pt/ptlist', { teamName })
-            .then((res) => {
-                if (res.data.success) {
-                    setAttendents((state) => (state = res.data.msg));
-                    setpresenter(
-                        (state) =>
-                            (state = {
-                                _id: '',
-                                ptName: '',
-                                attendents: [],
-                                createdAt: '',
-                                joined_people: 0,
-                                resultVote: '',
-                            })
-                    );
-                } else {
-                    alert(res.data.msg);
-                    window.location.href = '/team';
-                }
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [teamName, match]);
-    const updatePresenter = (update) => {
-        const attendenta = presenter.attendents.map((ele) => {
-            if (ele.name === update.name) return update;
-            else return ele;
-        });
-        setpresenter(
-            (data) => (data = { ...presenter, attendents: attendenta })
-        );
-    };
-    const updatePtList = () => {
+        // getPtList();
+        console.log(ptList);
         axios
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
+                console.log(res);
                 if (res.data.success) {
-                    console.log(res.data.msg);
-                    setAttendents((state) => (state = res.data.msg));
-                    setpresenter(
-                        (state) =>
-                            (state = {
-                                _id: '',
-                                ptName: '',
-                                attendents: [],
-                                createdAt: '',
-                                joined_people: 0,
-                                resultVote: '',
-                            })
-                    );
+                    // dispatch(setPresentationList(res.data.msg));
+                    updateState(res.data.msg);
                 } else {
                     alert(res.data.msg);
                     window.location.href = '/';
@@ -77,7 +37,48 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
             .catch((err) => {
                 console.log(err);
             });
-
+    }, [teamName]);
+    const updatePresenter = (update) => {
+        const attendenta = presenter.attendents.map((ele) => {
+            if (ele.name === update.name) return update;
+            else return ele;
+        });
+        dispatch(setPresenter({ ...presenter, attendents: attendenta }));
+    };
+    const updateState = (data) => {
+        console.log(data);
+        dispatch(setPresentationList(data));
+        dispatch(
+            setPresenter({
+                _id: '',
+                ptName: '',
+                attendents: [],
+                createdAt: '',
+                joined_people: 0,
+                resultVote: '',
+            })
+        );
+    };
+    const getPtList = () => {
+        console.log('ptlist가 업데이트 되었습니다.');
+        console.log(ptList);
+        axios
+            .post('/pt/ptlist', { teamName: teamName })
+            .then((res) => {
+                console.log('ptlist업데이트', res.data);
+                if (res.data.success) {
+                    updateState(res.data.msg);
+                } else {
+                    alert(res.data.msg);
+                    window.location.href = '/';
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
+    const updatePtList = () => {
+        getPtList();
         updateTeam(
             teamList.map((ele) => {
                 if (ele.teamName === teamName) {
@@ -94,16 +95,18 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
     const openModal = (pt) => {
         return () => {
             if (pt.ptName !== presenter.ptName) {
-                setpresenter(
-                    (state) =>
-                        (state = {
-                            _id: pt._id,
-                            ptName: pt.ptName,
-                            attendents: pt.attendents,
-                            createdAt: pt.createdAt,
-                            joined_people: pt.joined_people,
-                            resultVote: pt.resultVote,
-                        })
+                console.log(presenter);
+                console.log(pt);
+                dispatch(setOrder(0));
+                dispatch(
+                    setPresenter({
+                        _id: pt._id,
+                        ptName: pt.ptName,
+                        attendents: pt.attendents,
+                        createdAt: pt.createdAt,
+                        joined_people: pt.joined_people,
+                        resultVote: pt.resultVote,
+                    })
                 );
             }
             setModalVisible((state) => (state = true));
@@ -111,29 +114,7 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
     };
     const closeModal = () => {
         console.log(teamName);
-        axios
-            .post('/pt/ptlist', { teamName: teamName })
-            .then((res) => {
-                if (!res.data.success) {
-                    alert('서버로부터 응답을 받지 못했습니다');
-                    window.location.href = '/';
-                }
-                setAttendents((state) => (state = res.data.msg));
-                setpresenter(
-                    (state) =>
-                        (state = {
-                            _id: '',
-                            ptName: '',
-                            attendents: [],
-                            createdAt: '',
-                            joined_people: 0,
-                            resultVote: '',
-                        })
-                );
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        getPtList();
         setModalVisible((state) => (state = false));
     };
 
@@ -145,10 +126,10 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
                     updatePtList={updatePtList}
                 />
             </div>
-            {attendents < 1 && (
+            {ptList.length < 1 && (
                 <h1>발표 내역이 없습니다. 추가 하시겠습니까?</h1>
             )}
-            {attendents.length > 1 && (
+            {ptList.length > 1 && (
                 <div
                     style={{ display: 'flex', justifyContent: 'space-around' }}
                 >
@@ -158,8 +139,8 @@ function PresentationList({ teamName, teamList, updateTeam, match }) {
                     <div>만든 날짜</div>
                 </div>
             )}
-            {attendents.length > 0 &&
-                attendents.map((ele, idx) => {
+            {ptList.length > 0 &&
+                ptList.map((ele, idx) => {
                     return (
                         <Presentation key={idx}>
                             <div

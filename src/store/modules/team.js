@@ -19,6 +19,7 @@ const initialTeam = {
 export default function team(state = initialTeam, action) {
     switch (action.type) {
         case SET_TEAM_LIST:
+            console.log([...action.payload]);
             return {
                 ...state,
                 teamList: action.payload, // 배열로 넘어 와야함.

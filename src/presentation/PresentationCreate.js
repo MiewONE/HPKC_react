@@ -1,8 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import '../styles/ptcreate.scss';
+import { setPresentationList } from '../store/modules/presentation';
+import { useSelector, useDispatch } from 'react-redux';
 import { List } from '../lib/List';
 const PresentationCreate = ({ teamName, updatePtList }) => {
+    const { presentation } = useSelector((stat) => stat);
+    const { ptList, presenter } = presentation;
+    const dispatch = useDispatch();
     const [member, setMember] = useState([]);
     const [selectedMember, setSelectedMember] = useState([]);
     const ptName = useRef();
@@ -29,14 +34,15 @@ const PresentationCreate = ({ teamName, updatePtList }) => {
                 teamName,
             })
             .then((res) => {
+                console.log(res);
                 if (!res.data.success) {
                     alert('생성에 실패하였습니다.');
                     return;
                 }
-                alert(res.data.msg + '이 생성되었습니다.');
+                alert(res.data.msg.ptName + '이 생성되었습니다.');
+                dispatch(setPresentationList([...ptList, res.data.msg]));
             });
-        console.log('업데이트 시작');
-        updatePtList();
+        console.log(ptList);
     };
     return (
         <div className="ptCreateModal">
