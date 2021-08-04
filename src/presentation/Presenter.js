@@ -4,13 +4,16 @@ import axios from 'axios';
 import storage from '../lib/storage';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRecommed, setAttendent } from '../store/modules/presentation';
-
+import '../styles/presenter.scss';
 const Presenter = ({
     teamId,
     teamName,
     ptName,
     updatePresenter,
     updateAttendent,
+    closeModal,
+    previous,
+    next,
 }) => {
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
@@ -119,29 +122,76 @@ const Presenter = ({
     };
     return (
         <div>
-            <button onClick={events.save}>저장</button>
-            <span>{ptName}</span>
-            <br />
-            {attendents[num].name}
-            <br />
-            <button onClick={events.oncrease}>-</button>
-            <span>{order}</span>
-            <button onClick={events.increase}>+</button>
-            <br />
-            <span>요약</span>
-            <br />
-            <form
-                action="/upload/uploadFile"
-                encType="multipart/form-data"
-                method="post"
-                onChange={events.uploadfile}
-            >
-                <input type="file" name="attachment" />
-                <button type="submit">Upload</button>
-            </form>
-            <EditorComponent value={desc} onChange={events.onEditorChange} />
-            <span>{recommend}</span>
-            <button onClick={events.ddabong}>추천</button>
+            <header className="presenterHeader">
+                <p>{ptName}</p>
+                <scetion className="saveNclose">
+                    <img
+                        className="IMGsave"
+                        onClick={events.save}
+                        src="/img/IMG_save.png"
+                        alt="save"
+                    />
+                    <img
+                        className="IMGsave"
+                        onClick={closeModal}
+                        src="/img/IMG_save.png"
+                        alt="exit"
+                    />
+                </scetion>
+            </header>
+            <scetion className="Info">
+                <scetion>
+                    <scetion>
+                        <p>발표 순서 </p>
+                        <div>
+                            {attendents.map((ele) => {
+                                if (ele.name === attendents[num].name)
+                                    return (
+                                        <p>
+                                            <strong>{ele.name}</strong>
+                                        </p>
+                                    );
+                                else return <p>{ele.name}</p>;
+                            })}
+                        </div>
+                    </scetion>
+                    <scetion>
+                        <button onClick={events.oncrease}>-</button>
+                        <span>{order}</span>
+                        <button onClick={events.increase}>+</button>
+                    </scetion>
+                </scetion>
+                <p>작성자 : {attendents[num].name}</p>
+            </scetion>
+            <scetion className="summary">
+                <scetion>
+                    <span>요약</span>
+                    <form
+                        action="/upload/uploadFile"
+                        encType="multipart/form-data"
+                        method="post"
+                        onChange={events.uploadfile}
+                    >
+                        <input type="file" name="attachment" />
+                        <button type="submit">Upload</button>
+                    </form>
+                </scetion>
+
+                <EditorComponent
+                    value={desc}
+                    onChange={events.onEditorChange}
+                />
+            </scetion>
+            <scetion className="recommend">
+                <span>{recommend}</span>
+                <button onClick={events.ddabong}>추천</button>
+            </scetion>
+            <scetion className="previous" onClick={previous}>
+                이전
+            </scetion>
+            <scetion className="next" onClick={next}>
+                다음
+            </scetion>
         </div>
     );
 };

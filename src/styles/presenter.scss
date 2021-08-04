@@ -1,0 +1,85 @@
+.presenterHeader{
+      display : flex;
+      justify-content: center;
+      background: #78B27A;
+      border-radius: 1% 1% 0 0;
+      & > p{
+            color : white;
+            font-size: 1em;
+            font-weight: bold;
+      }
+}
+.saveNclose{
+      width: 10%;
+      position: absolute;
+      right: 0;
+      top: 0;
+      display: flex;
+}
+.IMGsave{
+      width: 44%;
+}
+.Info{
+      display : flex;
+      justify-content: space-between;
+      & > scetion {
+            display:flex;
+            flex-direction:column;
+            width: 80%;
+      }
+      & > scetion >scetion  {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            & > div{
+                  display: flex;
+                  width: 71%;
+                  margin-left: 6%;
+                  & p {
+                        margin: 2%;
+                  }
+            }
+            & strong {
+                  font-size: 1.3em;
+                  color : #78B27A;
+            }
+      }
+}
+.summary {
+      display:flex;
+      flex-direction : column;
+      & scetion {
+            display: flex;
+            justify-content : space-between
+      }
+      & > scetion > span {
+            margin-left: 2%;
+            margin-top: 1%;
+            font-size: 1.2em;
+      }
+      & form {
+            margin-top: 1%;
+      }
+}
+.recommend{
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      & button {
+            width: 10%;
+      }
+}
+.next {
+      position: absolute;
+      right: -111px;
+      top: 50%;
+      background: white;
+}
+.previous {
+      position: absolute;
+      left: -111px;
+      top: 50%;
+      background: white;
+}

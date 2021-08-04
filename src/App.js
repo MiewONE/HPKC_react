@@ -59,7 +59,6 @@ function App() {
                         storage.remove(_loggedInfo);
                         dispatch(logout());
                         window.location.href = '/';
-                        alert('다시 로그인해주시 바랍니다.');
                     }
                     setLogined(true);
                 })
@@ -97,10 +96,11 @@ function App() {
             <div className="madinHeader">
                 <div>
                     <Link to="/" className="titleLogo">
-                        123
+                        홈페이지
                     </Link>
                     {logined && <Link to="/team">팀 페이지</Link>}
                 </div>
+
                 <div>
                     {!logined && <button onClick={openModal}>로그인</button>}
                     {!logined && (

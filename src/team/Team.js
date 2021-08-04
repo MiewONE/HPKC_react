@@ -22,15 +22,15 @@ function Team() {
                 if (res.data.success) {
                     updateTeam(res.data.msg);
                 } else {
-                    alert('서버에서 오류가 발생하였습니다.');
-                    // window.location.href = '/';
+                    alert('세션이 만료 되었습니다.');
+                    window.location.href = '/';
                     return;
                 }
             })
             .catch((err) => {
                 alert('서버에서 오류가 발생하였습니다.');
                 console.log(err);
-                // window.location.href = '/';
+                window.location.href = '/';
                 return;
             });
     }, []);

@@ -1,13 +1,13 @@
 import React from 'react';
 import '../styles/home.scss';
-import SkillCard from '../components/SkillCard';
+import '../styles/home.css';
 function Home(props) {
     const head = ['이름', '이메일', 'Git 주소'];
     const body = ['박원균', 'miewone@kakao.com', '주소'];
 
     return (
-        <div>
-            <div className="pageblock homelogo">
+        <div id="homeContainer">
+            <section className="pageblock homelogo">
                 <img src="/img/Logo_pptogether.png" alt="logo" />
                 <span>
                     #백엔드 <br />
@@ -16,61 +16,61 @@ function Home(props) {
                     박원균 <br />
                     포트폴리오
                 </span>
-            </div>
-            <div className="pageblock grayblock explain" id="">
-                <div className="topheader">
+            </section>
+            <section className="pageblock grayblock explain" id="">
+                <section className="topheader">
                     <span>#소개</span>
-                </div>
-                <div className="header">안녕하세요 !</div>
-                <div className="explanation" id="about">
-                    <div>
-                        <div>
+                </section>
+                <section className="header">안녕하세요 !</section>
+                <section className="explanation" id="about">
+                    <section>
+                        <section>
                             <img src="/img/idphoto.png" alt="idphoto" />
-                        </div>
+                        </section>
 
-                        <div>
-                            <div>
+                        <section>
+                            <section>
                                 {head.map((ele) => {
-                                    return <div>{ele}</div>;
+                                    return <section>{ele}</section>;
                                 })}
-                            </div>
-                            <div>
+                            </section>
+                            <section>
                                 {body.map((ele) => {
-                                    return <div>{ele}</div>;
+                                    return <section>{ele}</section>;
                                 })}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div style={{ marginTop: '10%' }}>
+                            </section>
+                        </section>
+                    </section>
+                    <section>
+                        <section style={{ marginTop: '10%' }}>
                             <br />
-                            일상을 편하게 해주거나
+                            <strong>개</strong> 발에 관련된 즐거움을
                             <br />
-                            <br /> 재미있는 프로그램을 만드는것이 취미인
+                            <br /> <strong>발</strong> 전을 하는것에 즐거움을
                             <br />
-                            <br /> 개발자를 지향하고 있습니다.
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="pageblock explain">
-                <div className="topheader">
-                    <span>#소개</span>
-                </div>
-                <div className="header">프로젝트 소개</div>
-                <div className="explanation2">
-                    <div>
+                            <br /> <strong>자</strong> 신있게 말할 수 있습니다.
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section className="pageblock explain">
+                <section className="topheader">
+                    <span>#소개2</span>
+                </section>
+                <section className="header">프로젝트 소개</section>
+                <section className="explanation2">
+                    <section>
                         <h1 id="-">프로젝트 이름</h1>
                         <p style={{ fontSize: '2em', fontWeight: 'bold' }}>
-                            <span>> PPTogether</span>
+                            <span> PPTogether</span>
                         </p>
                         <img
                             style={{ width: '124px' }}
                             src="/img/pptogether.png"
                             alt="logo"
                         />
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                         <h1 id="-">프로젝트 목적</h1>
                         <p>이 프로젝트를 구상하고 개발하게된 계기로는 </p>
                         <p>
@@ -90,16 +90,16 @@ function Home(props) {
                             화면으로 보고싶다는 생각에 만들어 활용을 하기
                             위해서입니다.
                         </p>
-                    </div>
-                    <div>
-                        <div>
+                    </section>
+                    <section>
+                        <section>
                             <h1 id="-">프로젝트 목표</h1>
                             <p>
                                 취업을 목표로 백엔드에 필요한 기술들을
                                 녹여보았습니다.
                             </p>
-                        </div>
-                        <div style={{ marginTop: '24%' }}>
+                        </section>
+                        <section style={{ marginTop: '24%' }}>
                             <h1 id="-">기술</h1>
                             <ol>
                                 <li>
@@ -110,17 +110,17 @@ function Home(props) {
                                 <li>Docker,Docker-compose</li>
                                 <li>AWS (ECS, SNS, SQS, API Gateway 등)</li>
                             </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div className="pageblock explain grayblock">
-                <div className="topheader">
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section className="pageblock explain grayblock">
+                <section className="topheader">
                     <span>#소개</span>
-                </div>
-                <div className="header">프로젝트 설계</div>
-                <div className="explanation2">
-                    <div>
+                </section>
+                <section className="header">프로젝트 설계</section>
+                <section className="explanation2">
+                    <section>
                         <h2 id="-">요구사항</h2>
                         <ol>
                             <li>
@@ -150,8 +150,8 @@ function Home(props) {
                                 팀마다 해당하는 페이지를 공간을 만들어 줘야한다.
                             </li>
                         </ol>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                         <h3 id="-_-_">
                             상세 일정 <em>(예정)</em>
                         </h3>
@@ -225,8 +225,8 @@ function Home(props) {
                                 </ul>
                             </li>
                         </ol>
-                    </div>
-                    <div>
+                    </section>
+                    <section>
                         3. 개발
                         <ul>
                             <li>
@@ -269,9 +269,9 @@ function Home(props) {
                             </li>
                         </ul>
                         5. 배포
-                    </div>
-                </div>
-            </div>
+                    </section>
+                </section>
+            </section>
         </div>
     );
 }

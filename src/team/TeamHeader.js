@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Modal from 'react-awesome-modal';
+import Modal from '../components/Modal';
 import TeamBody from './TeamBody';
 
 const CREATE = 0;
@@ -39,13 +39,7 @@ const TeamHeader = ({ updateTeam, teamList }) => {
             <button onClick={deletedModal}>팀 삭제하기</button>
             <button onClick={teamMemberAddModal}>팀 멤버 추가</button>
             <button onClick={popModal}>팀 멤버 제거</button>
-            <Modal
-                visible={modalVisible}
-                width="500"
-                height="600"
-                effect="fadeInUp"
-                onClickAway={closeModal}
-            >
+            <Modal visible={modalVisible} onClickAway={closeModal}>
                 <TeamBody
                     curdState={crudState}
                     teamList={teamList}

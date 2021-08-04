@@ -1,4 +1,4 @@
-@keyframes openPtList {
+@keyframes openTeamList {
       from {
             opacity: 0;
             transform: translateX(30%);
@@ -8,7 +8,20 @@
             transform: translateX(0);
       }
 }
+@keyframes openPtList {
+      from {
+            opacity: 0;
+            transform: translateY(40%);
+      }
+      to{
+            opacity: 1;
+            transform: translateY(0);
+      }
+}
 
-.test {
+.openteamList {
+      animation: openTeamList 1s ease-in-out 0s 1 normal forwards; ;
+}
+.openptList {
       animation: openPtList 1s ease-in-out 0s 1 normal forwards; ;
 }

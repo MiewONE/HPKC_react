@@ -1,0 +1,9 @@
+#homeContainer {
+      display:flex;
+      flex-direction: column;
+      scroll-snap-type: y mandatory;
+      
+}
+.pageblock {
+      scroll-snap-align: center;
+}

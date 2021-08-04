@@ -2,8 +2,14 @@ import { useState, useEffect } from 'react';
 import Presenter from './Presenter';
 import { useDispatch, useSelector } from 'react-redux';
 import { setAttendent, setOrder } from '../store/modules/presentation';
+import '../styles/presentationDetail.scss';
 
-function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
+function PresenterDetail({
+    teamName,
+    presenter: presenters,
+    updatePresenter,
+    closeModal,
+}) {
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
     const { attendents, order } = presentation;
@@ -23,7 +29,6 @@ function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
         }
     };
     const next = () => {
-        console.log(presenters.attendents);
         if (order < presenters.attendents.length - 1) {
             dispatch(setOrder(order + 1));
         } else {
@@ -40,11 +45,6 @@ function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
         );
     };
 
-    if (!presenters) {
-        console.log(presenters, '>> 팀이름', teamName);
-        return <div>뭐징</div>;
-    }
-
     return (
         <>
             {attendents.length > 0 && (
@@ -56,10 +56,10 @@ function PresenterDetail({ teamName, presenter: presenters, updatePresenter }) {
                         ptName={presenters.ptName}
                         updatePresenter={updatePresenter}
                         updateAttendent={updateAttendent}
+                        closeModal={closeModal}
+                        previous={previous}
+                        next={next}
                     />
-                    <button onClick={previous}>이전</button>
-
-                    <button onClick={next}>다음</button>
                 </div>
             )}
         </>

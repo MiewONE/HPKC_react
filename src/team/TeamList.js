@@ -20,7 +20,7 @@ function TeamList({ teamList, updateTeam }) {
             }
         >
             <div
-                className={teamName ? 'test' : 'none'}
+                className={teamName ? 'openteamList' : 'none'}
                 style={teamName ? { width: '20%' } : { width: '40%' }}
             >
                 {teamList && teamList.length < 1 && (

@@ -159,8 +159,8 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                             teamName={teamName}
                             presenter={presenter}
                             updatePresenter={updatePresenter}
+                            closeModal={closeModal}
                         />
-                        <button onClick={closeModal}>모달 닫기</button>
                     </div>
                 </Modal>
             )}

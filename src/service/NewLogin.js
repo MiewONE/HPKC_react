@@ -49,17 +49,17 @@ const NewLogin = ({ closeModal }) => {
     };
     return (
         <div className="loginBody">
-            <div className="xbutton" onClick={closeModal}>
+            <section className="xbutton" onClick={closeModal}>
                 <SosialLogin></SosialLogin>
-            </div>
+            </section>
 
-            <div className="back logo">
+            <section className="back logo">
                 <img
                     src="/img/logopptogether.png"
                     alt="logo"
                     className="logoimg"
                 />
-            </div>
+            </section>
             <Input
                 className="input"
                 type="text"
@@ -77,8 +77,10 @@ const NewLogin = ({ closeModal }) => {
             <ButtonLogin className="sosial kakao" onClick={event_login}>
                 로그인
             </ButtonLogin>
-            <div className="back oauthExplain">소셜 계정으로 로그인</div>
-            <div className="back oauthClick">
+            <section className="back oauthExplain">
+                소셜 계정으로 로그인
+            </section>
+            <section className="back oauthClick">
                 <SosialLogin
                     className="kakao"
                     onClick={kakaoLogin}
@@ -86,17 +88,17 @@ const NewLogin = ({ closeModal }) => {
                 {/* <SosialLogin className="google"></SosialLogin>
                 <SosialLogin className="facebook"></SosialLogin>
                 <SosialLogin className="naver"></SosialLogin> */}
-            </div>
-            <div className="back checkLoginRemain">
+            </section>
+            <section className="back checkLoginRemain">
                 <label>
                     <input type="checkbox" name="saveme" onClick={save} />
                     로그인 상태 유지하기
                 </label>
-            </div>
-            <div className="back forgotPw">비밀번호 찾기</div>
-            <div className="back register">
+            </section>
+            <section className="back forgotPw">비밀번호 찾기</section>
+            <section className="back register">
                 회원이 아니시라면? <a href="#">회원가입</a>
-            </div>
+            </section>
         </div>
     );
 };

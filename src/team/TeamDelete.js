@@ -1,8 +1,11 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { setPresentationList } from '../store/modules/presentation';
 function TeamDelete({ teamList, updateTeam }) {
     console.log('teamdelete');
     const teamName = useRef();
+    const dispatch = useDispatch();
     const send = () => {
         if (
             window.confirm(
@@ -31,6 +34,7 @@ function TeamDelete({ teamList, updateTeam }) {
                             );
                         } else {
                             alert(res.data.msg);
+                            dispatch(setPresentationList([]));
                             // window.location.href = '/';
                         }
                     });
