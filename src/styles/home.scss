@@ -7,13 +7,22 @@
       height: 700px;
       margin: 0 0 4% 0;
       justify-content: space-evenly;
+      & > section {
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+      }
       & img {
+            width: 100%;
+            height: 46%;
             user-select: none;
       }
       & span {
             font-size: 6em;
-
             font-family: vitroCoreTTF;
+            color : black;
+            text-shadow: 4px 4px 4px gray;
       }
 }
 .explain{
@@ -93,7 +102,6 @@
       }
       & img {
 
-            width: 322.016px;
             border-radius: 10em;
             border : 1px solid black;
       }

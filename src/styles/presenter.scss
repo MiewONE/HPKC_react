@@ -1,27 +1,44 @@
+#presenter{
+      display: flex;
+      flex-direction:column
+}
 .presenterHeader{
       display : flex;
       justify-content: center;
       background: #78B27A;
       border-radius: 1% 1% 0 0;
-      & > p{
+      & > span{
             color : white;
-            font-size: 1em;
+            margin: 1% 0px;
+            font-size: 2em;
             font-weight: bold;
+            text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e, 0 -3px #6c986e;;
       }
 }
 .saveNclose{
-      width: 10%;
-      position: absolute;
-      right: 0;
-      top: 0;
-      display: flex;
+      width: 14%;
+    position: absolute;
+    right: 0%;
+    top: 1%;
+    display: flex;
+    & > section {
+      margin: 0px 3%;
+      cursor: pointer;
+    }
+      &  > img {
+            
+            width: 100%;
+            
+      }
 }
-.IMGsave{
+
+.IMGArrow{
       width: 44%;
 }
 .Info{
       display : flex;
       justify-content: space-between;
+      height: 125px;
       & > scetion {
             display:flex;
             flex-direction:column;
@@ -31,11 +48,14 @@
             display: flex;
             align-items: center;
             text-align: center;
+            & > p {
+                  margin-left: 3%;
+            }
             & > div{
                   display: flex;
                   width: 71%;
-                  margin-left: 6%;
-                  & p {
+                  margin-left: 3%;
+                  &  >p {
                         margin: 2%;
                   }
             }
@@ -44,42 +64,78 @@
                   color : #78B27A;
             }
       }
+      & > p {
+            margin-right: 3%;
+            font-size: 20px;
+      }
 }
 .summary {
       display:flex;
       flex-direction : column;
       & scetion {
             display: flex;
-            justify-content : space-between
       }
       & > scetion > span {
-            margin-left: 2%;
-            margin-top: 1%;
-            font-size: 1.2em;
+            margin: 1% 0 1% 2%;
+            font-size: 1.6em;
+            &::after {
+                  content: "";
+                  margin-top: 7%;
+                  display: block;
+                  width: 120px;
+                  border-bottom: 4px solid #78b27a;
+            }
       }
       & form {
-            margin-top: 1%;
+            margin-left: 5%;
+            margin-top: 3%;
       }
 }
 .recommend{
-      width: 100%;
+      position: absolute;
+      /* width: 100%; */
       display: flex;
       justify-content: center;
-      flex-direction: column;
       align-items: center;
-      & button {
-            width: 10%;
+      right: 0;
+      top: 18%;
+      & div:nth-child(2){
+            text-align: center;
+            height: 5%;
+            font-size: 1.6em;
+            position: relative;
+            left: -30%;
+            top: -6px;
+            border: 3px solid #78B27A;
+            border-radius: 67%;
+            width: 21%;
+
       }
+      & img {
+            width: 50%;
+            cursor:pointer;
+      }
+}
+.summaryText {
+      height: 400px;
+    padding: 2% 3%;
+
 }
 .next {
       position: absolute;
-      right: -111px;
+      right: -18%;
       top: 50%;
-      background: white;
+      & img {
+            width: 75px;
+            cursor: pointer;
+      }
 }
 .previous {
       position: absolute;
-      left: -111px;
+      left: -18%;
       top: 50%;
-      background: white;
+      & img {
+            width: 75px;
+            cursor: pointer;
+      }
 }

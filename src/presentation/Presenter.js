@@ -17,31 +17,55 @@ const Presenter = ({
 }) => {
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
-    const { attendents, order: num, recommend } = presentation;
+    const { attendents, order: num, recommend, presenter } = presentation;
     const loginInfo = storage.get('loggedInfo')
         ? storage.get('loggedInfo')
         : storage.remainGet('loggedInfo');
-
+    const [leftOver, setLeftOver] = useState(false);
+    const [rightOver, setRighttOver] = useState(false);
     const [desc, setDesc] = useState(attendents[num].summary);
     const [file, setFile] = useState('');
     const [order, setOrder] = useState(attendents[num].order);
-
+    const [already, setAlready] = useState(false);
+    const [writed, setWrited] = useState(false);
     useEffect(() => {
+        dispatch(setAttendent(presenter.attendents));
         dispatch(setRecommed(attendents[num].ddabong.length));
+
         setOrder((n) => (n = attendents[num].order));
-        setDesc((state) => (state = attendents[num].summary));
 
         const checkRecommend = attendents[num].ddabong.filter(
             (ele) => ele === loginInfo.email
         );
 
+        if (loginInfo.email === attendents[num].email) {
+            console.log(attendents[num].summary);
+            setWrited(true);
+            let states;
+            if (!attendents[num].summary) return;
+            if (attendents[num].summary.toString().includes('br'))
+                states = attendents[num].summary.replace(
+                    /<p><br><\/p>/g,
+                    '<br/>'
+                );
+            else states = attendents[num].summary;
+            console.log(states);
+            setDesc((state) => (state = states));
+        } else {
+            setWrited(false);
+            setDesc((state) => (state = attendents[num].summary));
+        }
         if (checkRecommend.length > 0) {
             console.log('추천한 발표입니다.');
+            setAlready(true);
         }
         return () => {
-            dispatch(setRecommed(0));
+            console.log(
+                recommend,
+                '<<< Presenter이 unmount되면서 recommend 출력'
+            );
         };
-    }, [num]);
+    }, [attendents, num]);
     const events = {
         onEditorChange: (value) => {
             setDesc((state) => (state = value));
@@ -109,6 +133,7 @@ const Presenter = ({
                                 })
                             )
                         );
+                        dispatch(setRecommed(attendents[num].ddabong.length));
 
                         alert('추천 되었습니다.');
                     } else {
@@ -121,28 +146,32 @@ const Presenter = ({
         },
     };
     return (
-        <div>
-            <header className="presenterHeader">
-                <p>{ptName}</p>
+        <div id="presenter">
+            <scetion className="presenterHeader">
+                <span>{ptName}</span>
                 <scetion className="saveNclose">
-                    <img
-                        className="IMGsave"
-                        onClick={events.save}
-                        src="/img/IMG_save.png"
-                        alt="save"
-                    />
-                    <img
-                        className="IMGsave"
-                        onClick={closeModal}
-                        src="/img/IMG_save.png"
-                        alt="exit"
-                    />
+                    <section>
+                        <img
+                            className="IMGsave"
+                            onClick={events.save}
+                            src="/img/save.png"
+                            alt="save"
+                        />
+                    </section>
+                    <section>
+                        <img
+                            className="IMGsave"
+                            onClick={closeModal}
+                            src="/img/close.png"
+                            alt="exit"
+                        />
+                    </section>
                 </scetion>
-            </header>
+            </scetion>
             <scetion className="Info">
                 <scetion>
                     <scetion>
-                        <p>발표 순서 </p>
+                        <p>발표 순서:</p>
                         <div>
                             {attendents.map((ele) => {
                                 if (ele.name === attendents[num].name)
@@ -155,43 +184,82 @@ const Presenter = ({
                             })}
                         </div>
                     </scetion>
-                    <scetion>
+                    {/* <scetion>
                         <button onClick={events.oncrease}>-</button>
                         <span>{order}</span>
                         <button onClick={events.increase}>+</button>
-                    </scetion>
+                    </scetion> */}
                 </scetion>
                 <p>작성자 : {attendents[num].name}</p>
             </scetion>
             <scetion className="summary">
                 <scetion>
                     <span>요약</span>
-                    <form
-                        action="/upload/uploadFile"
-                        encType="multipart/form-data"
-                        method="post"
-                        onChange={events.uploadfile}
-                    >
-                        <input type="file" name="attachment" />
-                        <button type="submit">Upload</button>
-                    </form>
+                    {writed && (
+                        <form
+                            action="/upload/uploadFile"
+                            encType="multipart/form-data"
+                            method="post"
+                            onChange={events.uploadfile}
+                        >
+                            <input type="file" name="attachment" />
+                            <button type="submit">Upload</button>
+                        </form>
+                    )}
                 </scetion>
 
-                <EditorComponent
-                    value={desc}
-                    onChange={events.onEditorChange}
-                />
+                {writed ? (
+                    <EditorComponent
+                        value={desc}
+                        onChange={events.onEditorChange}
+                    />
+                ) : (
+                    <p
+                        class="summaryText"
+                        dangerouslySetInnerHTML={{ __html: desc }}
+                    ></p>
+                )}
             </scetion>
             <scetion className="recommend">
-                <span>{recommend}</span>
-                <button onClick={events.ddabong}>추천</button>
+                <div onClick={events.ddabong}>
+                    {already ? (
+                        <img src="/img/liked.png" alt="ddabong" />
+                    ) : (
+                        <img src="/img/origin.png" alt="ddabong" />
+                    )}
+                </div>
+                <div>{recommend}</div>
             </scetion>
-            <scetion className="previous" onClick={previous}>
-                이전
-            </scetion>
-            <scetion className="next" onClick={next}>
-                다음
-            </scetion>
+            {num !== 0 && (
+                <scetion className="previous" onClick={previous}>
+                    <img
+                        className="IMGArrow"
+                        src={
+                            leftOver
+                                ? '/img/button/left_90.png'
+                                : '/img/button/left_60.png'
+                        }
+                        alt="save"
+                        onMouseOver={() => setLeftOver(true)}
+                        onMouseLeave={() => setLeftOver(false)}
+                    />
+                </scetion>
+            )}
+            {num !== attendents.length - 1 && (
+                <scetion className="next" onClick={next}>
+                    <img
+                        className="IMGArrow"
+                        src={
+                            rightOver
+                                ? '/img/button/right_90.png'
+                                : '/img/button/right_60.png'
+                        }
+                        alt="save"
+                        onMouseOver={() => setRighttOver(true)}
+                        onMouseLeave={() => setRighttOver(false)}
+                    />
+                </scetion>
+            )}
         </div>
     );
 };

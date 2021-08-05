@@ -15,7 +15,7 @@ function PresentationList({ teamName, teamList, updateTeam }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const { presentation } = useSelector((state) => state);
-    const { ptList, presenter } = presentation;
+    const { ptList, presenter, order } = presentation;
 
     useEffect(() => {
         axios
@@ -84,6 +84,11 @@ function PresentationList({ teamName, teamList, updateTeam }) {
     };
     const openModal = (pt) => {
         return () => {
+            console.log(
+                '>>> PresentationList에서 PresentationDetail열면서 presenter과 order설정'
+            );
+            console.log(order, '<<<<< Order값 출력');
+            console.log(presenter, '<<<<< Presenter값 출력');
             if (pt.ptName !== presenter.ptName) {
                 dispatch(setOrder(0));
                 dispatch(
@@ -97,6 +102,8 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                     })
                 );
             }
+            console.log(presenter, ' <<<< order 값 지정 후 출력');
+            console.log(presenter, ' <<<< Presenter 값 지정 후 출력');
             setModalVisible((state) => (state = true));
         };
     };
@@ -150,7 +157,7 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                 <Modal
                     visible={modalVisible}
                     width="1000"
-                    height="600"
+                    height="800"
                     effect="fadeInUp"
                     onClickAway={closeModal}
                 >

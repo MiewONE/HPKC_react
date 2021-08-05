@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import Presenter from './Presenter';
 import { useDispatch, useSelector } from 'react-redux';
-import { setAttendent, setOrder } from '../store/modules/presentation';
+import {
+    setAttendent,
+    setOrder,
+    setRecommed,
+} from '../store/modules/presentation';
 import '../styles/presentationDetail.scss';
 
 function PresenterDetail({
@@ -10,14 +14,25 @@ function PresenterDetail({
     updatePresenter,
     closeModal,
 }) {
+    console.log('>>>> PresenterDetail 호출');
+    console.log(presenters, '<<<< props로 전달받은 presenters 출력');
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
-    const { attendents, order } = presentation;
-    console.log(presenters);
+    const { attendents, order, recommend } = presentation;
     useEffect(() => {
-        dispatch(setAttendent([...presenters.attendents]));
+        dispatch(setAttendent(presenters.attendents));
         dispatch(setOrder(0));
-        console.log(attendents);
+        console.log(
+            attendents,
+            '<<<< presenterDetail에서 useEffect 레더링 되면서 된 attendents 출력'
+        );
+        console.log(
+            order,
+            '<<<< presenterDetail에서 useEffect 레더링 되면서 된 order 출력'
+        );
+        return () => {
+            console.log('PresenterDetail unmount ');
+        };
     }, [presenters]);
 
     const previous = () => {

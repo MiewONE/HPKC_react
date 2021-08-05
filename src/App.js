@@ -96,7 +96,7 @@ function App() {
             <div className="madinHeader">
                 <div>
                     <Link to="/" className="titleLogo">
-                        홈페이지
+                        <img src="/img/LOGO_pptogether.png" alt="logo" />
                     </Link>
                     {logined && <Link to="/team">팀 페이지</Link>}
                 </div>

@@ -8,14 +8,20 @@ function Home(props) {
     return (
         <div id="homeContainer">
             <section className="pageblock homelogo">
-                <img src="/img/Logo_pptogether.png" alt="logo" />
-                <span>
-                    #백엔드 <br />
-                    #개발자 <br />
-                    <br />
-                    박원균 <br />
-                    포트폴리오
-                </span>
+                <section>
+                    {/* <img src="/img/LOGO_pptogether.png" alt="logo" /> */}
+                    <span>
+                        박원균 <br />
+                        포트폴리오
+                    </span>
+                </section>
+
+                <scetion>
+                    <span>
+                        #BACKEND <br />
+                        #DEVELOPER <br />
+                    </span>
+                </scetion>
             </section>
             <section className="pageblock grayblock explain" id="">
                 <section className="topheader">
