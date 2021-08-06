@@ -1,9 +1,12 @@
 import { useState } from 'react';
+
 import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
 import '../styles/teamlist.css';
+
 function TeamList({ teamList, updateTeam }) {
     const [teamName, setTeamName] = useState('');
+
     return (
         <div
             style={
@@ -39,7 +42,7 @@ function TeamList({ teamList, updateTeam }) {
                                 >
                                     {ele.teamName}
                                 </button>
-                                <span>발표 : {ele.ptCnt}개</span>
+                                {/* <span>발표 : {ele.ptCnt}개</span> */}
                                 <span>멤버수:{ele.members}명</span>
                             </TeamDivList>
                         );

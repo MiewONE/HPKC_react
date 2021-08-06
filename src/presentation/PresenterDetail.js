@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     setAttendent,
     setOrder,
+    setPresenter,
     setRecommed,
 } from '../store/modules/presentation';
 import '../styles/presentationDetail.scss';
@@ -18,12 +19,11 @@ function PresenterDetail({
     console.log(presenters, '<<<< props로 전달받은 presenters 출력');
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
-    const { attendents, order, recommend } = presentation;
+    const { attendents, order, recommend, presenter } = presentation;
     useEffect(() => {
-        dispatch(setAttendent(presenters.attendents));
         dispatch(setOrder(0));
         console.log(
-            attendents,
+            presenters.attendents,
             '<<<< presenterDetail에서 useEffect 레더링 되면서 된 attendents 출력'
         );
         console.log(
@@ -51,20 +51,19 @@ function PresenterDetail({
         }
     };
     const updateAttendent = (_attendent) => {
-        setAttendent(
-            (state) =>
-                (state = attendents.map((ele) => {
-                    if (ele.name === _attendent.name) return _attendent;
-                    else return ele;
-                }))
-        );
+        setPresenter({
+            ...presenter,
+            attendents: attendents.map((ele) => {
+                if (ele.name === _attendent.name) return _attendent;
+                else return ele;
+            }),
+        });
     };
 
     return (
         <>
-            {attendents.length > 0 && (
+            {presenters.attendents.length > 0 && (
                 <div>
-                    {console.log(presenters)}
                     <Presenter
                         teamName={teamName}
                         teamId={presenters.teamId}

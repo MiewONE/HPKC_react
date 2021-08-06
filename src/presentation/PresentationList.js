@@ -22,6 +22,7 @@ function PresentationList({ teamName, teamList, updateTeam }) {
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
                 if (res.data.success) {
+                    console.log('ptlist 업데이트');
                     updateState(res.data.msg);
                 } else {
                     alert(res.data.msg);
@@ -124,13 +125,19 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                 <h1>발표 내역이 없습니다. 추가 하시겠습니까?</h1>
             )}
             {ptList.length > 1 && (
-                <div
-                    style={{ display: 'flex', justifyContent: 'space-around' }}
-                >
-                    <div>발표명</div>
-                    <div>참석자 수</div>
-                    <div>첫번째 발표자</div>
-                    <div>만든 날짜</div>
+                <div>
+                    <span>총 갯수 :{ptList.length}</span>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                        }}
+                    >
+                        <div>발표명</div>
+                        <div>참석자 수</div>
+                        <div>첫번째 발표자</div>
+                        <div>만든 날짜</div>
+                    </div>
                 </div>
             )}
             {ptList.length > 0 &&

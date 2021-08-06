@@ -16,12 +16,13 @@ function Home(props) {
                     </span>
                 </section>
 
-                <scetion>
+                <section>
                     <span>
                         #BACKEND <br />
                         #DEVELOPER <br />
                     </span>
-                </scetion>
+                    {/* <img src="/img/portfolio_pwg.png" alt="idphoto" /> */}
+                </section>
             </section>
             <section className="pageblock grayblock explain" id="">
                 <section className="topheader">

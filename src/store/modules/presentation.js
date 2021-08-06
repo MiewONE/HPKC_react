@@ -36,7 +36,6 @@ export function setRecommed(data) {
 }
 const initialPersentation = {
     ptList: [],
-    attendents: [],
     order: 0,
     presenter: {
         _id: '',
