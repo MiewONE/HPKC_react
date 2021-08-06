@@ -49,13 +49,23 @@ function Home(props) {
                         </section>
                     </section>
                     <section>
-                        <section style={{ marginTop: '10%' }}>
+                        <section
+                            style={{ marginTop: '10%' }}
+                            className="myself"
+                        >
                             <br />
-                            <strong>개</strong> 발에 관련된 즐거움을
-                            <br />
-                            <br /> <strong>발</strong> 전을 하는것에 즐거움을
-                            <br />
-                            <br /> <strong>자</strong> 신있게 말할 수 있습니다.
+                            <p>
+                                <strong>개</strong> 발에 관련된 즐거움을
+                            </p>
+
+                            <p>
+                                <br /> <strong>발</strong> 전을 하는것에
+                                즐거움을
+                            </p>
+                            <p>
+                                <br /> <strong>자</strong> 신있게 말할 수
+                                있습니다.
+                            </p>
                         </section>
                     </section>
                 </section>

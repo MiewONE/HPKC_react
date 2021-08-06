@@ -43,6 +43,11 @@ const Presenter = ({
             (ele) => ele === loginInfo.email
         );
 
+        if (checkRecommend.length > 0) {
+            console.log('추천한 발표입니다.');
+            setAlready(true);
+            console.log(already);
+        }
         if (loginInfo.email === presenter.attendents[num].email) {
             setWrited((state) => (state = true));
             let states;
@@ -59,11 +64,7 @@ const Presenter = ({
             setWrited(false);
             setDesc((state) => (state = presenter.attendents[num].summary));
         }
-        if (checkRecommend.length > 0) {
-            console.log('추천한 발표입니다.');
-            setAlready(true);
-            console.log(already);
-        }
+
         console.log(desc);
         return () => {
             setAlready(false);

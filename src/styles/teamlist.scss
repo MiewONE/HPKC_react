@@ -19,9 +19,29 @@
       }
 }
 
+
 .openteamList {
       animation: openTeamList 1s ease-in-out 0s 1 normal forwards; ;
 }
 .openptList {
       animation: openPtList 1s ease-in-out 0s 1 normal forwards; ;
+}
+.teamlist{
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 700px;
+      overflow-y: auto;
+}
+#teamListContainer{
+      
+}
+.art {
+      width: 21%;
+      display: flex;
+      flex-direction: column-reverse;
+}
+.whale{
+      width: 19%;
 }

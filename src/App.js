@@ -95,19 +95,33 @@ function App() {
         <div className="appContiner">
             <div className="madinHeader">
                 <div>
-                    <Link to="/" className="titleLogo">
+                    {logined && (
+                        <Link to="/team" className="team">
+                            <p>팀 페이지</p>
+                        </Link>
+                    )}
+                </div>
+                <div className="titleLogo">
+                    <Link to="/">
                         <img src="/img/LOGO_pptogether.png" alt="logo" />
                     </Link>
-                    {logined && <Link to="/team">팀 페이지</Link>}
                 </div>
 
                 <div>
-                    {!logined && <button onClick={openModal}>로그인</button>}
                     {!logined && (
-                        <button onClick={openRegister}>회원가입</button>
+                        <div onClick={openModal}>
+                            <p>로그인</p>
+                        </div>
+                    )}
+                    {!logined && (
+                        <div onClick={openRegister}>
+                            <p>회원가입</p>
+                        </div>
                     )}
                     {logined && (
-                        <button onClick={event_logout}>로그아웃</button>
+                        <div onClick={event_logout}>
+                            <p>로그아웃</p>
+                        </div>
                     )}
                 </div>
             </div>

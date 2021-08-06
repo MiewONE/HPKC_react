@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { setTeamList as _setTeamList } from '../store/modules/team';
 import TeamList from './TeamList';
 import axios from 'axios';
-import TeamHeader from './TeamHeader';
 
 function Team() {
     const dispatch = useDispatch();
@@ -38,8 +37,6 @@ function Team() {
         <>
             {user.name !== '' && (
                 <div>
-                    <TeamHeader updateTeam={updateTeam} teamList={teamList} />
-
                     <TeamList teamList={teamList} updateTeam={updateTeam} />
                 </div>
             )}

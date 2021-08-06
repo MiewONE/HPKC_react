@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Modal from '../components/Modal';
+import Modal from 'react-awesome-modal';
 import TeamBody from './TeamBody';
-
+import '../styles/teamheader.scss';
 const CREATE = 0;
 const DELETED = 1;
 const PUSH = 2;
@@ -34,11 +34,19 @@ const TeamHeader = ({ updateTeam, teamList }) => {
     };
 
     return (
-        <div>
-            <button onClick={createModal}>팀 만들기</button>
-            <button onClick={deletedModal}>팀 삭제하기</button>
-            <button onClick={teamMemberAddModal}>팀 멤버 추가</button>
-            <button onClick={popModal}>팀 멤버 제거</button>
+        <div id="teamHeaderContainer">
+            <section onClick={createModal}>
+                <p>팀 만들기</p>
+            </section>
+            <section onClick={deletedModal}>
+                <p>팀 삭제하기</p>
+            </section>
+            <section onClick={teamMemberAddModal}>
+                <p>팀 멤버 추가</p>
+            </section>
+            <section onClick={popModal}>
+                <p>팀 멤버 제거</p>
+            </section>
             <Modal visible={modalVisible} onClickAway={closeModal}>
                 <TeamBody
                     curdState={crudState}

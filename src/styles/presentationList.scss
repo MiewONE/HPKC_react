@@ -12,3 +12,10 @@
 .test {
       animation: openPtList 1s ease-in-out 0s 1 normal forwards; ;
 }
+
+
+.ptList{
+      width: 80%;
+      height: 660px;
+      overflow-y: auto;
+}

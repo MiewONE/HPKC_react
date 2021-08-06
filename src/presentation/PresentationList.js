@@ -10,7 +10,7 @@ import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
-import '../styles/presentationList.css';
+import '../styles/presentationList.scss';
 function PresentationList({ teamName, teamList, updateTeam }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
@@ -22,7 +22,6 @@ function PresentationList({ teamName, teamList, updateTeam }) {
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
                 if (res.data.success) {
-                    console.log('ptlist 업데이트');
                     updateState(res.data.msg);
                 } else {
                     alert(res.data.msg);
@@ -114,52 +113,51 @@ function PresentationList({ teamName, teamList, updateTeam }) {
     };
 
     return (
-        <div>
+        <div className="ptList">
             <div className="ptHeader">
                 <PresentationHeader
                     teamName={teamName}
                     updatePtList={updatePtList}
                 />
             </div>
-            {ptList.length < 1 && (
-                <h1>발표 내역이 없습니다. 추가 하시겠습니까?</h1>
-            )}
-            {ptList.length > 1 && (
-                <div>
-                    <span>총 갯수 :{ptList.length}</span>
-                    <div
-                        style={{
-                            display: 'flex',
-                            justifyContent: 'space-around',
-                        }}
-                    >
-                        <div>발표명</div>
-                        <div>참석자 수</div>
-                        <div>첫번째 발표자</div>
-                        <div>만든 날짜</div>
+            <scetion>
+                {ptList.length < 1 && (
+                    <h1>발표 내역이 없습니다. 추가 하시겠습니까?</h1>
+                )}
+                {ptList.length > 1 && (
+                    <div>
+                        <span>총 갯수 :{ptList.length}</span>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'space-around',
+                            }}
+                        >
+                            <div>발표명</div>
+                            <div>참석자 수</div>
+                            <div>첫번째 발표자</div>
+                            <div>만든 날짜</div>
+                        </div>
                     </div>
-                </div>
-            )}
-            {ptList.length > 0 &&
-                ptList.map((ele, idx) => {
-                    return (
-                        <Presentation key={idx}>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'space-around',
-                                }}
-                            >
-                                <button onClick={openModal(ele)}>
-                                    <span>{ele.ptName}</span>
-                                </button>
-                            </div>
-                            <div>{ele.joined_people}</div>
-                            <div>{ele.attendents[0].name}</div>
-                            <div>{ele.createdAt}</div>
-                        </Presentation>
-                    );
-                })}
+                )}
+                <scetion>
+                    {ptList.length > 0 &&
+                        ptList.map((ele, idx) => {
+                            return (
+                                <Presentation key={idx}>
+                                    <div>
+                                        <button onClick={openModal(ele)}>
+                                            <span>{ele.ptName}</span>
+                                        </button>
+                                    </div>
+                                    <div>{ele.joined_people}</div>
+                                    <div>{ele.attendents[0].name}</div>
+                                    <div>{ele.createdAt}</div>
+                                </Presentation>
+                            );
+                        })}
+                </scetion>
+            </scetion>
             {presenter._id !== '' && (
                 <Modal
                     visible={modalVisible}

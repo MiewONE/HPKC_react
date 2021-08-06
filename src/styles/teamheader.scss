@@ -1,0 +1,22 @@
+#teamHeaderContainer{
+      display:grid;
+      grid-template-rows: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
+      & section{
+            text-align: center;
+            margin: 2%;
+            border: 6px solid #78B27A;
+            border-radius: 24px;
+            padding: 0%;
+            & p {
+                  font-size: 1.2em;
+            }
+      }
+
+      & section:hover{
+            color : white;
+            text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e, 0 -3px #6c986e;;
+            background-color: #78B27A;
+            cursor :pointer;
+      }
+}

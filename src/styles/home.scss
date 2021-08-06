@@ -11,8 +11,9 @@
             display:flex;
             justify-content: center;
             align-items: center;
-            background:black;
+            background:#78B27A;
             width: 50%;
+            border-radius: 7%;
             & span {
                   font-size: 6em;
                   font-family: vitroCoreTTF;
@@ -30,7 +31,7 @@
                   font-size: 6em;
                   font-family: vitroCoreTTF;
                   color : black;
-                  text-shadow: 4px 4px 4px gray;
+                  text-shadow: 5px 5px 5px #78B27A;
             }
             & img {
                   width: 70%;
@@ -131,4 +132,10 @@
 }
 li{
       margin : 5px;
+}
+
+.myself{
+      & p,strong {
+            font-size: 2em;
+      }
 }

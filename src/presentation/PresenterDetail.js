@@ -19,24 +19,12 @@ function PresenterDetail({
     console.log(presenters, '<<<< props로 전달받은 presenters 출력');
     const dispatch = useDispatch();
     const { presentation } = useSelector((state) => state);
-    const { attendents, order, recommend, presenter } = presentation;
+    const { order, presenter } = presentation;
     useEffect(() => {
         dispatch(setOrder(0));
-        console.log(
-            presenters.attendents,
-            '<<<< presenterDetail에서 useEffect 레더링 되면서 된 attendents 출력'
-        );
-        console.log(
-            order,
-            '<<<< presenterDetail에서 useEffect 레더링 되면서 된 order 출력'
-        );
-        return () => {
-            console.log('PresenterDetail unmount ');
-        };
     }, [presenters]);
 
     const previous = () => {
-        console.log(order);
         if (order > 0) {
             dispatch(setOrder(order - 1));
         } else {
@@ -53,7 +41,7 @@ function PresenterDetail({
     const updateAttendent = (_attendent) => {
         setPresenter({
             ...presenter,
-            attendents: attendents.map((ele) => {
+            attendents: presenters.attendents.map((ele) => {
                 if (ele.name === _attendent.name) return _attendent;
                 else return ele;
             }),
