@@ -47,11 +47,18 @@ const TeamHeader = ({ updateTeam, teamList }) => {
             <section onClick={popModal}>
                 <p>팀 멤버 제거</p>
             </section>
-            <Modal visible={modalVisible} onClickAway={closeModal}>
+            <Modal
+                visible={modalVisible}
+                width="420"
+                height="558"
+                effect="fadeInUp"
+                onClickAway={closeModal}
+            >
                 <TeamBody
                     curdState={crudState}
                     teamList={teamList}
                     updateTeam={updateTeam}
+                    closeModal={closeModal}
                 />
                 <button onClick={closeModal}>모달 닫기</button>
             </Modal>

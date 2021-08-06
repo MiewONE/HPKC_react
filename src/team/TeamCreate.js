@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import axios from 'axios';
-function TeamCreate({ teamList, updateTeam }) {
+import '../styles/teamCreate.scss';
+
+function TeamCreate({ teamList, updateTeam, closeModal }) {
     console.log('teamcreate', teamList);
     const teamName = useRef();
     const subject = useRef();

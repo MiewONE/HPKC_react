@@ -8,13 +8,23 @@ const DELETED = 1;
 const PUSH = 2;
 const POP = 3;
 
-const TeamBody = ({ curdState, teamList, updateTeam }) => {
+const TeamBody = ({ curdState, teamList, updateTeam, closeModal }) => {
     switch (curdState) {
         case CREATE:
-            return <TeamCreate teamList={teamList} updateTeam={updateTeam} />;
+            return (
+                <TeamCreate
+                    teamList={teamList}
+                    updateTeam={updateTeam}
+                    closeModal={closeModal}
+                />
+            );
         case PUSH:
             return (
-                <TeamMemberAdd teamList={teamList} updateTeam={updateTeam} />
+                <TeamMemberAdd
+                    teamList={teamList}
+                    updateTeam={updateTeam}
+                    closeModal={closeModal}
+                />
             );
 
         case POP:

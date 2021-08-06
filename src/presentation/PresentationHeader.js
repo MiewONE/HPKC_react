@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-awesome-modal';
 import PresentationBody from './PresentationBody';
-
+import '../styles/presentationHeader.scss';
 const CREATE = 0;
 const DELETE = 2;
 
@@ -22,9 +22,13 @@ const PresentationHeader = ({ teamName, updatePtList }) => {
     };
 
     return (
-        <div>
-            <button onClick={createModal}>발표 생성</button>
-            <button onClick={deleteModal}>발표 삭제</button>
+        <div className="ptCrudHeader">
+            <section onClick={createModal}>
+                <span>발표 생성</span>
+            </section>
+            <section onClick={deleteModal}>
+                <span>발표 삭제</span>
+            </section>
             <Modal
                 visible={modalVisible}
                 width="500"

@@ -19,7 +19,7 @@ function TeamList({ teamList, updateTeam }) {
                       }
                     : {
                           display: 'flex',
-                          justifyContent: 'space-evenly;',
+                          justifyContent: 'space-between;',
                       }
             }
         >
@@ -32,29 +32,31 @@ function TeamList({ teamList, updateTeam }) {
                 className={teamName ? 'openteamList teamlist' : 'none teamlist'}
                 style={teamName ? { width: '20%' } : { width: '40%' }}
             >
-                <section>
+                <section id="teamlist">
                     {teamList && teamList.length < 1 && (
                         <h1>팀이 존재하지 않습니다. 팀을 만들어 보세요!</h1>
                     )}
+                    <section>
+                        <section>팀명</section>
+                        {!teamName && <section>주제</section>}
+                        <section>팀 인원</section>
+                    </section>
                     {teamList.length > 0 &&
                         teamList.map((ele) => {
                             return (
                                 <TeamDivList
                                     className="list"
                                     key={ele.teamName}
+                                    onClick={() => {
+                                        setTeamName(
+                                            (state) => (state = ele.teamName)
+                                        );
+                                    }}
                                 >
-                                    <button
-                                        onClick={() => {
-                                            setTeamName(
-                                                (state) =>
-                                                    (state = ele.teamName)
-                                            );
-                                        }}
-                                    >
-                                        {ele.teamName}
-                                    </button>
+                                    <span>{ele.teamName}</span>
+                                    {!teamName && <span>{ele.subject}</span>}
                                     {/* <span>발표 : {ele.ptCnt}개</span> */}
-                                    <span>멤버수:{ele.members}명</span>
+                                    <span>{ele.members}명</span>
                                 </TeamDivList>
                             );
                         })}

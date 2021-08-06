@@ -31,11 +31,12 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 700px;
-      overflow-y: auto;
+
 }
 #teamListContainer{
-      
+      justify-content: space-evenly;
+      min-height: 750px;
+      max-height: 800px;
 }
 .art {
       width: 21%;
@@ -45,3 +46,27 @@
 .whale{
       width: 19%;
 }
+
+#teamlist {
+      height: 800px;
+      overflow-y: auto;
+      & > section:nth-child(1)
+      {     
+            
+            display:flex;
+            justify-content: space-evenly;
+            & section {
+                  position:sticky;
+                  width: 33%;
+                  text-align: center;
+                  margin-top: 10px;
+            }
+      }
+}
+.list {
+      & span {
+            width: 33%;
+            text-align: center;
+      }
+}
+

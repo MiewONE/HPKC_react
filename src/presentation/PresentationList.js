@@ -122,21 +122,18 @@ function PresentationList({ teamName, teamList, updateTeam }) {
             </div>
             <scetion>
                 {ptList.length < 1 && (
-                    <h1>발표 내역이 없습니다. 추가 하시겠습니까?</h1>
+                    <section className="noneList">
+                        발표 내역이 없어요. 추가 해주세요 !
+                    </section>
                 )}
                 {ptList.length > 1 && (
                     <div>
                         <span>총 갯수 :{ptList.length}</span>
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'space-around',
-                            }}
-                        >
-                            <div>발표명</div>
-                            <div>참석자 수</div>
-                            <div>첫번째 발표자</div>
-                            <div>만든 날짜</div>
+                        <div className="ptlistTitle">
+                            <section>발표명</section>
+                            <section>참석자 수</section>
+                            <section>첫번째 발표자</section>
+                            <section>만든 날짜</section>
                         </div>
                     </div>
                 )}
@@ -144,11 +141,17 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                     {ptList.length > 0 &&
                         ptList.map((ele, idx) => {
                             return (
-                                <Presentation key={idx}>
+                                <Presentation
+                                    key={idx}
+                                    onClick={openModal(ele)}
+                                >
+                                    <span style={{ marginLeft: '3%' }}>
+                                        {idx + 1}
+                                    </span>
                                     <div>
-                                        <button onClick={openModal(ele)}>
+                                        <section>
                                             <span>{ele.ptName}</span>
-                                        </button>
+                                        </section>
                                     </div>
                                     <div>{ele.joined_people}</div>
                                     <div>{ele.attendents[0].name}</div>
