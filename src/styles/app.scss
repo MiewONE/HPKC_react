@@ -6,12 +6,19 @@
       padding: 2% 3%;
       align-items: center;
       border-bottom: 6px solid #78b27a;
+      & > div {
+            width: 33%;
+      }
+      & > div:nth-last-child(1){
+            display:flex;
+            justify-content: flex-end;
+      }
       & .titleLogo {
             display: flex;
             justify-content: center;
             align-items: center;
             & a {
-                  width: 17%;
+                  width: 30%;
             }
             & img {
                   width: 75%;
@@ -23,7 +30,7 @@
             font-family: vitroCoreTTF;
             color: #78b27a;
             margin: 1% 0px;
-            font-size: 2em;
+            font-size: 150%;
             font-weight: bold;
             // text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e, 0 -3px #6c986e;;
       }

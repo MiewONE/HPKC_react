@@ -7,6 +7,7 @@ import TeamHeader from './TeamHeader';
 function TeamList({ teamList, updateTeam }) {
     const [teamName, setTeamName] = useState('');
 
+    const [teamListState, setteamList] = useState(teamList);
     return (
         <div
             id="teamListContainer"
@@ -33,7 +34,7 @@ function TeamList({ teamList, updateTeam }) {
                 style={teamName ? { width: '20%' } : { width: '40%' }}
             >
                 <section id="teamlist">
-                    {teamList && teamList.length < 1 && (
+                    {teamListState && teamListState.length < 1 && (
                         <h1>팀이 존재하지 않습니다. 팀을 만들어 보세요!</h1>
                     )}
                     <section>
@@ -41,11 +42,15 @@ function TeamList({ teamList, updateTeam }) {
                         {!teamName && <section>주제</section>}
                         <section>팀 인원</section>
                     </section>
-                    {teamList.length > 0 &&
-                        teamList.map((ele) => {
+                    {teamListState.length > 0 &&
+                        teamListState.map((ele) => {
                             return (
                                 <TeamDivList
-                                    className="list"
+                                    className={
+                                        teamName === ele.teamName
+                                            ? 'selected list'
+                                            : 'list'
+                                    }
                                     key={ele.teamName}
                                     onClick={() => {
                                         setTeamName(
@@ -53,10 +58,30 @@ function TeamList({ teamList, updateTeam }) {
                                         );
                                     }}
                                 >
-                                    <span>{ele.teamName}</span>
-                                    {!teamName && <span>{ele.subject}</span>}
+                                    <span
+                                        style={
+                                            teamName
+                                                ? { width: '80%' }
+                                                : { width: '33%' }
+                                        }
+                                    >
+                                        {ele.teamName}
+                                    </span>
+                                    {!teamName && (
+                                        <span style={{ width: '33%' }}>
+                                            {ele.subject}
+                                        </span>
+                                    )}
                                     {/* <span>발표 : {ele.ptCnt}개</span> */}
-                                    <span>{ele.members}명</span>
+                                    <span
+                                        style={
+                                            teamName
+                                                ? { width: '20%' }
+                                                : { width: '33%' }
+                                        }
+                                    >
+                                        {ele.members}명
+                                    </span>
                                 </TeamDivList>
                             );
                         })}

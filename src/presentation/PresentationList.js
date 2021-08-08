@@ -14,9 +14,12 @@ import '../styles/presentationList.scss';
 function PresentationList({ teamName, teamList, updateTeam }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
-    const { presentation } = useSelector((state) => state);
+    const { presentation, team } = useSelector((state) => state);
     const { ptList, presenter, order } = presentation;
-
+    const { teamList: allTeamList } = team;
+    const selectedTeam = allTeamList.filter(
+        (ele) => ele.teamName === teamName
+    )[0];
     useEffect(() => {
         axios
             .post('/pt/ptlist', { teamName: teamName })
@@ -113,55 +116,66 @@ function PresentationList({ teamName, teamList, updateTeam }) {
     };
 
     return (
-        <div className="ptList">
-            <div className="ptHeader">
-                <PresentationHeader
-                    teamName={teamName}
-                    updatePtList={updatePtList}
-                />
-            </div>
-            <scetion>
-                {ptList.length < 1 && (
-                    <section className="noneList">
-                        발표 내역이 없어요. 추가 해주세요 !
+        <div>
+            <div className="ptList">
+                <div className="ptHeader">
+                    <section>
+                        <PresentationHeader
+                            teamName={teamName}
+                            updatePtList={updatePtList}
+                        />
                     </section>
-                )}
-                {ptList.length > 1 && (
-                    <div>
-                        <span>총 갯수 :{ptList.length}</span>
-                        <div className="ptlistTitle">
-                            <section>발표명</section>
-                            <section>참석자 수</section>
-                            <section>첫번째 발표자</section>
-                            <section>만든 날짜</section>
+
+                    {selectedTeam && (
+                        <section id="teamInfo">
+                            <p>{selectedTeam.teamName}</p>
+                            <p>{selectedTeam.subject}</p>
+                        </section>
+                    )}
+                </div>
+                <section>
+                    {ptList.length < 1 && (
+                        <section className="noneList">
+                            발표 내역이 없어요. 추가 해주세요 !
+                        </section>
+                    )}
+                    {ptList.length > 1 && (
+                        <div id="ptlistHeader">
+                            <span>총 갯수 :{ptList.length}</span>
+                            <div className="ptlistTitle">
+                                <section>발표명</section>
+                                <section>참석자 수</section>
+                                <section>첫번째 발표자</section>
+                                <section>만든 날짜</section>
+                            </div>
                         </div>
-                    </div>
-                )}
-                <scetion>
-                    {ptList.length > 0 &&
-                        ptList.map((ele, idx) => {
-                            return (
-                                <Presentation
-                                    key={idx}
-                                    onClick={openModal(ele)}
-                                >
-                                    <span style={{ marginLeft: '3%' }}>
-                                        {idx + 1}
-                                    </span>
-                                    <div>
-                                        <section>
-                                            <span>{ele.ptName}</span>
-                                        </section>
-                                    </div>
-                                    <div>{ele.joined_people}</div>
-                                    <div>{ele.attendents[0].name}</div>
-                                    <div>{ele.createdAt}</div>
-                                </Presentation>
-                            );
-                        })}
-                </scetion>
-            </scetion>
-            {presenter._id !== '' && (
+                    )}
+                    <section>
+                        {ptList.length > 0 &&
+                            ptList.map((ele, idx) => {
+                                return (
+                                    <Presentation
+                                        key={idx}
+                                        onClick={openModal(ele)}
+                                    >
+                                        <span style={{ marginLeft: '3%' }}>
+                                            {idx + 1}
+                                        </span>
+                                        <div>
+                                            <section>
+                                                <span>{ele.ptName}</span>
+                                            </section>
+                                        </div>
+                                        <div>{ele.joined_people}</div>
+                                        <div>{ele.attendents[0].name}</div>
+                                        <div>{ele.createdAt}</div>
+                                    </Presentation>
+                                );
+                            })}
+                    </section>
+                </section>
+            </div>
+            {presenter._id && (
                 <Modal
                     visible={modalVisible}
                     width="1000"

@@ -5,7 +5,7 @@ export const Presentation = styled.div`
     justify-content: space-evenly;
     padding: 10px 0px;
     width: 100%;
-    border-bottom: 5px solid transparent;
+    border-bottom: 1.5px solid transparent;
     border-image: linear-gradient(to right, #aedcaf, #78b27a);
     border-image-slice: 1;
     font-size: 1.2em;

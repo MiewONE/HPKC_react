@@ -119,9 +119,17 @@ function App() {
                         </div>
                     )}
                     {logined && (
-                        <div onClick={event_logout}>
-                            <p>로그아웃</p>
-                        </div>
+                        <section style={{ display: 'flex' }}>
+                            <p style={{ marginRight: '20px' }}>
+                                안녕하세요,
+                                {storage.get(_loggedInfo)
+                                    ? storage.get(_loggedInfo).name
+                                    : storage.remainGet(_loggedInfo).name}
+                            </p>
+                            <div onClick={event_logout}>
+                                <p>로그아웃</p>
+                            </div>
+                        </section>
                     )}
                 </div>
             </div>
