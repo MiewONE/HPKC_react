@@ -1,0 +1,54 @@
+.selected
+{
+      color: white;
+      text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e,
+          0 -3px #6c986e;
+      background-color: #78b27a;
+      cursor:pointer;
+}
+
+.nonselected{
+      color: black;
+      background-color: white;
+      cursor:pointer;
+}
+
+.dellist{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-bottom: 1.5px solid transparent;
+      border-image: linear-gradient(to right, #aedcaf, #78b27a);
+      border-image-slice: 1;
+      & > span{
+            width: 50%;
+            text-align: center;
+            margin: 1%;
+            
+      }
+}
+#ptDelete{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      & > span {
+            font-size: 2em;
+            border-bottom: 3px solid #78b27a;
+            margin: 2%;
+      }
+      & #ptDelHeader{
+            height: 30px;
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            & span {
+                  font-weight: bold;
+            }
+      }
+      & .delListContainer{
+            height: 450px;
+            width: 100%;
+            overflow-y: auto;
+      }
+}

@@ -1,9 +1,14 @@
 import React, { useRef } from 'react';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setPresentationList } from '../store/modules/presentation';
-function TeamDelete({ teamList, updateTeam }) {
+import { setTeamList } from '../store/modules/team';
+import { ButtonLogin, Input } from '../styles/loginStyle';
+import '../styles/teamDelete.scss';
+function TeamDelete() {
     console.log('teamdelete');
+    const { team } = useSelector((state) => state);
+    const { teamList } = team;
     const teamName = useRef();
     const dispatch = useDispatch();
     const send = () => {
@@ -26,12 +31,16 @@ function TeamDelete({ teamList, updateTeam }) {
                         console.log(res);
                         if (res.data.success) {
                             alert('삭제가 완료되었습니다.');
-                            updateTeam(
-                                teamList.filter(
-                                    (ele) =>
-                                        ele.teamName !== teamName.current.value
+                            dispatch(
+                                setTeamList(
+                                    teamList.filter(
+                                        (ele) =>
+                                            ele.teamName !==
+                                            teamName.current.value
+                                    )
                                 )
                             );
+                            window.location.href = '/team';
                         } else {
                             alert(res.data.msg);
                             dispatch(setPresentationList([]));
@@ -46,14 +55,15 @@ function TeamDelete({ teamList, updateTeam }) {
         }
     };
     return (
-        <div>
-            <input
+        <div id="teamDeleteContainer">
+            <span>팀 삭제하기</span>
+            <Input
                 type="text"
                 name="teamName"
                 placeholder="팀 이름을 입력하세요"
                 ref={teamName}
             />
-            <button onClick={send}>팀 제거하기</button>
+            <ButtonLogin onClick={send}>팀 제거하기</ButtonLogin>
         </div>
     );
 }

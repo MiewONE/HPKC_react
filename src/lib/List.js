@@ -18,7 +18,7 @@ export function List({ items, onItemsChange, isHorizontal = false, listName }) {
         <ul className={isHorizontal ? 'list horizontal' : 'list'} ref={listRef}>
             {listName}
             {items.map((item) => (
-                <li key={item.id}>
+                <li key={item.id} className="listItem">
                     <span>{item.id}</span>
                     <span>{item.email}</span>
                 </li>

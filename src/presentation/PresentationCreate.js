@@ -4,7 +4,8 @@ import '../styles/ptcreate.scss';
 import { setPresentationList } from '../store/modules/presentation';
 import { useSelector, useDispatch } from 'react-redux';
 import { List } from '../lib/List';
-const PresentationCreate = ({ teamName }) => {
+import { SosialLogin, ButtonLogin } from '../styles/loginStyle';
+const PresentationCreate = ({ teamName, closeModal }) => {
     const { presentation } = useSelector((stat) => stat);
     const { ptList } = presentation;
     const dispatch = useDispatch();
@@ -46,13 +47,17 @@ const PresentationCreate = ({ teamName }) => {
     };
     return (
         <div className="ptCreateModal">
-            <span>발표명 :</span>
-            <input
-                type="text"
-                name="presentationName"
-                placeholder="발표명을 입력하세요"
-                ref={ptName}
-            />
+            <span className="modalTitle">발표 생성</span>
+            <section>
+                <span>발표명 :</span>
+                <input
+                    type="text"
+                    name="presentationName"
+                    placeholder="발표명을 입력하세요"
+                    ref={ptName}
+                />
+            </section>
+
             {member && (
                 <div className="listContainer">
                     <List
@@ -68,7 +73,12 @@ const PresentationCreate = ({ teamName }) => {
                 </div>
             )}
 
-            <button onClick={save}>생성</button>
+            <ButtonLogin className="saveButton" onClick={save}>
+                생성
+            </ButtonLogin>
+            <section className="xbutton" onClick={closeModal}>
+                <SosialLogin></SosialLogin>
+            </section>
         </div>
     );
 };

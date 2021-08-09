@@ -1,9 +1,13 @@
 import { useRef } from 'react';
 import axios from 'axios';
 import '../styles/teamCreate.scss';
-
-function TeamCreate({ teamList, updateTeam, closeModal }) {
-    console.log('teamcreate', teamList);
+import { useDispatch, useSelector } from 'react-redux';
+import { setTeamList } from '../store/modules/team';
+import { ButtonLogin, Input } from '../styles/loginStyle';
+function TeamCreate({ closeModal }) {
+    const dispatch = useDispatch();
+    const { team } = useSelector((state) => state);
+    const { teamList } = team;
     const teamName = useRef();
     const subject = useRef();
     if (!teamList) return <h1></h1>;
@@ -23,7 +27,7 @@ function TeamCreate({ teamList, updateTeam, closeModal }) {
                     console.log(res);
                     if (res.data.success) {
                         alert(res.data.msg.teamName + ' 팀이 생성되었습니다.');
-                        updateTeam([...teamList, res.data.msg]);
+                        dispatch(setTeamList([...teamList, res.data.msg]));
                     } else {
                         alert('생성에 실패하였습니다.');
                         // window.location.href = '/';
@@ -34,20 +38,21 @@ function TeamCreate({ teamList, updateTeam, closeModal }) {
         }
     };
     return (
-        <div>
-            <input
+        <div id="teamCreateContainer">
+            <span>팀 만들기</span>
+            <Input
                 type="text"
                 name="teamName"
                 placeholder="팀 이름을 입력하세요"
                 ref={teamName}
             />
-            <input
+            <Input
                 type="text"
                 name="subject"
                 placeholder="주제를 입력하세요"
                 ref={subject}
             />
-            <button onClick={send}>팀 생성</button>
+            <ButtonLogin onClick={send}>팀 생성</ButtonLogin>
         </div>
     );
 }

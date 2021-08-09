@@ -40,8 +40,8 @@ const PresentationHeader = ({ teamName, updatePtList }) => {
                     teamName={teamName}
                     curdState={crudState}
                     updatePtList={updatePtList}
+                    closeModal={closeModal}
                 />
-                <button onClick={closeModal}>모달 닫기</button>
             </Modal>
         </div>
     );

@@ -168,9 +168,9 @@ const Presenter = ({
     };
     return (
         <div id="presenter">
-            <scetion className="presenterHeader">
+            <section className="presenterHeader">
                 <span>{ptName}</span>
-                <scetion className="saveNclose">
+                <section className="saveNclose">
                     <section>
                         <img
                             className="IMGsave"
@@ -187,11 +187,11 @@ const Presenter = ({
                             alt="exit"
                         />
                     </section>
-                </scetion>
-            </scetion>
-            <scetion className="Info">
-                <scetion>
-                    <scetion>
+                </section>
+            </section>
+            <section className="Info">
+                <section>
+                    <section>
                         <p>발표 순서:</p>
                         <div>
                             {presenter.attendents.map((ele) => {
@@ -204,17 +204,17 @@ const Presenter = ({
                                 else return <p>{ele.name}</p>;
                             })}
                         </div>
-                    </scetion>
-                    {/* <scetion>
+                    </section>
+                    {/* <section>
                         <button onClick={events.oncrease}>-</button>
                         <span>{order}</span>
                         <button onClick={events.increase}>+</button>
-                    </scetion> */}
-                </scetion>
+                    </section> */}
+                </section>
                 <p>작성자 : {presenter.attendents[num].name}</p>
-            </scetion>
-            <scetion className="summary">
-                <scetion>
+            </section>
+            <section className="summary">
+                <section>
                     <span>요약</span>
                     {writed && (
                         <form
@@ -227,7 +227,7 @@ const Presenter = ({
                             <button type="submit">Upload</button>
                         </form>
                     )}
-                </scetion>
+                </section>
 
                 {writed ? (
                     <EditorComponent
@@ -240,8 +240,8 @@ const Presenter = ({
                         dangerouslySetInnerHTML={{ __html: desc }}
                     ></p>
                 )}
-            </scetion>
-            <scetion className="recommend">
+            </section>
+            <section className="recommend">
                 <div onClick={events.ddabong}>
                     <img
                         src={already ? '/img/liked.png' : '/img/origin.png'}
@@ -249,9 +249,9 @@ const Presenter = ({
                     />
                 </div>
                 <div>{recommend}</div>
-            </scetion>
+            </section>
             {num !== 0 && (
-                <scetion className="previous" onClick={previous}>
+                <section className="previous" onClick={previous}>
                     <img
                         className="IMGArrow"
                         src={
@@ -263,10 +263,10 @@ const Presenter = ({
                         onMouseOver={() => setLeftOver(true)}
                         onMouseLeave={() => setLeftOver(false)}
                     />
-                </scetion>
+                </section>
             )}
             {num !== presenter.attendents.length - 1 && (
-                <scetion className="next" onClick={next}>
+                <section className="next" onClick={next}>
                     <img
                         className="IMGArrow"
                         src={
@@ -278,7 +278,7 @@ const Presenter = ({
                         onMouseOver={() => setRighttOver(true)}
                         onMouseLeave={() => setRighttOver(false)}
                     />
-                </scetion>
+                </section>
             )}
         </div>
     );

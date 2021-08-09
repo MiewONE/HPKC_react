@@ -39,12 +39,12 @@
       display : flex;
       justify-content: space-between;
       height: 125px;
-      & > scetion {
+      & > section {
             display:flex;
             flex-direction:column;
             width: 80%;
       }
-      & > scetion >scetion  {
+      & > section >section  {
             display: flex;
             align-items: center;
             text-align: center;
@@ -72,10 +72,10 @@
 .summary {
       display:flex;
       flex-direction : column;
-      & scetion {
+      & section {
             display: flex;
       }
-      & > scetion > span {
+      & > section > span {
             margin: 1% 0 1% 2%;
             font-size: 1.6em;
             &::after {

@@ -4,13 +4,19 @@ import PresentationDelete from './PresentationDelete';
 const CREATE = 0;
 const DELETE = 2;
 
-const PresentationBody = ({ curdState, teamName, updatePtList }) => {
+const PresentationBody = ({
+    curdState,
+    teamName,
+    updatePtList,
+    closeModal,
+}) => {
     switch (curdState) {
         case CREATE:
             return (
                 <PresentationCreate
                     teamName={teamName}
                     updatePtList={updatePtList}
+                    closeModal={closeModal}
                 />
             );
 
@@ -20,6 +26,7 @@ const PresentationBody = ({ curdState, teamName, updatePtList }) => {
                     <PresentationDelete
                         teamName={teamName}
                         updatePtList={updatePtList}
+                        closeModal={closeModal}
                     />
                 </div>
             );

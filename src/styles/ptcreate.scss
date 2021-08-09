@@ -10,11 +10,39 @@
 .ptCreateModal
 {
       height: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      & > .modalTitle {
+            margin : 1% 0 3% 1%;
+            font-size: 2em;
+            width: 30%;
+            border-bottom: 4px solid #78B27A;
+      }
+      & > section{
+            margin : 1% 0 0 1%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+      }
 }
+
 .listContainer
 {
   display: flex;
+  width: 100%;
   min-height: 50%;
   max-height: 100%;
+
+}
+.xbutton{
+      width: 5%;
+}
+.saveButton{
+      width: 30% !important;
+      position: absolute;
+      bottom: 0%;
+      right: 35%;
 
 }

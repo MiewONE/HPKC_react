@@ -7,7 +7,7 @@ const DELETED = 1;
 const PUSH = 2;
 const POP = 3;
 
-const TeamHeader = ({ updateTeam, teamList }) => {
+const TeamHeader = ({ teamList }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [crudState, setCrudState] = useState(999);
 
@@ -49,18 +49,16 @@ const TeamHeader = ({ updateTeam, teamList }) => {
             </section>
             <Modal
                 visible={modalVisible}
-                width="420"
-                height="558"
+                width="300"
+                height="300"
                 effect="fadeInUp"
                 onClickAway={closeModal}
             >
                 <TeamBody
                     curdState={crudState}
                     teamList={teamList}
-                    updateTeam={updateTeam}
                     closeModal={closeModal}
                 />
-                <button onClick={closeModal}>모달 닫기</button>
             </Modal>
         </div>
     );

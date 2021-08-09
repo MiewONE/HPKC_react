@@ -1,13 +1,15 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import PresentationList from '../presentation/PresentationList';
 import { TeamDivList } from '../styles/teamStyle';
 import '../styles/teamlist.scss';
 import TeamHeader from './TeamHeader';
-function TeamList({ teamList, updateTeam }) {
+function TeamList() {
     const [teamName, setTeamName] = useState('');
-
-    const [teamListState, setteamList] = useState(teamList);
+    const dispatch = useDispatch();
+    const { team } = useSelector((state) => state);
+    const { teamList } = team;
+    useEffect(() => {}, [teamList]);
     return (
         <div
             id="teamListContainer"
@@ -33,17 +35,32 @@ function TeamList({ teamList, updateTeam }) {
                 className={teamName ? 'openteamList teamlist' : 'none teamlist'}
                 style={teamName ? { width: '20%' } : { width: '40%' }}
             >
-                <section id="teamlist">
-                    {teamListState && teamListState.length < 1 && (
-                        <h1>팀이 존재하지 않습니다. 팀을 만들어 보세요!</h1>
+                <section
+                    id="teamlist"
+                    style={
+                        teamList && teamList.length < 1
+                            ? {
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                              }
+                            : {}
+                    }
+                >
+                    {teamList && teamList.length < 1 && (
+                        <section className="noneTeam">
+                            팀이 존재하지 않습니다. 팀을 만들어 보세요!
+                        </section>
                     )}
-                    <section>
-                        <section>팀명</section>
-                        {!teamName && <section>주제</section>}
-                        <section>팀 인원</section>
-                    </section>
-                    {teamListState.length > 0 &&
-                        teamListState.map((ele) => {
+                    {teamList.length > 0 && (
+                        <section>
+                            <section>팀명</section>
+                            {!teamName && <section>주제</section>}
+                            <section>팀 인원</section>
+                        </section>
+                    )}
+                    {teamList.length > 0 &&
+                        teamList.map((ele) => {
                             return (
                                 <TeamDivList
                                     className={
@@ -87,7 +104,7 @@ function TeamList({ teamList, updateTeam }) {
                         })}
                 </section>
                 <section>
-                    <TeamHeader updateTeam={updateTeam} teamList={teamList} />
+                    <TeamHeader teamList={teamList} />
                 </section>
             </div>
             {!teamName && (
@@ -97,11 +114,7 @@ function TeamList({ teamList, updateTeam }) {
             )}
             {teamName && (
                 <div style={{ width: '70%', height: '100%' }}>
-                    <PresentationList
-                        teamName={teamName}
-                        teamList={teamList}
-                        updateTeam={updateTeam}
-                    />
+                    <PresentationList teamName={teamName} teamList={teamList} />
                 </div>
             )}
         </div>

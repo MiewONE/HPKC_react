@@ -8,10 +8,6 @@ function Team() {
     const dispatch = useDispatch();
     const { user, team } = useSelector((state) => state);
     const teamList = team.teamList;
-    const updateTeam = (data) => {
-        console.log(data);
-        dispatch(_setTeamList(data));
-    };
 
     useEffect(() => {
         axios
@@ -19,7 +15,7 @@ function Team() {
             .then((res) => {
                 console.log(res.data);
                 if (res.data.success) {
-                    updateTeam(res.data.msg);
+                    dispatch(_setTeamList(res.data.msg));
                 } else {
                     alert('세션이 만료 되었습니다.');
                     window.location.href = '/';
@@ -37,7 +33,7 @@ function Team() {
         <>
             {user.name !== '' && (
                 <div>
-                    <TeamList teamList={teamList} updateTeam={updateTeam} />
+                    <TeamList teamList={teamList} />
                 </div>
             )}
         </>

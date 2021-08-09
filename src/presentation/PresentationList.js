@@ -6,21 +6,28 @@ import {
     setPresenter,
     setOrder,
 } from '../store/modules/presentation';
+import { setTeamList } from '../store/modules/team';
 import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
 import '../styles/presentationList.scss';
-function PresentationList({ teamName, teamList, updateTeam }) {
+function PresentationList({ teamName }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const { presentation, team } = useSelector((state) => state);
     const { ptList, presenter, order } = presentation;
-    const { teamList: allTeamList } = team;
-    const selectedTeam = allTeamList.filter(
-        (ele) => ele.teamName === teamName
-    )[0];
+    const { teamList } = team;
+    const [teamUserList, setTeamUserList] = useState([]);
+    const selectedTeam = teamList.filter((ele) => ele.teamName === teamName)[0];
     useEffect(() => {
+        axios.post('/team/userlist', { teamName: teamName }).then((res) => {
+            if (res.data.success) {
+                setTeamUserList(res.data.msg);
+            } else {
+                alert('팀 정보를 가져오는데 실패하였습니다.');
+            }
+        });
         axios
             .post('/pt/ptlist', { teamName: teamName })
             .then((res) => {
@@ -72,26 +79,23 @@ function PresentationList({ teamName, teamList, updateTeam }) {
     };
     const updatePtList = () => {
         getPtList();
-        updateTeam(
-            teamList.map((ele) => {
-                if (ele.teamName === teamName) {
-                    return {
-                        ...ele,
-                        ptCnt: ele.ptCnt + 1,
-                    };
-                } else {
-                    return ele;
-                }
-            })
+        dispatch(
+            setTeamList(
+                teamList.map((ele) => {
+                    if (ele.teamName === teamName) {
+                        return {
+                            ...ele,
+                            ptCnt: ele.ptCnt + 1,
+                        };
+                    } else {
+                        return ele;
+                    }
+                })
+            )
         );
     };
     const openModal = (pt) => {
         return () => {
-            console.log(
-                '>>> PresentationList에서 PresentationDetail열면서 presenter과 order설정'
-            );
-            console.log(order, '<<<<< Order값 출력');
-            console.log(presenter, '<<<<< Presenter값 출력');
             if (pt.ptName !== presenter.ptName) {
                 dispatch(setOrder(0));
                 dispatch(
@@ -128,8 +132,24 @@ function PresentationList({ teamName, teamList, updateTeam }) {
 
                     {selectedTeam && (
                         <section id="teamInfo">
-                            <p>{selectedTeam.teamName}</p>
-                            <p>{selectedTeam.subject}</p>
+                            <p>팀 정보</p>
+                            <section className="teamInfo">
+                                <p>팀 이름 :</p>
+                                <p>{selectedTeam.teamName}</p>
+                            </section>
+                            <section className="teamInfo">
+                                <p>팀 주제 :</p>
+                                <p>{selectedTeam.subject}</p>
+                            </section>
+                            <section className="teamInfo">
+                                <p>팀 멤버 :</p>
+                                <section className="teamMember">
+                                    {teamUserList.length > 0 &&
+                                        teamUserList.map((ele) => {
+                                            return <p>{ele.id}</p>;
+                                        })}
+                                </section>
+                            </section>
                         </section>
                     )}
                 </div>
@@ -150,7 +170,7 @@ function PresentationList({ teamName, teamList, updateTeam }) {
                             </div>
                         </div>
                     )}
-                    <section>
+                    <section id={ptList.length > 0 ? 'ptListAll' : ''}>
                         {ptList.length > 0 &&
                             ptList.map((ele, idx) => {
                                 return (

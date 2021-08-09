@@ -109,7 +109,7 @@ function App() {
 
                 <div>
                     {!logined && (
-                        <div onClick={openModal}>
+                        <div style={{ marginRight: '3%' }} onClick={openModal}>
                             <p>로그인</p>
                         </div>
                     )}
