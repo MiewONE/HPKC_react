@@ -37,7 +37,9 @@
 .ptlistTitle{
       display: flex;
       justify-content: space-around;
-
+      & > section {
+            font-weight: bold;
+      }
       &  >section:nth-child(1) {
             width: 40%;
             text-align: center;

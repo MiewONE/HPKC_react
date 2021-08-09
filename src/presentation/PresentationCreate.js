@@ -42,6 +42,7 @@ const PresentationCreate = ({ teamName, closeModal }) => {
                 }
                 alert(res.data.msg.ptName + '이 생성되었습니다.');
                 dispatch(setPresentationList([...ptList, res.data.msg]));
+                closeModal();
             });
         console.log(ptList);
     };

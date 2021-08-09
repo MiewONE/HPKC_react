@@ -3,7 +3,7 @@ import axios from 'axios';
 import '../styles/newlogin.scss';
 import storage from '../lib/storage';
 import { SosialLogin, ButtonLogin, Input } from '../styles/loginStyle';
-const Register = ({ closeModal }) => {
+const Register = ({ closeModal, openModal }) => {
     const regExp =
         /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
@@ -28,6 +28,11 @@ const Register = ({ closeModal }) => {
             alert('공란이 존재합니다. 확인 후 다시 시도해주세요');
             return;
         }
+        if (!checkEmail) {
+            alert('이메일 형식을 맞춰주세요');
+            userEmail.current.focus();
+            return;
+        }
 
         axios
             .post('/oauth/register', {
@@ -41,7 +46,7 @@ const Register = ({ closeModal }) => {
                     return;
                 }
                 alert('회원가입이 완료되었습니다.');
-                window.location.href = '/';
+                openModal();
             })
             .catch((err) => {
                 console.log(err);
@@ -109,7 +114,6 @@ const Register = ({ closeModal }) => {
                 <SosialLogin className="facebook"></SosialLogin>
                 <SosialLogin className="naver"></SosialLogin> */}
             </div>
-            <div className="back forgotPw">비밀번호 찾기</div>
         </div>
     );
 };

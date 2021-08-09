@@ -54,9 +54,9 @@ function TeamList() {
                     )}
                     {teamList.length > 0 && (
                         <section>
-                            <section>팀명</section>
+                            {!teamName && <section>팀명</section>}
                             {!teamName && <section>주제</section>}
-                            <section>팀 인원</section>
+                            {!teamName && <section>팀 인원</section>}
                         </section>
                     )}
                     {teamList.length > 0 &&

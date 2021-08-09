@@ -41,7 +41,7 @@ function PresentationList({ teamName }) {
             .catch((err) => {
                 console.log(err);
             });
-    }, [teamName]);
+    }, [teamName, teamList]);
     const updatePresenter = (update) => {
         const attendenta = presenter.attendents.map((ele) => {
             if (ele.name === update.name) return update;
@@ -159,7 +159,7 @@ function PresentationList({ teamName }) {
                             발표 내역이 없어요. 추가 해주세요 !
                         </section>
                     )}
-                    {ptList.length > 1 && (
+                    {ptList.length > 0 && (
                         <div id="ptlistHeader">
                             <span>총 갯수 :{ptList.length}</span>
                             <div className="ptlistTitle">

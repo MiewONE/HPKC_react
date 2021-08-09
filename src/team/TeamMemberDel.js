@@ -99,10 +99,11 @@ function TeamMemberDel() {
 
             <div>
                 {members.length > 0 &&
-                    members.map((ele) => {
+                    members.map((ele, idx) => {
                         console.log(members);
                         return (
                             <section
+                                key={idx}
                                 className={
                                     ele.selected ? 'selected' : 'nonselected'
                                 }

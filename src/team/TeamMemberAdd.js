@@ -11,6 +11,7 @@ function TeamMemberAdd() {
     const member = useRef();
     const { team } = useSelector((state) => state);
     const { teamList } = team;
+
     const send = () => {
         const existTeam = teamList.filter(
             (ele) => ele.teamName === teamName.current.value
@@ -19,7 +20,7 @@ function TeamMemberAdd() {
         console.log(existTeam);
         if (existTeam.length > 0) {
             axios
-                .post('/team/memberappend', {
+                .post('/team/invite', {
                     teamName: teamName.current.value,
                     memberEmail: member.current.value,
                 })
@@ -29,13 +30,16 @@ function TeamMemberAdd() {
                         const remainTeam = teamList.filter(
                             (ele) => ele.teamName !== teamName.current.value
                         );
-                        dispatch(setTeamList([...remainTeam, res.data.msg]));
-                        alert(member.current.value + '이 추가되었습니다.');
+                        // dispatch(setTeamList([...remainTeam, res.data.msg]));
+                        alert(
+                            member.current.value + '에 초대 요청을 보냈습니다..'
+                        );
+                        member.current.value = '';
                     } else {
                         alert(res.data.msg + ' 요청에 실패하였습니다.');
+                        member.current.focus();
                         // window.location.href = '/';
                     }
-                    member.current.value = '';
                 });
         } else {
             alert('존재하지 않는 팀입니다.');

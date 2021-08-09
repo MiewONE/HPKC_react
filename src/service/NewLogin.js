@@ -12,7 +12,7 @@ import {
     MainImg,
 } from '../styles/loginStyle';
 
-const NewLogin = ({ closeModal }) => {
+const NewLogin = ({ closeModal, openRegister }) => {
     const dispatch = useDispatch();
     const [saveme, setSaveme] = useState(false);
     const userEmail = useRef();
@@ -97,7 +97,17 @@ const NewLogin = ({ closeModal }) => {
             </section>
             <section className="back forgotPw">비밀번호 찾기</section>
             <section className="back register">
-                회원이 아니시라면? <a href="#">회원가입</a>
+                회원이 아니시라면?{' '}
+                <span
+                    style={{
+                        cursor: 'pointer',
+                        color: '#557E57',
+                        borderBottom: '1px solid #557E57',
+                    }}
+                    onClick={openRegister}
+                >
+                    회원가입
+                </span>
             </section>
         </div>
     );

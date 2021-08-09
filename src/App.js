@@ -19,6 +19,8 @@ function App() {
     const [logined, setLogined] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [modalState, setModalState] = useState(false);
+    const [pendingInvidation, setPendingInvidation] = useState([]);
+    const [notionVisible, setNostionVisible] = useState(false);
     useEffect(() => {
         const kakaoLogin = storage.get('kakao');
         console.log(kakaoLogin);
@@ -71,6 +73,16 @@ function App() {
             storage.removeRemain(_loggedInfo);
             window.location.href = '/login?expired';
         }
+        axios
+            .get('/oauth/invitedTeam')
+            .then((res) => {
+                if (res.data.success) {
+                    setPendingInvidation(res.data.msg);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }, []);
     const event_logout = () => {
         axios.get('/oauth/logout');
@@ -90,6 +102,33 @@ function App() {
     };
     const closeModal = () => {
         setModalVisible((state) => (state = false));
+    };
+    const openNotion = () => {
+        console.log(notionVisible);
+        setNostionVisible(!notionVisible);
+    };
+    const confirm = (data) => {
+        return () => {
+            axios
+                .post('/team/memberappend', { teamName: data.teamName })
+                .then((res) => {
+                    if (res.data.success) {
+                        alert(res.data.msg.teamName + '에 참여하였습니다.');
+                        setPendingInvidation(
+                            pendingInvidation.filter(
+                                (ele) => ele.teamName !== data.teamName
+                            )
+                        );
+                    } else {
+                        console.log(res);
+                    }
+                });
+        };
+    };
+    const cancel = (data) => {
+        return () => {
+            // 유저와 팀 디비에서 요청을 삭제하는 로직.
+        };
     };
     return (
         <div className="appContiner">
@@ -120,11 +159,18 @@ function App() {
                     )}
                     {logined && (
                         <section style={{ display: 'flex' }}>
-                            <p style={{ marginRight: '20px' }}>
+                            {pendingInvidation.length > 0 && (
+                                <span className="notion" onClick={openNotion}>
+                                    {pendingInvidation.length}
+                                </span>
+                            )}
+
+                            <p style={{ margin: '0 20px' }}>
                                 안녕하세요,
                                 {storage.get(_loggedInfo)
                                     ? storage.get(_loggedInfo).name
                                     : storage.remainGet(_loggedInfo).name}
+                                님
                             </p>
                             <div onClick={event_logout}>
                                 <p>로그아웃</p>
@@ -146,9 +192,49 @@ function App() {
                 effect="fadeInUp"
                 onClickAway={closeModal}
             >
-                {modalState && <Login closeModal={closeModal} />}
-                {!modalState && <Register closeModal={closeModal} />}
+                {modalState && (
+                    <Login
+                        closeModal={closeModal}
+                        openRegister={openRegister}
+                    />
+                )}
+                {!modalState && (
+                    <Register closeModal={closeModal} openModal={openModal} />
+                )}
             </Modal>
+            {notionVisible && (
+                <section id="notionWindow">
+                    <strong>초대받은 팀 내역입니다.</strong>
+                    <section>
+                        <span></span>
+                    </section>
+                    <section className="invidationContainer">
+                        {pendingInvidation &&
+                            pendingInvidation.map((ele) => {
+                                return (
+                                    <section className="invidationList">
+                                        <span>{ele.teamName}</span>
+                                        <span>{ele.email}</span>
+                                        <section>
+                                            <span
+                                                className="ok"
+                                                onClick={confirm(ele)}
+                                            >
+                                                승낙
+                                            </span>
+                                            <span
+                                                className="nagative"
+                                                onClick={cancel(ele)}
+                                            >
+                                                거절
+                                            </span>
+                                        </section>
+                                    </section>
+                                );
+                            })}
+                    </section>
+                </section>
+            )}
         </div>
     );
 }
