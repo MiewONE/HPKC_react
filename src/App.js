@@ -111,6 +111,9 @@ function App() {
         setPendingInvidation(
             pendingInvidation.filter((ele) => ele.teamName !== teamName)
         );
+        if (pendingInvidation.length < 1) {
+            setNostionVisible(!notionVisible);
+        }
     };
     const confirm = (data) => {
         return () => {

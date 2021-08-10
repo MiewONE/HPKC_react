@@ -42,7 +42,7 @@ function TeamMemberAdd() {
     };
     return (
         <div id="teamCreateContainer">
-            <span>팀 멤버 추가</span>
+            <span>팀 멤버 초대</span>
             <Input
                 type="text"
                 name="teamName"
@@ -55,7 +55,7 @@ function TeamMemberAdd() {
                 placeholder="사용자 이메일을 입력하세요"
                 ref={member}
             />
-            <ButtonLogin onClick={send}>팀 멤버 추가</ButtonLogin>
+            <ButtonLogin onClick={send}>팀 멤버 초대</ButtonLogin>
         </div>
     );
 }

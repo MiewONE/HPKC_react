@@ -10,13 +10,22 @@ const Register = ({ closeModal, openModal }) => {
     const userName = useRef();
     const userEmail = useRef();
     const userPwd = useRef();
+    const userPwdcheck = useRef();
     const [checkEmail, setCheckEmail] = useState(true);
+    const [checkedPwd, setCheckedPwd] = useState(true);
     const checkEmailregExp = (e) => {
         console.log(e);
         if (!regExp.test(e.target.value)) {
             setCheckEmail(false);
         } else {
             setCheckEmail(true);
+        }
+    };
+    const checkPwd = (e) => {
+        if (e.target.value === userPwd.current.value) {
+            setCheckedPwd(true);
+        } else {
+            setCheckedPwd(false);
         }
     };
     const event_login = () => {
@@ -96,12 +105,25 @@ const Register = ({ closeModal, openModal }) => {
                 placeholder="비밀번호"
                 ref={userPwd}
             ></Input>
+            <Input
+                className="input"
+                type="password"
+                name="passwod"
+                placeholder="비밀번호 확인"
+                ref={userPwdcheck}
+                onChange={checkPwd}
+            ></Input>
             <ButtonLogin className="sosial kakao" onClick={event_login}>
                 회원 가입
             </ButtonLogin>
             {!checkEmail && (
                 <span style={{ color: 'red' }}>
                     이메일 형식에 맞지 않습니다.
+                </span>
+            )}
+            {!checkedPwd && (
+                <span style={{ color: 'red' }}>
+                    입력하신 비밀번호가 같지 않습니다.
                 </span>
             )}
             <div className="back oauthExplain">소셜 계정으로 가입</div>

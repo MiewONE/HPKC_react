@@ -11,6 +11,7 @@ import PresenterDetail from '../presentation/PresenterDetail';
 import { Presentation } from '../styles/PresentationList';
 import Modal from 'react-awesome-modal';
 import PresentationHeader from './PresentationHeader';
+import { ButtonLogin } from '../styles/loginStyle';
 import '../styles/presentationList.scss';
 function PresentationList({ teamName }) {
     const dispatch = useDispatch();
@@ -21,26 +22,29 @@ function PresentationList({ teamName }) {
     const [teamUserList, setTeamUserList] = useState([]);
     const selectedTeam = teamList.filter((ele) => ele.teamName === teamName)[0];
     useEffect(() => {
-        axios.post('/team/userlist', { teamName: teamName }).then((res) => {
-            if (res.data.success) {
-                setTeamUserList(res.data.msg);
-            } else {
-                alert('팀 정보를 가져오는데 실패하였습니다.');
-            }
-        });
-        axios
-            .post('/pt/ptlist', { teamName: teamName })
-            .then((res) => {
+        if (teamName) {
+            axios.post('/team/userlist', { teamName: teamName }).then((res) => {
                 if (res.data.success) {
-                    updateState(res.data.msg);
+                    setTeamUserList(res.data.msg);
                 } else {
-                    alert(res.data.msg);
-                    window.location.href = '/';
+                    alert('팀 정보를 가져오는데 실패하였습니다.');
+                    return;
                 }
-            })
-            .catch((err) => {
-                console.log(err);
             });
+            axios
+                .post('/pt/ptlist', { teamName: teamName })
+                .then((res) => {
+                    if (res.data.success) {
+                        updateState(res.data.msg);
+                    } else {
+                        alert(res.data.msg);
+                        window.location.href = '/';
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     }, [teamName, teamList]);
     const updatePresenter = (update) => {
         const attendenta = presenter.attendents.map((ele) => {
@@ -118,6 +122,30 @@ function PresentationList({ teamName }) {
         getPtList();
         setModalVisible((state) => (state = false));
     };
+    const leaveTeam = () => {
+        if (window.confirm(teamName + '에서 나가시겠습니까?')) {
+            axios
+                .post('/team/leaveTeam', { teamName })
+                .then((res) => {
+                    if (res.data.success) {
+                        dispatch(
+                            setTeamList(
+                                teamList.filter(
+                                    (ele) => ele.teamName !== teamName
+                                )
+                            )
+                        );
+                        alert(res.data.msg + '을 떠나셨습니다.');
+                    } else {
+                        console.log(res);
+                        alert(res.data.msg);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+    };
 
     return (
         <div>
@@ -149,6 +177,17 @@ function PresentationList({ teamName }) {
                                             return <p>{ele.id}</p>;
                                         })}
                                 </section>
+                            </section>
+                            <section
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    marginTop: '23vh',
+                                }}
+                            >
+                                <ButtonLogin onClick={leaveTeam}>
+                                    팀 나가기
+                                </ButtonLogin>
                             </section>
                         </section>
                     )}

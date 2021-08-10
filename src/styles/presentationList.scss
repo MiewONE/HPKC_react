@@ -21,7 +21,7 @@
 .ptList{
       width: 99%;
 
-
+      height:89vh;
       display: flex;
       flex-direction : row-reverse;
       justify-content: center;
@@ -68,6 +68,7 @@
 .ptHeader {
       display :flex;
       flex-direction : column;
+      border-left: 1px solid #78B27A;
 }
 #ptListAll {
       height: 700px;
