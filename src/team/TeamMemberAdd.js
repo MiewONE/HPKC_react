@@ -6,7 +6,6 @@ import '../styles/teamCreate.scss';
 import { ButtonLogin, Input } from '../styles/loginStyle';
 
 function TeamMemberAdd() {
-    const dispatch = useDispatch();
     const teamName = useRef();
     const member = useRef();
     const { team } = useSelector((state) => state);
@@ -27,16 +26,12 @@ function TeamMemberAdd() {
                 .then((res) => {
                     console.log(res);
                     if (res.data.success) {
-                        const remainTeam = teamList.filter(
-                            (ele) => ele.teamName !== teamName.current.value
-                        );
-                        // dispatch(setTeamList([...remainTeam, res.data.msg]));
                         alert(
-                            member.current.value + '에 초대 요청을 보냈습니다..'
+                            member.current.value + '에 초대 요청을 보냈습니다.'
                         );
                         member.current.value = '';
                     } else {
-                        alert(res.data.msg + ' 요청에 실패하였습니다.');
+                        alert(res.data.msg);
                         member.current.focus();
                         // window.location.href = '/';
                     }

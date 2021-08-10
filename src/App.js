@@ -107,6 +107,11 @@ function App() {
         console.log(notionVisible);
         setNostionVisible(!notionVisible);
     };
+    const removeInvitation = (teamName) => {
+        setPendingInvidation(
+            pendingInvidation.filter((ele) => ele.teamName !== teamName)
+        );
+    };
     const confirm = (data) => {
         return () => {
             axios
@@ -123,11 +128,22 @@ function App() {
                         console.log(res);
                     }
                 });
+            removeInvitation(data.teamName);
         };
     };
     const cancel = (data) => {
         return () => {
             // 유저와 팀 디비에서 요청을 삭제하는 로직.
+            axios
+                .post('/team/reject', { teamName: data.teamName })
+                .then((res) => {
+                    if (res.data.success) {
+                        alert('거절 되었습니다.');
+                    } else {
+                        console.log(res);
+                    }
+                });
+            removeInvitation(data.teamName);
         };
     };
     return (
@@ -159,7 +175,7 @@ function App() {
                     )}
                     {logined && (
                         <section style={{ display: 'flex' }}>
-                            {pendingInvidation.length > 0 && (
+                            {pendingInvidation && pendingInvidation.length > 0 && (
                                 <span className="notion" onClick={openNotion}>
                                     {pendingInvidation.length}
                                 </span>
