@@ -4,7 +4,7 @@
 }
 .homelogo{
       display:flex;
-      height: 700px;
+      height: 80vh;
       margin: 0 0 4% 0;
       justify-content: space-between;
       & > section:nth-child(1) {
@@ -15,7 +15,7 @@
             width: 50%;
             border-radius: 0 0 7% 7%/  0 0 7% 7%;
             & span {
-                  font-size: 6em;
+                  font-size: 7vw;
                   font-family: vitroCoreTTF;
                   color : white;
                   text-shadow: 4px 4px 4px gray;
@@ -28,7 +28,7 @@
             align-items: center;
             width: 50%;
             & span {
-                  font-size: 6em;
+                  font-size: 7vw;
                   font-family: vitroCoreTTF;
                   color : black;
                   text-shadow: 5px 5px 5px #78B27A;
@@ -42,8 +42,9 @@
       
       
 }
+
 .explain{
-      height: 800px;    
+      height: 110vh;    
       display:flex;
       justify-content: center;
       flex-direction: column;
@@ -53,18 +54,18 @@
       background-color: #F2F2F8;
 }
 .header{
-      font-size: 3em;
+      font-size: 4vw;
       height: 10%;
       font-weight: bold;
 
 }
 .explanation{
-      height: 700px;
+      height: 80vh;
       width: 100%;
       display:flex;
 
       & > section:nth-child(2){
-            font-size: 2em;
+            font-size: 2vw;
             display: flex;
             justify-content: space-evenly;
       }
@@ -118,7 +119,8 @@
             width: 60%;
       }
       & img {
-
+            width: 25vw;
+            height: 50vh;
             border-radius: 10em;
             border : 1px solid black;
       }
@@ -136,6 +138,6 @@ li{
 
 .myself{
       & p,strong {
-            font-size: 2em;
+            font-size: 3vw;
       }
 }

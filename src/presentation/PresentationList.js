@@ -17,7 +17,7 @@ function PresentationList({ teamName }) {
     const dispatch = useDispatch();
     const [modalVisible, setModalVisible] = useState(false);
     const { presentation, team } = useSelector((state) => state);
-    const { ptList, presenter, order } = presentation;
+    const { ptList, presenter } = presentation;
     const { teamList } = team;
     const [teamUserList, setTeamUserList] = useState([]);
     const selectedTeam = teamList.filter((ele) => ele.teamName === teamName)[0];
@@ -186,7 +186,7 @@ function PresentationList({ teamName }) {
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'center',
-                                    marginTop: '23vh',
+                                    marginTop: '3vh',
                                 }}
                             >
                                 <ButtonLogin onClick={leaveTeam}>
@@ -206,6 +206,7 @@ function PresentationList({ teamName }) {
                         <div id="ptlistHeader">
                             <span>총 갯수 :{ptList.length}</span>
                             <div className="ptlistTitle">
+                                <span>index</span>
                                 <section>발표명</section>
                                 <section>참석자 수</section>
                                 <section>첫번째 발표자</section>
@@ -241,8 +242,8 @@ function PresentationList({ teamName }) {
             {presenter._id && (
                 <Modal
                     visible={modalVisible}
-                    width="1000"
-                    height="800"
+                    width="800"
+                    height="600"
                     effect="fadeInUp"
                     onClickAway={closeModal}
                 >

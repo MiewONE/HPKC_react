@@ -21,7 +21,7 @@
 .ptList{
       width: 99%;
 
-      height:89vh;
+      height:80vh;
       display: flex;
       flex-direction : row-reverse;
       justify-content: center;
@@ -36,26 +36,15 @@
 
 .ptlistTitle{
       display: flex;
-      justify-content: space-around;
+      justify-content: space-evenly;
+      width: 100%;
       & > section {
             font-weight: bold;
       }
-      &  >section:nth-child(1) {
-            width: 40%;
-            text-align: center;
-        }
-        &  >section:nth-child(2) {
-            width: 10%;
-            text-align: center;
-        }
-        &  >section:nth-child(3) {
+      & > section {
             width: 20%;
             text-align: center;
-        }
-        &  >section:nth-child(4) {
-            width: 30%;
-            text-align: center;
-        } 
+      }
 }
 .noneList {
       display: flex;
@@ -63,7 +52,7 @@
       align-items: center;
       font-size: 3em;
       color : #78B27A;
-      height: 700px;
+      height: 80vh;
 }
 .ptHeader {
       display :flex;
@@ -71,7 +60,7 @@
       border-left: 1px solid #78B27A;
 }
 #ptListAll {
-      height: 700px;
+      height: 80vh;
       overflow-y: auto;
 }
 #teamInfo{

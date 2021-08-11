@@ -232,6 +232,13 @@ function App() {
                         <span></span>
                     </section>
                     <section className="invidationContainer">
+                        <img
+                            src="/img/close.png"
+                            alt="x"
+                            onClick={() => {
+                                setNostionVisible(!notionVisible);
+                            }}
+                        />
                         {pendingInvidation &&
                             pendingInvidation.map((ele) => {
                                 return (

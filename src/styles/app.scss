@@ -30,9 +30,9 @@
             font-family: vitroCoreTTF;
             color: #78b27a;
             margin: 1% 0px;
-            font-size: 150%;
+            font-size: 1.5vw;
             font-weight: bold;
-            // text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e, 0 -3px #6c986e;;
+            // //text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e, 0 -3px #6c986e;;
       }
 }
 .team {
@@ -76,26 +76,18 @@
       animation: openPtList 0.5s ease-in-out 0s 1 normal forwards;
 
       position: absolute;
-      top:8vh;
-      right: 25%;
-      width: 30vh;
+      top:5vh;
+      right: 33vw;
+      width: 30vw;
       height: 20vh;
       overflow-y: auto;
 	background: #fffafa;
 	border: 4px solid #78B27A;
       border-radius: 5%;
+      
       & > strong {
             font-size: 1.2em;
             border-bottom: 2px solid #78b27a;
-      }
-      &::before{
-            content: "2";
-            position: absolute;
-            bottom:90%;
-            right: 0;
-            width: 10vh;
-            height: 10vh;
-            background: black;
       }
 }
 
@@ -105,10 +97,24 @@
       display: flex;
       flex-direction: column;
       gap: 1px;
+      & > img {
+            position: absolute;
+            width: 2.5vw;
+            right: 1%;
+            top: -3%;
+            cursor: pointer;
+      }
 }
 .invidationList{
       display: flex;
       justify-content: space-around;
+      & >span {
+            width: 40%;
+            text-align: center;
+      }
+      & section{
+            width: 20%;
+      }
       margin-top: 3%;
 }
 .ok{

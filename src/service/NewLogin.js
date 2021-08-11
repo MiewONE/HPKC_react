@@ -95,7 +95,7 @@ const NewLogin = ({ closeModal, openRegister }) => {
                     로그인 상태 유지하기
                 </label>
             </section>
-            <section className="back forgotPw">비밀번호 찾기</section>
+            {/* <section className="back forgotPw">비밀번호 찾기</section> */}
             <section className="back register">
                 회원이 아니시라면?{' '}
                 <span
