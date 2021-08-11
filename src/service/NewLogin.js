@@ -24,6 +24,7 @@ const NewLogin = ({ closeModal, openRegister }) => {
                 password: userPwd.current.value,
             })
             .then((res) => {
+                console.log(res);
                 if (!res.data.success) {
                     alert(res.data.msg);
                     return;
@@ -45,7 +46,7 @@ const NewLogin = ({ closeModal, openRegister }) => {
     };
     const kakaoLogin = () => {
         storage.set('kakao', true);
-        window.location.href = '/api/oauth/kakao';
+        window.location.href = '/oauth/kakao';
     };
     return (
         <div className="loginBody">

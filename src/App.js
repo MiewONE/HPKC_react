@@ -47,6 +47,7 @@ function App() {
         const loggedInfo = storage.get(_loggedInfo)
             ? storage.get(_loggedInfo)
             : storage.remainGet(_loggedInfo);
+        console.log(loggedInfo);
         if (!loggedInfo) return;
 
         dispatch(setLoggedInfo(loggedInfo));
@@ -60,7 +61,9 @@ function App() {
                         storage.remove('loggedInfo');
                         storage.remove(_loggedInfo);
                         dispatch(logout());
-                        window.location.href = '/';
+                        return;
+                        // window.location.href = '/';
+                    } else {
                     }
                     setLogined(true);
                 })
