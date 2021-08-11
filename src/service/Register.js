@@ -44,7 +44,7 @@ const Register = ({ closeModal, openModal }) => {
         }
 
         axios
-            .post('/oauth/register', {
+            .post('http://localhost:3045/oauth/register', {
                 userName: userName.current.value,
                 userEmail: userEmail.current.value,
                 password: userPwd.current.value,

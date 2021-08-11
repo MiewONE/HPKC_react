@@ -16,7 +16,7 @@ function Login() {
 
     const event_login = () => {
         axios
-            .post('/oauth/logins', {
+            .post('http://localhost:3045/oauth/logins', {
                 userEmail: userEmail.current.value,
                 password: userPwd.current.value,
             })

@@ -10,7 +10,7 @@ export const check = (_loggedInfo) => {
 
     try {
         axios
-            .post('/oauth/check', loggedInfo)
+            .post('http://localhost:3045/oauth/check', loggedInfo)
             .then((res) => {
                 console.log('응답 반응:', res);
                 if (!res.data.success) {

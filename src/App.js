@@ -26,7 +26,7 @@ function App() {
         console.log(kakaoLogin);
         if (kakaoLogin) {
             axios
-                .get('/oauth/usr')
+                .get('http://localhost:3045/oauth/usr')
                 .then((res) => {
                     console.log(res);
                     if (!res.data.success) {
@@ -53,7 +53,7 @@ function App() {
 
         try {
             axios
-                .post('/oauth/check', loggedInfo)
+                .post('http://localhost:3045/oauth/check', loggedInfo)
                 .then((res) => {
                     console.log(res);
                     if (!res.data.success) {
@@ -74,7 +74,7 @@ function App() {
             window.location.href = '/login?expired';
         }
         axios
-            .get('/oauth/invitedTeam')
+            .get('http://localhost:3045/oauth/invitedTeam')
             .then((res) => {
                 if (res.data.success) {
                     setPendingInvidation(res.data.msg);
@@ -85,7 +85,7 @@ function App() {
             });
     }, []);
     const event_logout = () => {
-        axios.get('/oauth/logout');
+        axios.get('http://localhost:3045/oauth/logout');
         dispatch(logout());
         setLogined(false);
         storage.remove(_loggedInfo);
@@ -118,7 +118,9 @@ function App() {
     const confirm = (data) => {
         return () => {
             axios
-                .post('/team/memberappend', { teamName: data.teamName })
+                .post('http://localhost:3045/team/memberappend', {
+                    teamName: data.teamName,
+                })
                 .then((res) => {
                     if (res.data.success) {
                         alert(res.data.msg.teamName + '에 참여하였습니다.');
@@ -138,7 +140,9 @@ function App() {
         return () => {
             // 유저와 팀 디비에서 요청을 삭제하는 로직.
             axios
-                .post('/team/reject', { teamName: data.teamName })
+                .post('http://localhost:3045/team/reject', {
+                    teamName: data.teamName,
+                })
                 .then((res) => {
                     if (res.data.success) {
                         alert('거절 되었습니다.');

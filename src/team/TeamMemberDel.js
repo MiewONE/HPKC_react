@@ -13,7 +13,9 @@ function TeamMemberDel() {
     useEffect(() => {}, [teamList]);
     const findTeamMember = () => {
         axios
-            .post('/team/userlist', { teamName: teamName.current.value })
+            .post('http://localhost:3045/team/userlist', {
+                teamName: teamName.current.value,
+            })
             .then((res) => {
                 if (res.data.success) {
                     setMembers(
@@ -38,7 +40,7 @@ function TeamMemberDel() {
         const sendMembers = members.filter((ele) => ele.selected);
         if (existTeam.length > 0) {
             axios
-                .put('/team/memberremove', {
+                .put('http://localhost:3045/team/memberremove', {
                     teamName: teamName.current.value,
                     members: sendMembers,
                 })

@@ -11,7 +11,7 @@ function Team() {
 
     useEffect(() => {
         axios
-            .get('/team/teamlist')
+            .get('http://localhost:3045/team/teamlist')
             .then((res) => {
                 console.log(res.data);
                 if (res.data.success) {

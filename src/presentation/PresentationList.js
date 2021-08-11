@@ -23,16 +23,20 @@ function PresentationList({ teamName }) {
     const selectedTeam = teamList.filter((ele) => ele.teamName === teamName)[0];
     useEffect(() => {
         if (teamName) {
-            axios.post('/team/userlist', { teamName: teamName }).then((res) => {
-                if (res.data.success) {
-                    setTeamUserList(res.data.msg);
-                } else {
-                    alert('팀 정보를 가져오는데 실패하였습니다.');
-                    return;
-                }
-            });
             axios
-                .post('/pt/ptlist', { teamName: teamName })
+                .post('http://localhost:3045/team/userlist', {
+                    teamName: teamName,
+                })
+                .then((res) => {
+                    if (res.data.success) {
+                        setTeamUserList(res.data.msg);
+                    } else {
+                        alert('팀 정보를 가져오는데 실패하였습니다.');
+                        return;
+                    }
+                });
+            axios
+                .post('http://localhost:3045/pt/ptlist', { teamName: teamName })
                 .then((res) => {
                     if (res.data.success) {
                         updateState(res.data.msg);
@@ -68,7 +72,7 @@ function PresentationList({ teamName }) {
     };
     const getPtList = () => {
         axios
-            .post('/pt/ptlist', { teamName: teamName })
+            .post('http://localhost:3045/pt/ptlist', { teamName: teamName })
             .then((res) => {
                 if (res.data.success) {
                     updateState(res.data.msg);
@@ -125,7 +129,7 @@ function PresentationList({ teamName }) {
     const leaveTeam = () => {
         if (window.confirm(teamName + '에서 나가시겠습니까?')) {
             axios
-                .post('/team/leaveTeam', { teamName })
+                .post('http://localhost:3045/team/leaveTeam', { teamName })
                 .then((res) => {
                     if (res.data.success) {
                         dispatch(

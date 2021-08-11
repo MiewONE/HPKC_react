@@ -19,7 +19,7 @@ function TeamMemberAdd() {
         console.log(existTeam);
         if (existTeam.length > 0) {
             axios
-                .post('/team/invite', {
+                .post('http://localhost:3045/team/invite', {
                     teamName: teamName.current.value,
                     memberEmail: member.current.value,
                 })

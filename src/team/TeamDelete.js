@@ -24,7 +24,7 @@ function TeamDelete() {
             console.log(existTeam);
             if (existTeam.length > 0) {
                 axios
-                    .delete('/team/delete', {
+                    .delete('http://localhost:3045/team/delete', {
                         data: { teamName: teamName.current.value },
                     })
                     .then((res) => {
@@ -40,7 +40,7 @@ function TeamDelete() {
                                     )
                                 )
                             );
-                            window.location.href = '/team';
+                            window.location.href = 'http://localhost:3045/team';
                         } else {
                             alert(res.data.msg);
                             dispatch(setPresentationList([]));
