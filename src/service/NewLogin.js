@@ -19,7 +19,7 @@ const NewLogin = ({ closeModal, openRegister }) => {
     const userPwd = useRef();
     const event_login = () => {
         axios
-            .post('http://localhost:3045/oauth/logins', {
+            .post('/api/oauth/logins', {
                 userEmail: userEmail.current.value,
                 password: userPwd.current.value,
             })
@@ -45,7 +45,7 @@ const NewLogin = ({ closeModal, openRegister }) => {
     };
     const kakaoLogin = () => {
         storage.set('kakao', true);
-        window.location.href = 'http://localhost:3045/oauth/kakao';
+        window.location.href = '/api/oauth/kakao';
     };
     return (
         <div className="loginBody">

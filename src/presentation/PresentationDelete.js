@@ -10,22 +10,20 @@ const PresentationDelete = ({ teamName, updatePtList, closeModal }) => {
     const { ptList } = presentation;
     const dispatch = useDispatch();
     useEffect(() => {
-        axios
-            .post('http://localhost:3045/pt/ptlist', { teamName })
-            .then((res) => {
-                if (res.data.success) {
-                    setPtDelList(
-                        res.data.msg.map((ele) => {
-                            return {
-                                selected: false,
-                                ptName: ele.ptName,
-                                createdAt: ele.createdAt,
-                            };
-                        })
-                    );
-                } else {
-                }
-            });
+        axios.post('/api/pt/ptlist', { teamName }).then((res) => {
+            if (res.data.success) {
+                setPtDelList(
+                    res.data.msg.map((ele) => {
+                        return {
+                            selected: false,
+                            ptName: ele.ptName,
+                            createdAt: ele.createdAt,
+                        };
+                    })
+                );
+            } else {
+            }
+        });
     }, []);
     const select = (data) => {
         return () => {
@@ -46,7 +44,7 @@ const PresentationDelete = ({ teamName, updatePtList, closeModal }) => {
     const send = async () => {
         const delList = ptDelList.filter((ele) => ele.selected === true);
         await axios
-            .delete('http://localhost:3045/pt/delete', {
+            .delete('/api/pt/delete', {
                 data: {
                     teamName,
                     delList,

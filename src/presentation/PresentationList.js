@@ -24,7 +24,7 @@ function PresentationList({ teamName }) {
     useEffect(() => {
         if (teamName) {
             axios
-                .post('http://localhost:3045/team/userlist', {
+                .post('/api/team/userlist', {
                     teamName: teamName,
                 })
                 .then((res) => {
@@ -36,7 +36,7 @@ function PresentationList({ teamName }) {
                     }
                 });
             axios
-                .post('http://localhost:3045/pt/ptlist', { teamName: teamName })
+                .post('/api/pt/ptlist', { teamName: teamName })
                 .then((res) => {
                     if (res.data.success) {
                         updateState(res.data.msg);
@@ -72,7 +72,7 @@ function PresentationList({ teamName }) {
     };
     const getPtList = () => {
         axios
-            .post('http://localhost:3045/pt/ptlist', { teamName: teamName })
+            .post('/api/pt/ptlist', { teamName: teamName })
             .then((res) => {
                 if (res.data.success) {
                     updateState(res.data.msg);
@@ -129,7 +129,7 @@ function PresentationList({ teamName }) {
     const leaveTeam = () => {
         if (window.confirm(teamName + '에서 나가시겠습니까?')) {
             axios
-                .post('http://localhost:3045/team/leaveTeam', { teamName })
+                .post('/api/team/leaveTeam', { teamName })
                 .then((res) => {
                     if (res.data.success) {
                         dispatch(

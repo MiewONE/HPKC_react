@@ -16,7 +16,7 @@ function Login() {
 
     const event_login = () => {
         axios
-            .post('http://localhost:3045/oauth/logins', {
+            .post('/api/oauth/logins', {
                 userEmail: userEmail.current.value,
                 password: userPwd.current.value,
             })
@@ -60,7 +60,7 @@ function Login() {
                         {/* {<a href="https://accounts.kakao.com/login?continue=https%3A%2F%2Fkauth.kakao.com%2Foauth%2Fauthorize%3Fresponse_type%3Dcode%26redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A3045%252Foauth%252Fkakao%252Fcallbak%26client_id%3D4a80f5bc42cf4ae3a4858a763df852df" >카톡 로그인</a>} */}
                         {
                             <a
-                                href="http://localhost:3045/oauth/kakao"
+                                href="/api/oauth/kakao"
                                 className="kakao"
                                 title="카카오계정으로 로그인"
                             >

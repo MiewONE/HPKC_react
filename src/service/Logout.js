@@ -5,7 +5,7 @@ import storage from '../lib/storage';
 function Logout() {
     storage.remove('loggedInfo');
     const event_logout = () => {
-        axios.get('http://localhost:3045/oauth/logout').then((data) => {
+        axios.get('/api/oauth/logout').then((data) => {
             console.log(data.data);
         });
         dispatch(logout());
@@ -16,10 +16,7 @@ function Logout() {
         <>
             {state_login.user.name !== '' && (
                 <div>
-                    <form
-                        action="http://localhost:3045/oauth/logou"
-                        method="GET"
-                    >
+                    <form action="/api/oauth/logou" method="GET">
                         <input
                             type="submit"
                             name="logout"

@@ -102,7 +102,7 @@ const Presenter = ({
             updatePresenter(sendUser);
             updateAttendent(sendUser);
             axios
-                .post('http://localhost:3045/pt/presenter/detailsave', {
+                .post('/api/pt/presenter/detailsave', {
                     teamId,
                     teamName,
                     ptName,
@@ -119,7 +119,7 @@ const Presenter = ({
         },
         ddabong: async () => {
             axios
-                .put('http://localhost:3045/pt/recommendation', {
+                .put('/api/pt/recommendation', {
                     teamName,
                     ptName,
                     presenter: presenter.attendents[num],

@@ -26,7 +26,7 @@ function App() {
         console.log(kakaoLogin);
         if (kakaoLogin) {
             axios
-                .get('http://localhost:3045/oauth/usr')
+                .get('/api/oauth/usr')
                 .then((res) => {
                     console.log(res);
                     if (!res.data.success) {
@@ -53,7 +53,7 @@ function App() {
 
         try {
             axios
-                .post('http://localhost:3045/oauth/check', loggedInfo)
+                .post('/api/oauth/check', loggedInfo)
                 .then((res) => {
                     console.log(res);
                     if (!res.data.success) {
@@ -74,7 +74,7 @@ function App() {
             window.location.href = '/login?expired';
         }
         axios
-            .get('http://localhost:3045/oauth/invitedTeam')
+            .get('/api/oauth/invitedTeam')
             .then((res) => {
                 if (res.data.success) {
                     setPendingInvidation(res.data.msg);
@@ -85,7 +85,7 @@ function App() {
             });
     }, []);
     const event_logout = () => {
-        axios.get('http://localhost:3045/oauth/logout');
+        axios.get('/api/oauth/logout');
         dispatch(logout());
         setLogined(false);
         storage.remove(_loggedInfo);
@@ -118,7 +118,7 @@ function App() {
     const confirm = (data) => {
         return () => {
             axios
-                .post('http://localhost:3045/team/memberappend', {
+                .post('/api/team/memberappend', {
                     teamName: data.teamName,
                 })
                 .then((res) => {
@@ -140,7 +140,7 @@ function App() {
         return () => {
             // 유저와 팀 디비에서 요청을 삭제하는 로직.
             axios
-                .post('http://localhost:3045/team/reject', {
+                .post('/api/team/reject', {
                     teamName: data.teamName,
                 })
                 .then((res) => {

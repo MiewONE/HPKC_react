@@ -14,7 +14,7 @@ const PresentationCreate = ({ teamName, closeModal }) => {
     const ptName = useRef();
     useEffect(() => {
         axios
-            .post('http://localhost:3045/team/userlist', { teamName })
+            .post('/api/team/userlist', { teamName })
             .then((res) => {
                 setMember((state) => (state = res.data.msg));
             })
@@ -29,7 +29,7 @@ const PresentationCreate = ({ teamName, closeModal }) => {
             return;
         }
         axios
-            .post('http://localhost:3045/pt/create-presentation', {
+            .post('/api/pt/create-presentation', {
                 ptName: ptName.current.value,
                 members: selectedMember,
                 teamName,

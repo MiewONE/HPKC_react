@@ -19,7 +19,7 @@ function TeamCreate({ closeModal }) {
         console.log(existTeam);
         if (existTeam.length === 0) {
             axios
-                .post('http://localhost:3045/team/create', {
+                .post('/api/team/create', {
                     teamName: teamName.current.value,
                     subject: subject.current.value,
                 })

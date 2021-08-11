@@ -62,5 +62,5 @@
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2"
   },
-  "proxy": "http://localhost:3045"
+  "proxy": "/api"
 }

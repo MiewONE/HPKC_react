@@ -44,7 +44,7 @@ const Register = ({ closeModal, openModal }) => {
         }
 
         axios
-            .post('http://localhost:3045/oauth/register', {
+            .post('/api/oauth/register', {
                 userName: userName.current.value,
                 userEmail: userEmail.current.value,
                 password: userPwd.current.value,
@@ -66,7 +66,7 @@ const Register = ({ closeModal, openModal }) => {
     };
     const kakaoLogin = () => {
         storage.set('kakao', true);
-        window.location.href = 'http://localhost:3045/oauth/kakao';
+        window.location.href = '/api/oauth/kakao';
     };
     return (
         <div className="loginBody">
