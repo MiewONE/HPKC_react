@@ -165,7 +165,7 @@ function App() {
                 </div>
                 <div className="titleLogo">
                     <Link to="/">
-                        <img src="/img/LOGO_pptogether.png" alt="logo" />
+                        <img src="/img/defaultlogopptogether.png" alt="logo" />
                     </Link>
                 </div>
 
@@ -184,7 +184,10 @@ function App() {
                         <section style={{ display: 'flex' }}>
                             {pendingInvidation && pendingInvidation.length > 0 && (
                                 <span className="notion" onClick={openNotion}>
-                                    {pendingInvidation.length}
+                                    <span>알림 </span>
+                                    <span id="invidationCnt">
+                                        {pendingInvidation.length}개
+                                    </span>
                                 </span>
                             )}
 

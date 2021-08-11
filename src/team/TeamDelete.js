@@ -5,7 +5,7 @@ import { setPresentationList } from '../store/modules/presentation';
 import { setTeamList } from '../store/modules/team';
 import { ButtonLogin, Input } from '../styles/loginStyle';
 import '../styles/teamDelete.scss';
-function TeamDelete() {
+function TeamDelete({ setTeam }) {
     console.log('teamdelete');
     const { team } = useSelector((state) => state);
     const { teamList } = team;
@@ -40,7 +40,8 @@ function TeamDelete() {
                                     )
                                 )
                             );
-                            window.location.href = '/api/team';
+                            setTeam(teamList[0].teamName);
+                            // window.location.href = '/team';
                         } else {
                             alert(res.data.msg);
                             dispatch(setPresentationList([]));

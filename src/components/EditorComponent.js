@@ -36,9 +36,9 @@ function EditorComponent({ value, onChange }) {
         'background',
     ];
     return (
-        <div style={{ height: '450px', padding: '2%' }}>
+        <div style={{ height: '33vh', padding: '2%' }}>
             <ReactQuill
-                style={{ width: '100%', height: '450px' }}
+                style={{ width: '100%', height: '30vh' }}
                 theme="snow"
                 modules={modules}
                 formats={formats}

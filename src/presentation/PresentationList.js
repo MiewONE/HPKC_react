@@ -23,6 +23,8 @@ function PresentationList({ teamName }) {
     const selectedTeam = teamList.filter((ele) => ele.teamName === teamName)[0];
     useEffect(() => {
         if (teamName) {
+            console.log('팀 삭제 후 어찌되누?');
+            console.log(teamName);
             axios
                 .post('/api/team/userlist', {
                     teamName: teamName,
@@ -49,7 +51,7 @@ function PresentationList({ teamName }) {
                     console.log(err);
                 });
         }
-    }, [teamName, teamList]);
+    }, [teamName]);
     const updatePresenter = (update) => {
         const attendenta = presenter.attendents.map((ele) => {
             if (ele.name === update.name) return update;
@@ -204,7 +206,7 @@ function PresentationList({ teamName }) {
                     )}
                     {ptList.length > 0 && (
                         <div id="ptlistHeader">
-                            <span>총 갯수 :{ptList.length}</span>
+                            <span>총 개수 :{ptList.length}</span>
                             <div className="ptlistTitle">
                                 <span>index</span>
                                 <section>발표명</section>

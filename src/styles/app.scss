@@ -48,12 +48,13 @@
 .notion{
       color:tomato;
       font-weight: bold;
-      border: 2px solid red;
-      width: 2vh;
+      font-size: 1.4vw;
+      width: 8vh;
       height: 2vh;
-      border-radius: 50%;
       text-align: center;
       cursor :pointer;
+}
+.invidationCnt{
 }
 // #notionWindow{
 //       position: absolute;
@@ -76,8 +77,8 @@
       animation: openPtList 0.5s ease-in-out 0s 1 normal forwards;
 
       position: absolute;
-      top:5vh;
-      right: 33vw;
+      top:7vh;
+      right: 25vw;
       width: 30vw;
       height: 20vh;
       overflow-y: auto;

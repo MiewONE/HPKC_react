@@ -9,9 +9,10 @@ function TeamList() {
     const dispatch = useDispatch();
     const { team } = useSelector((state) => state);
     const { teamList } = team;
-    useEffect(() => {
-        setTeamName('');
-    }, [teamList]);
+
+    const setTeam = (teamName) => {
+        setTeamName(teamName);
+    };
     return (
         <div
             id="teamListContainer"
@@ -106,7 +107,7 @@ function TeamList() {
                         })}
                 </section>
                 <section>
-                    <TeamHeader teamList={teamList} />
+                    <TeamHeader teamList={teamList} setTeam={setTeam} />
                 </section>
             </div>
             {!teamName && (

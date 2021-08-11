@@ -7,7 +7,7 @@ const DELETED = 1;
 const PUSH = 2;
 const POP = 3;
 
-const TeamHeader = ({ teamList }) => {
+const TeamHeader = ({ teamList, setTeam }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [crudState, setCrudState] = useState(999);
 
@@ -58,6 +58,7 @@ const TeamHeader = ({ teamList }) => {
                     curdState={crudState}
                     teamList={teamList}
                     closeModal={closeModal}
+                    setTeam={setTeam}
                 />
             </Modal>
         </div>
