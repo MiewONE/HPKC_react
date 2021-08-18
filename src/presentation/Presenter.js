@@ -35,6 +35,7 @@ const Presenter = ({
 
     useEffect(() => {
         console.log(presenter.attendents);
+        setDesc('');
         dispatch(setRecommed(presenter.attendents[num].ddabong.length));
 
         setOrder((n) => (n = presenter.attendents[num].order));
@@ -216,9 +217,9 @@ const Presenter = ({
             <section className="summary">
                 <section>
                     <span>요약</span>
-                    {writed && (
+                    {/* {writed && (
                         <form
-                            action="/upload/uploadFile"
+                            action="/api/upload/uploadFile"
                             encType="multipart/form-data"
                             method="post"
                             onChange={events.uploadfile}
@@ -226,7 +227,7 @@ const Presenter = ({
                             <input type="file" name="attachment" />
                             <button type="submit">Upload</button>
                         </form>
-                    )}
+                    )} */}
                 </section>
 
                 {writed ? (

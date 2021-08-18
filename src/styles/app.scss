@@ -35,8 +35,45 @@
             // //text-shadow: -3px 0 #6c986e, 0 3px #6c986e, 3px 0 #6c986e, 0 -3px #6c986e;;
       }
 }
-.team {
+.page {
       text-decoration: none;
+      display:flex;
+      justify-content: center;
+      transform-style:preserve-3d;
+      & p {
+            margin-top: 1.3vw;
+            color:white;
+      }
+      &::before{
+            content: "";
+            position: absolute;
+            width: 8.5vw;
+            border: 1px solid transparent;
+            border-radius: 1vw 1vw 0 0;
+            background-color: #78B27A;
+            box-shadow: 0.3vw -0.1vw 0.4vw 0.1vw gray;
+            transform: translate3d(0,0,-3em);
+            height: 4.5vw;
+      } 
+}
+
+.nonpage {
+      text-decoration: none;
+      display:flex;
+      justify-content: center;
+      transform-style:preserve-3d;
+      & p {
+            margin-top: 3vh;
+      }
+      &::before{
+            content: "";
+            position: absolute;
+            width: 8.5vw;
+            border: 1px solid transparent;
+            border-radius: 1vw 1vw 0 0;
+            transform: translate3d(0,0,-3em);
+            height: 9vh;
+      } 
 }
 
 .Login {
@@ -44,7 +81,11 @@
       flex-direction: column;
       align-items: center;
 }
-
+.pages{
+      display: flex;
+      width: 20vw;
+      justify-content: space-around;
+}
 .notion{
       color:tomato;
       font-weight: bold;

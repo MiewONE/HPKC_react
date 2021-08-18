@@ -46,7 +46,7 @@ const NewLogin = ({ closeModal, openRegister }) => {
     };
     const kakaoLogin = () => {
         storage.set('kakao', true);
-        window.location.href = '/oauth/kakao';
+        window.location.href = 'http://localhost:3045/oauth/kakao';
     };
     return (
         <div className="loginBody">

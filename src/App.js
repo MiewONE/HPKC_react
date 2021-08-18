@@ -12,7 +12,11 @@ import storage from './lib/storage';
 import Modal from 'react-awesome-modal';
 import Notfount from './components/Notfount';
 import Register from './service/Register';
+import Mypage from './components/Mypage';
 
+const HOMEPAGE = 0;
+const TEAMPAGE = 1;
+const MYPAGE = 2;
 function App() {
     const _loggedInfo = 'loggedInfo';
     const dispatch = useDispatch();
@@ -21,6 +25,7 @@ function App() {
     const [modalState, setModalState] = useState(false);
     const [pendingInvidation, setPendingInvidation] = useState([]);
     const [notionVisible, setNostionVisible] = useState(false);
+    const [pageState, setPageState] = useState(HOMEPAGE);
     useEffect(() => {
         const kakaoLogin = storage.get('kakao');
         console.log(kakaoLogin);
@@ -161,9 +166,30 @@ function App() {
             <div className="madinHeader">
                 <div>
                     {logined && (
-                        <Link to="/team" className="team">
-                            <p>팀 페이지</p>
-                        </Link>
+                        <div className="pages">
+                            <Link
+                                to="/team"
+                                className={
+                                    pageState === TEAMPAGE ? 'page' : 'nonpage'
+                                }
+                                onClick={() => {
+                                    setPageState(TEAMPAGE);
+                                }}
+                            >
+                                <p>팀 페이지</p>
+                            </Link>
+                            <Link
+                                to="/mypage"
+                                className={
+                                    pageState === MYPAGE ? 'page' : 'nonpage'
+                                }
+                                onClick={() => {
+                                    setPageState(MYPAGE);
+                                }}
+                            >
+                                <p>마이 페이지</p>
+                            </Link>
+                        </div>
                     )}
                 </div>
                 <div className="titleLogo">
@@ -201,6 +227,7 @@ function App() {
                                     : storage.remainGet(_loggedInfo).name}
                                 님
                             </p>
+
                             <div onClick={event_logout}>
                                 <p>로그아웃</p>
                             </div>
@@ -211,6 +238,7 @@ function App() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route path="/team" component={Team} />
+                <Route path="/mypage" component={Mypage} />
                 <Route component={Notfount} />
             </Switch>
 
