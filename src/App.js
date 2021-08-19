@@ -12,7 +12,7 @@ import storage from './lib/storage';
 import Modal from 'react-awesome-modal';
 import Notfount from './components/Notfount';
 import Register from './service/Register';
-import Mypage from './components/Mypage';
+import Mypage from './mypage/Mypage';
 
 const HOMEPAGE = 0;
 const TEAMPAGE = 1;
@@ -193,7 +193,12 @@ function App() {
                     )}
                 </div>
                 <div className="titleLogo">
-                    <Link to="/">
+                    <Link
+                        to="/"
+                        onClick={() => {
+                            setPageState(HOMEPAGE);
+                        }}
+                    >
                         <img src="/img/defaultlogopptogether.png" alt="logo" />
                     </Link>
                 </div>

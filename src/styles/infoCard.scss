@@ -1,0 +1,112 @@
+@keyframes openTeamList {
+      from {
+            opacity: 0;
+            transform: translateY(30%);
+      }
+      to{
+            opacity: 1;
+            transform: translateX(0);
+      }
+}
+
+#cardContainer{
+      display: flex;
+      width: 20vw;
+      height: 30vw;
+      border-radius: 0.5vw;
+      box-shadow: -0.2vw -0.1vw 0.4vw 0.1vw #D7D7D7;
+      animation: openTeamList 0.5s ease-in-out 0s 1 normal forwards; ;
+}
+#withdrawal{
+      height: 0.3vw;
+      position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: inherit;
+    line-height:0.2;
+    transform-style:preserve-3d;
+    font-family: inherit;
+    font-weight: 600;
+    color: #382b22;
+    padding: 1.25em 2em;
+    background: #fff0f0;
+    border: 2px solid #b18597;
+    border-radius: 0.75em;
+    user-select: none;
+    transition: transform 0.15s ease-out,background 0.15s ease-out;
+    &::before{
+        content:"";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: #f9c4d2;
+        border-radius: inherit;
+        box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+        transform: translate3d(0,0.75em,-3em);
+        transition: transform 0.15s ease-out,box-shadow 0.15s ease-out;
+    };
+    &:hover {
+        background: #ffe9e9;
+        transform: translateY(0.25em);
+    }
+}
+#leftSide{
+      width: 17vw;
+      height: 100%;
+      display: flex;
+      flex-direction:column;
+      & span{
+            text-align: center;
+      }
+      & > span{
+            margin-top: 1vw;
+            font-size: 2vw;
+            border-bottom: 2px solid #78B27A;
+      }
+      & img {
+            width: 11vw;
+      }
+      & > section{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin:5% 0;
+            & span{
+                  font-size: 1.3em;
+            }
+      }
+      & > section:nth-child(2){
+            margin:2vw 0 1vw 0;
+      }
+      & input{
+            height: 20%;
+            margin: 0;
+      }
+      & input::placeholder{
+            color:rgb(172, 172, 172);
+      }
+      & a{
+            width: 40%;
+            height: 100%;
+            margin: 0;
+      }
+}
+#rightSide{
+      width: 15%;
+      height: 100%;
+      border-radius: 0 0.5vw 0.5vw 0;
+      background-color: #78B27A;
+      & span{
+            margin: 1vw 0.5vw 1vw 1vw;
+            font-weight: bold;
+            writing-mode: vertical-rl;
+            color:white;
+      }
+}

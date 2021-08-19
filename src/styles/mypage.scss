@@ -1,15 +1,6 @@
 #mypage{
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 40vw;
-}
-.info{
-      margin: 1vw;
-      display: flex;
-      width: 30vw;
-      & span {
-            width: 50%;
-      }
 }
